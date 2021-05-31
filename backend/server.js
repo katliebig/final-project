@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -30,7 +29,6 @@ const storage = new CloudinaryStorage({
 })
 const parser = multer({ storage })
 
-
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -41,19 +39,85 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-app.get('/human', parser.single('image'), async (req, res) => {
-  res.send(cloudinary.url("hair2_n92fbb.png", { width: 100, height: 150, crop: "fill" }))
+app.get('/human', async (req, res) => {
+
+  const mouths = await cloudinary.search
+    .expression('tags=mouth')
+    .execute()
+
+  const noses = await cloudinary.search
+    .expression('tags=nose')
+    .execute()
+
+  const heads = await cloudinary.search
+    .expression('tags=head')
+    .execute()
+
+  const clothes = await cloudinary.search
+    .expression('tags=clothes')
+    .execute()
+
+  const ears = await cloudinary.search
+    .expression('tags=ears')
+    .execute()
+
+  const eyebrows = await cloudinary.search
+    .expression('tags=eyebrows')
+    .execute()
+
+  const eyes = await cloudinary.search
+    .expression('tags=eyes')
+    .execute()
+
+  const hairstyles = await cloudinary.search
+    .expression('tags=hair')
+    .execute()
+
+  const urlsMouth = []
+  const urlsNoses = []
+  const urlsClothes = []
+  const urlsHeads = []
+  const urlsEars = []
+  const urlsEyebrows = []
+  const urlsEyes = []
+  const urlsHairstyle = []
+
+  for (let resource of mouths.resources) {
+    urlsMouth.push(resource.secure_url)
+  }
+  for (let resource of noses.resources) {
+    urlsNoses.push(resource.secure_url)
+  }
+  for (let resource of heads.resources) {
+    urlsHeads.push(resource.secure_url)
+  }
+  for (let resource of clothes.resources) {
+    urlsClothes.push(resource.secure_url)
+  }
+  for (let resource of ears.resources) {
+    urlsEars.push(resource.secure_url)
+  }
+  for (let resource of eyebrows.resources) {
+    urlsEyebrows.push(resource.secure_url)
+  }
+  for (let resource of eyes.resources) {
+    urlsEyes.push(resource.secure_url)
+  }
+  for (let resource of hairstyles.resources) {
+    urlsHairstyle.push(resource.secure_url)
+  }
+
+  res.json({
+    mouths: urlsMouth,
+    noses: urlsNoses,
+    heads: urlsHeads,
+    clothes: urlsClothes,
+    ears: urlsEars,
+    eyebrows: urlsEyebrows,
+    eyes: urlsEyes,
+    hairstyles: urlsHairstyle,
+  })
 })
-
-app.get('/hair', parser.single('image'), async (req, res) => {
-  res.send(
-    cloudinary.search // TODO: fix, error about missing api_key
-      .expression('tags=hair')
-      .execute()
-  )
-})
-
-
 
 app.listen(port, () => {
   // eslint-disable-next-line
