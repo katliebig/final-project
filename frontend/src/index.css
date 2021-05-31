@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.creator-container {
+  display: flex;
+}
+
+.creator-image-container {
+  position: relative;
+}
+
+.creator-image {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+}
