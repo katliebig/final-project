@@ -40,83 +40,54 @@ app.get('/', (req, res) => {
 })
 
 app.get('/human', async (req, res) => {
+  try {
 
-  const mouths = await cloudinary.search
-    .expression('tags=mouth')
-    .execute()
+    const human = await cloudinary.search
+      .expression("tags=human")
+      .execute()
 
-  const noses = await cloudinary.search
-    .expression('tags=nose')
-    .execute()
+    const urlsMouth = []
+    const urlsNose = []
+    const urlsClothes = []
+    const urlsHead = []
+    const urlsEars = []
+    const urlsEyebrows = []
+    const urlsEyes = []
+    const urlsHair = []
 
-  const heads = await cloudinary.search
-    .expression('tags=head')
-    .execute()
+    for (let resource of human.resources) {
+      if (resource.filename.includes("hair")) {
+        urlsHair.push(resource.secure_url)
+      } else if (resource.filename.includes("eyebrows")) {
+        urlsEyebrows.push(resource.secure_url)
+      } else if (resource.filename.includes("eyes")) {
+        urlsEyes.push(resource.secure_url)
+      } else if (resource.filename.includes("ears")) {
+        urlsEars.push(resource.secure_url)
+      } else if (resource.filename.includes("nose")) {
+        urlsNose.push(resource.secure_url)
+      } else if (resource.filename.includes("mouth")) {
+        urlsMouth.push(resource.secure_url)
+      } else if (resource.filename.includes("head")) {
+        urlsHead.push(resource.secure_url)
+      } else if (resource.filename.includes("clothes")) {
+        urlsClothes.push(resource.secure_url)
+      }
+    }
 
-  const clothes = await cloudinary.search
-    .expression('tags=clothes')
-    .execute()
-
-  const ears = await cloudinary.search
-    .expression('tags=ears')
-    .execute()
-
-  const eyebrows = await cloudinary.search
-    .expression('tags=eyebrows')
-    .execute()
-
-  const eyes = await cloudinary.search
-    .expression('tags=eyes')
-    .execute()
-
-  const hairstyles = await cloudinary.search
-    .expression('tags=hair')
-    .execute()
-
-  const urlsMouth = []
-  const urlsNoses = []
-  const urlsClothes = []
-  const urlsHeads = []
-  const urlsEars = []
-  const urlsEyebrows = []
-  const urlsEyes = []
-  const urlsHairstyle = []
-
-  for (let resource of mouths.resources) {
-    urlsMouth.push(resource.secure_url)
+    res.json({
+      mouth: urlsMouth,
+      nose: urlsNose,
+      head: urlsHead,
+      clothes: urlsClothes,
+      ears: urlsEars,
+      eyebrows: urlsEyebrows,
+      eyes: urlsEyes,
+      hair: urlsHair,
+    })
+  } catch (error) {
+    res.status(400).json({ error })
   }
-  for (let resource of noses.resources) {
-    urlsNoses.push(resource.secure_url)
-  }
-  for (let resource of heads.resources) {
-    urlsHeads.push(resource.secure_url)
-  }
-  for (let resource of clothes.resources) {
-    urlsClothes.push(resource.secure_url)
-  }
-  for (let resource of ears.resources) {
-    urlsEars.push(resource.secure_url)
-  }
-  for (let resource of eyebrows.resources) {
-    urlsEyebrows.push(resource.secure_url)
-  }
-  for (let resource of eyes.resources) {
-    urlsEyes.push(resource.secure_url)
-  }
-  for (let resource of hairstyles.resources) {
-    urlsHairstyle.push(resource.secure_url)
-  }
-
-  res.json({
-    mouths: urlsMouth,
-    noses: urlsNoses,
-    heads: urlsHeads,
-    clothes: urlsClothes,
-    ears: urlsEars,
-    eyebrows: urlsEyebrows,
-    eyes: urlsEyes,
-    hairstyles: urlsHairstyle,
-  })
 })
 
 app.listen(port, () => {
