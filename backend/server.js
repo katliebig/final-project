@@ -5,6 +5,9 @@ import dotenv from 'dotenv'
 import cloudinaryFramework from 'cloudinary'
 import multer from 'multer'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import crypto from 'crypto'
+import bcrypt from 'bcrypt'
+import listEndpoints from 'express-list-endpoints'
 
 dotenv.config()
 
@@ -29,6 +32,37 @@ const storage = new CloudinaryStorage({
 })
 const parser = multer({ storage })
 
+const User = mongoose.model('User', {
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  accessToken: {
+    type: String,
+    default: () => crypto.randomBytes(128).toString('hex')
+  }
+})
+
+const authenticateUser = async (req, res, next) => {
+  const accessToken = req.header('Authorization')
+
+  try {
+    const user = await User.findOne({ accessToken })
+    if (user) {
+      next()
+    } else {
+      res.status(401).json({ success: false, message: 'Not authorized' })
+    }
+  } catch (error) {
+    res.status(400).json({ success: false, message: "Invalid request", error })
+  }
+}
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -36,12 +70,54 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send(listEndpoints(app))
+})
+
+app.post('/users', async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    const salt = bcrypt.genSaltSync()
+    const newUser = await new User({
+      username,
+      password: bcrypt.hashSync(password, salt)
+    }).save()
+
+    res.json({
+      success: true,
+      userID: newUser._id,
+      username: newUser.username,
+      accessToken: newUser.accessToken
+    })
+  } catch (error) {
+    res.status(400).json({ success: false, message: "Invalid request", error })
+  }
+})
+
+app.post('/sessions', async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    const user = await User.findOne({ username })
+
+    if (user && bcrypt.compareSync(password, user.password)) {
+      res.json({
+        success: true,
+        userID: user._id,
+        username: user.username,
+        accessToken: user.accessToken
+      })
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' })
+    }
+  } catch (error) {
+    res.status(404).json({ success: false, message: 'Invalid request', error: error })
+  }
 })
 
 app.get('/human', async (req, res) => {
+  // TODO: make into race endpoint using params
   try {
-
     const human = await cloudinary.search
       .expression("tags=human")
       .execute()
@@ -86,7 +162,7 @@ app.get('/human', async (req, res) => {
       hair: urlsHair,
     })
   } catch (error) {
-    res.status(400).json({ error })
+    res.status(400).json({ message: "Something went wrong", error })
   }
 })
 
