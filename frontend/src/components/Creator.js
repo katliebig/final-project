@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { API_URL } from '../reusables/urls'
+
 const Creator = () => {
   const [attribute, setAttribute] = useState("")
   const [hair, setHair] = useState(0)
@@ -13,7 +15,7 @@ const Creator = () => {
   const [race, setRace] = useState()
 
   useEffect(() => {
-    fetch("http://localhost:8080/human")
+    fetch(API_URL("human"))
       .then(res => res.json())
       .then(data => {
         setRace(data)
