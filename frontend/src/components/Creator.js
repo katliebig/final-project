@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import mergeImages from 'merge-images'
 
 import raceImageSet from "../reducers/raceImageSet"
@@ -19,8 +20,10 @@ const Creator = () => {
   const [savedImage, setSavedImage] = useState("")
 
   const imageSet = useSelector(store => store.raceImageSet.imageSet)
+  const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   // const [species, setSpecies] = useState({
   //   hair: 0,
@@ -29,13 +32,31 @@ const Creator = () => {
   // })
 
   useEffect(() => {
-    fetch(API_URL("human"))
-      .then(res => res.json())
-      .then(data => {
-        dispatch(raceImageSet.actions.setRaceImageSet(data))
-      })
-      .catch(error => console.log(error))
-  }, [dispatch])
+    if (!accessToken) {
+      history.push("/");
+    }
+  }, [accessToken, history]);
+
+  useEffect(() => {
+    fetchImageSet()
+  }, [accessToken])
+
+  const fetchImageSet = () => {
+    if (accessToken) {
+      const options = {
+        method: "GET",
+        headers: {
+          Authorization: accessToken
+        }
+      }
+      fetch(API_URL("human"), options)
+        .then(res => res.json())
+        .then(data => {
+          dispatch(raceImageSet.actions.setRaceImageSet(data))
+        })
+        .catch(error => console.log(error))
+    }
+  }
 
   // TODO: refactor attribute change
   // const onDecremtAttribute = () => {
@@ -169,9 +190,19 @@ const Creator = () => {
       imageSet.head[head],
       imageSet.clothes[clothes]
     ], { crossOrigin: 'anonymous' })
-      .then(b64 => setSavedImage(b64))
+      .then(b64 => {
+        fetch(API_URL("characters"), {
+          method: "POST",
+          headers: {
+            "Authorization": accessToken,
+            "Content-Type": 'application/json'
+          },
+          body: JSON.stringify({ image: b64 })
+        })
+          .then(res => res.json())
+          .then(data => console.log(data))
+      })
   }
-
   return (
     <div className="creator-container">
       <select onChange={(e) => setAttribute(e.target.value)}>
@@ -187,17 +218,19 @@ const Creator = () => {
       <button onClick={onAttributeChangeDown}>{"<"}-</button>
       <button onClick={onAttributeChangeUp}>-{">"}</button>
       <button onClick={onCharacterSave}>Save to gallery</button>
-      <img className="saved-image" src={`${savedImage}`} />
-      <div className="creator-image-container">
-        <img className="creator-image" src={imageSet ? imageSet.hair[hair] : null} alt="hair" />
-        <img className="creator-image" src={imageSet ? imageSet.eyebrows[eyebrows] : null} alt="eyebrows" />
-        <img className="creator-image" src={imageSet ? imageSet.eyes[eyes] : null} alt="eyes" />
-        <img className="creator-image" src={imageSet ? imageSet.ears[ears] : null} alt="ears" />
-        <img className="creator-image" src={imageSet ? imageSet.nose[nose] : null} alt="nose" />
-        <img className="creator-image" src={imageSet ? imageSet.mouth[mouth] : null} alt="mouth" />
-        <img className="creator-image" src={imageSet ? imageSet.head[head] : null} alt="head" />
-        <img className="creator-image" src={imageSet ? imageSet.clothes[clothes] : null} alt="clothes" />
-      </div>
+
+      {imageSet &&
+        <div className="creator-image-container">
+          <img className="creator-image" src={imageSet.hair[hair]} alt="hair" />
+          <img className="creator-image" src={imageSet.eyebrows[eyebrows]} alt="eyebrows" />
+          <img className="creator-image" src={imageSet.eyes[eyes]} alt="eyes" />
+          <img className="creator-image" src={imageSet.ears[ears]} alt="ears" />
+          <img className="creator-image" src={imageSet.nose[nose]} alt="nose" />
+          <img className="creator-image" src={imageSet.mouth[mouth]} alt="mouth" />
+          <img className="creator-image" src={imageSet.head[head]} alt="head" />
+          <img className="creator-image" src={imageSet.clothes[clothes]} alt="clothes" />
+        </div>
+      }
     </div>
   )
 }

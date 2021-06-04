@@ -30,3 +30,11 @@ code {
   height: 300px;
   width: 300px;
 }
+
+button {
+  height: 40px;
+}
+
+select {
+  height: 40px;
+}

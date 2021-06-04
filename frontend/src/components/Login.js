@@ -17,7 +17,7 @@ const Login = () => {
 
   useEffect(() => {
     if (accessToken) {
-      history.push('/')
+      history.push('/creator')
     }
   }, [accessToken, history])
 
@@ -35,6 +35,7 @@ const Login = () => {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
+          console.log(data)
           batch(() => {
             dispatch(user.actions.setUsername(data.username))
             dispatch(user.actions.setAccessToken(data.accessToken))
