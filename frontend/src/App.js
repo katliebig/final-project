@@ -10,9 +10,11 @@ import Gallery from './components/Gallery'
 import UserGallery from './components/UserGallery'
 
 import user from './reducers/user'
+import raceImageSet from 'reducers/raceImageSet'
 
 const reducer = combineReducers({
-  user: user.reducer
+  user: user.reducer,
+  raceImageSet: raceImageSet.reducer
 })
 const store = configureStore({ reducer })
 
