@@ -48,12 +48,24 @@ const User = mongoose.model('User', {
   }
 })
 
+const Character = mongoose.model('Character', {
+  image: {
+    type: String,
+    // required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
+
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header('Authorization')
 
   try {
     const user = await User.findOne({ accessToken })
     if (user) {
+      req.user = user
       next()
     } else {
       res.status(401).json({ success: false, message: 'Not authorized' })
@@ -67,7 +79,7 @@ const port = process.env.PORT || 8080
 const app = express()
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 
 app.get('/', (req, res) => {
   res.send(listEndpoints(app))
@@ -115,6 +127,8 @@ app.post('/sessions', async (req, res) => {
   }
 })
 
+
+app.get("/human", authenticateUser)
 app.get('/human', async (req, res) => {
   // TODO: make into race endpoint using params
   try {
@@ -161,6 +175,22 @@ app.get('/human', async (req, res) => {
       eyes: urlsEyes,
       hair: urlsHair,
     })
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong", error })
+  }
+})
+
+app.post("/characters", authenticateUser)
+
+app.post("/characters", async (req, res) => {
+  const { _id } = req.user
+  const { image } = req.body
+
+  try {
+    const user = await User.findById(_id)
+    const newCharacter = await new Character({ image, user }).save()
+    // TODO: don't send this back, as it includes user data
+    res.json(newCharacter)
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
   }
