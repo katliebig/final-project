@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Creator from './components/Creator'
 import Gallery from './components/Gallery'
 import UserGallery from './components/UserGallery'
+import Header from "./components/Header"
 
 import user from './reducers/user'
 import raceImageSet from './reducers/raceImageSet'
@@ -24,6 +25,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/Login" component={Login} />

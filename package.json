@@ -3,5 +3,19 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "npm install --prefix backend"
-  }
+  },
+  "dependencies": {},
+  "description": "Replace this readme with your own information about your project.",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katliebig/final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katliebig/final-project/issues"
+  },
+  "homepage": "https://github.com/katliebig/final-project#readme"
 }
