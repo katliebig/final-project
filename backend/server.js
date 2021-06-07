@@ -115,7 +115,7 @@ app.post('/sessions', async (req, res) => {
     if (user && bcrypt.compareSync(password, user.password)) {
       res.json({
         success: true,
-        userID: user._id,
+        id: user._id,
         username: user.username,
         accessToken: user.accessToken
       })
@@ -180,8 +180,12 @@ app.get('/human', async (req, res) => {
   }
 })
 
-app.post("/characters", authenticateUser)
+app.get("/characters", async (req, res) => {
+  const characters = await Character.find()
+  res.json(characters)
+})
 
+app.post("/characters", authenticateUser)
 app.post("/characters", async (req, res) => {
   const { _id } = req.user
   const { image } = req.body
@@ -191,6 +195,18 @@ app.post("/characters", async (req, res) => {
     const newCharacter = await new Character({ image, user }).save()
     // TODO: don't send this back, as it includes user data
     res.json(newCharacter)
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong", error })
+  }
+})
+
+app.get("/characters/users/:id", authenticateUser)
+app.get("/characters/users/:id", async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const characters = await Character.find({ user: id })
+    res.json(characters)
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
   }
