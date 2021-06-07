@@ -8,6 +8,7 @@ import raceImageSet from "../reducers/raceImageSet"
 import { API_URL } from '../reusables/urls'
 
 import Loader from './Loader'
+import CharacterRandomizer from "./CharacterRandomizer"
 
 const Creator = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -33,13 +34,7 @@ const Creator = () => {
     if (!accessToken) {
       history.push("/");
     }
-  }, [accessToken, history]);
 
-  useEffect(() => {
-    fetchImageSet()
-  }, [accessToken])
-
-  const fetchImageSet = () => {
     if (accessToken) {
       const options = {
         method: "GET",
@@ -55,7 +50,7 @@ const Creator = () => {
         })
         .catch(error => console.log(error))
     }
-  }
+  }, [history, dispatch, accessToken])
 
   const onDecrementAttribute = () => {
     onAttributeChange(-1)
@@ -97,6 +92,7 @@ const Creator = () => {
           .then(data => console.log(data))
       })
   }
+
   return (
     <div className="creator-container">
       <select onChange={(e) => setAttribute(e.target.value)}>
@@ -112,7 +108,7 @@ const Creator = () => {
       <button onClick={onDecrementAttribute}>{"<"}-</button>
       <button onClick={onIncrementAttribute}>-{">"}</button>
       <button onClick={onCharacterSave}>Save to gallery</button>
-
+      <CharacterRandomizer setCharacter={setCharacter} />
       {isLoading && <Loader />}
       {imageSet &&
         <div className="creator-image-container">
