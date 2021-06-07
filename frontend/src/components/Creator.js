@@ -17,19 +17,22 @@ const Creator = () => {
   const [head, setHead] = useState(0)
   const [clothes, setClothes] = useState(0)
   const [ears, setEars] = useState(0)
-  const [savedImage, setSavedImage] = useState("")
+  // const [character, setCharacter] = useState({
+  //   hair: 0,
+  //   eyebrows: 0,
+  //   eyes: 0,
+  //   ears: 0,
+  //   nose: 0,
+  //   mouth: 0,
+  //   head: 0,
+  //   clothes: 0
+  // })
 
   const imageSet = useSelector(store => store.raceImageSet.imageSet)
   const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
   const history = useHistory()
-
-  // const [species, setSpecies] = useState({
-  //   hair: 0,
-  //   eyebrows: 0,
-  //   eyes: 0,
-  // })
 
   useEffect(() => {
     if (!accessToken) {
@@ -66,12 +69,14 @@ const Creator = () => {
   //   onAttributeChange(1)
   // }
   // const onAttributeChange = (change) => {
-  //   const someVal = species[attribute] < imageSet[attribute].length - 1;
-  //   const newValue = species[attribute] + change;
-  //   let newSpecies = species;
-  //   newSpecies[attribute] = newValue;
-  //   setSpecies(newSpecies)
+  //   let newCharacter = character
+  //   if (character[attribute] < imageSet[attribute].length - 1) {
+  //    newCharacter[attribute] = (character[attribute] + change)%character[attribute].length // TODO: SCHLAU SEIN
+  // } else if (character[attribute] === imageSet[attribute].length - 1) {
+  //    newCharacter[attribute] = 0
   // }
+  //   setCharacter(newCharacter)
+
 
   const onAttributeChangeUp = () => {
     if (attribute === "hair") {

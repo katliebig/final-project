@@ -37,10 +37,16 @@ const Login = () => {
         if (data.success) {
           console.log(data)
           batch(() => {
+            dispatch(user.actions.setId(data.id))
             dispatch(user.actions.setUsername(data.username))
             dispatch(user.actions.setAccessToken(data.accessToken))
             dispatch(user.actions.setErrors(null))
           })
+          localStorage.setItem("user", JSON.stringify({
+            id: data.id,
+            username: data.username,
+            accessToken: data.accessToken
+          }))
         } else {
           dispatch(user.actions.setErrors(data))
         }
