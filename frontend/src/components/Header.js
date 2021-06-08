@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch, batch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import user from '../reducers/user'
 
@@ -8,6 +8,7 @@ const Header = () => {
   const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const onLogoutButtonClick = () => {
     batch(() => {
@@ -20,21 +21,54 @@ const Header = () => {
 
   return (
     <header>
-      {accessToken &&
-        <button onClick={onLogoutButtonClick} className="logout-button">
-          Log out
-      </button>}
+      <img className="header-logo" src="./assets/Dice-and-doom-logo.png" alt="Dice and doom logo" />
 
-      <Link to="/">Home</Link>
+      <div className="header-links-container">
+        {accessToken &&
+          <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
+            <div className="header-icon-border">
+              <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
+            </div>
+            <span className="link">Log out</span>
+          </Link>}
 
-      {!accessToken && <Link to="/Login">Log in</Link>}
+        {!accessToken &&
+          <Link to="/Login">
+            <div className="header-icon-border"><img src="./assets/login.svg" className="header-icon" alt="home icon" /></div>
+            <span className="link">Log in</span>
+          </Link>}
 
-      {accessToken && <Link to="/Creator">Creator</Link>}
+        <Link to="/">
+          <div className="header-icon-border">
+            <img src="./assets/home.svg" className="header-icon" alt="home icon" />
+          </div>
+          <span className={`link ${location.pathname === "/" ? "current-route" : ""}`}>Home</span>
+        </Link>
 
-      <Link to="/Gallery">Gallery</Link>
+        {accessToken &&
+          <Link to="/Creator">
+            <div className="header-icon-border">
+              <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
+            </div>
+            <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+          </Link>}
 
-      {accessToken && <Link to="/UserGallery">User Gallery</Link>}
-    </header>
+        <Link to="/Gallery">
+          <div className="header-icon-border">
+            <img src="./assets/gallery.svg" className="header-icon" alt="home icon" />
+          </div>
+          <span className={`link ${location.pathname === "/Gallery" ? "current-route" : ""}`}>Gallery</span>
+        </Link>
+
+        {accessToken &&
+          <Link to="/UserGallery">
+            <div className="header-icon-border">
+              <img src="./assets/user.svg" className="header-icon" alt="home icon" />
+            </div>
+            <span className={`link ${location.pathname === "/UserGallery" ? "current-route" : ""}`}>User Gallery</span>
+          </Link>}
+      </div>
+    </header >
   )
 }
 

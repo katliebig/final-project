@@ -17,7 +17,7 @@ const Login = () => {
 
   useEffect(() => {
     if (accessToken) {
-      history.push('/creator')
+      history.push('/Creator')
     }
   }, [accessToken, history])
 

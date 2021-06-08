@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Neucha&family=Righteous&family=Roboto&display=swap');
+
+/* font-family: 'Hammersmith One', sans-serif;
+font-family: 'Neucha', cursive;
+font-family: 'Righteous', cursive;
+font-family: 'Roboto', sans-serif;
+color: #FFBC37; // golden
+background-color: #FF0000; // red (button) 
+svg: #8A0101;
+*/
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -7,9 +22,88 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+header {
+  background-image: url("./reusables/stacked-waves-haikei-red.svg");
+  background-size: auto;
+  height: 200px;
+  font-family: 'Neucha', cursive;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #FFBC37;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+}
+
+.header-logo {
+  max-width: 180px;
+  width: 20%;
+}
+
+.header-links-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon-border {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin-right: 8px;
+  border: 2px solid #FFBC37;
+  border-radius: 50%;
+}
+
+header a:hover .header-icon-border {  
+  background-color: #3a393981;
+}
+
+.link {
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+}
+
+.link::before,
+.link::after {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #FFBC37;
+    top: 100%;
+    left: 0;
+    pointer-events: none;
+}
+
+.link::before {
+    content: '';
+}
+
+.link::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+
+header a:hover .link::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+
+.current-route {
+  text-decoration: underline;
 }
 
 .creator-container {
