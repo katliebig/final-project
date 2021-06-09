@@ -12,7 +12,7 @@ import listEndpoints from 'express-list-endpoints'
 dotenv.config()
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/character-creator"
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 mongoose.Promise = Promise
 
 const cloudinary = cloudinaryFramework.v2;
@@ -60,6 +60,18 @@ const Character = mongoose.model('Character', {
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  }
+})
+
+const Race = mongoose.model("Race", {
+  race: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  attributes: {
+    type: Array,
+    required: true
   }
 })
 
@@ -131,68 +143,43 @@ app.post('/sessions', async (req, res) => {
   }
 })
 
+app.post("/races", async (req, res) => {
+  const { race, attributes } = req.body
+  try {
+    const newRace = await new Race({ race, attributes }).save()
+    res.json(newRace)
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong", error })
+  }
+})
 
-app.get("/race/:race", authenticateUser)
-app.get('/race/:race', async (req, res) => {
-  // TODO: make into race endpoint using params
+app.get("/races/:race", authenticateUser)
+app.get('/races/:race', async (req, res) => {
   const { race } = req.params
 
   try {
-    const human = await cloudinary.search
+    const chosenRace = await Race.findOne({ race })
+
+    const chosenRaceResults = await cloudinary.search
       .expression(`tags=${race}`)
       .execute()
 
-    const urlsMouth = []
-    const urlsNose = []
-    const urlsClothes = []
-    const urlsHead = []
-    const urlsEars = []
-    const urlsEyebrows = []
-    const urlsEyes = []
-    const urlsHair = []
-    const urlsFacialHair = []
-    const urlsLeftHorn = []
-    const urlsRightHorn = []
+    const urls = {}
 
-    for (let resource of human.resources) {
-      if (resource.filename.includes("hair")) {
-        urlsHair.push(resource.secure_url)
-      } else if (resource.filename.includes("eyebrows")) {
-        urlsEyebrows.push(resource.secure_url)
-      } else if (resource.filename.includes("eyes")) {
-        urlsEyes.push(resource.secure_url)
-      } else if (resource.filename.includes("ear")) {
-        urlsEars.push(resource.secure_url)
-      } else if (resource.filename.includes("nose")) {
-        urlsNose.push(resource.secure_url)
-      } else if (resource.filename.includes("mouth")) {
-        urlsMouth.push(resource.secure_url)
-      } else if (resource.filename.includes("head")) {
-        urlsHead.push(resource.secure_url)
-      } else if (resource.filename.includes("clothes")) {
-        urlsClothes.push(resource.secure_url)
-      } else if (resource.filename.includes("facial")) {
-        urlsFacialHair.push(resource.secure_url)
-      } else if (resource.filename.includes("left_horn")) {
-        urlsLeftHorn.push(resource.secure_url)
-      } else if (resource.filename.includes("right_horn")) {
-        urlsRightHorn.push(resource.secure_url)
+    for (const resource of chosenRaceResults.resources) {
+      for (const attribute of chosenRace.attributes) {
+        if (resource.filename.includes(attribute)) {
+          if (!urls[attribute]) {
+            urls[attribute] = [resource.secure_url]
+          } else {
+            urls[attribute] = [...urls[attribute], resource.secure_url]
+          }
+        }
       }
     }
 
-    res.json({
-      mouth: urlsMouth,
-      nose: urlsNose,
-      head: urlsHead,
-      clothes: urlsClothes,
-      ears: urlsEars,
-      eyebrows: urlsEyebrows,
-      eyes: urlsEyes,
-      hair: urlsHair,
-      facialHair: urlsFacialHair,
-      leftHorn: urlsLeftHorn,
-      rightHorn: urlsRightHorn
-    })
+    res.json({ urls, attributes: chosenRace.attributes })
+
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
   }
