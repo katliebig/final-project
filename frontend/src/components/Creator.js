@@ -27,8 +27,9 @@ const Creator = () => {
     rightHorn: 0
   })
 
-  const imageSet = useSelector(store => store.race.imageSet)
   const chosenRace = useSelector(store => store.race.chosenRace)
+  const attributes = useSelector(store => store.race.attributes)
+  const imageSet = useSelector(store => store.race.imageSet)
   const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
@@ -46,82 +47,69 @@ const Creator = () => {
           Authorization: accessToken
         }
       }
-      fetch(API_URL(`race/${chosenRace}`), options)
+      fetch(API_URL(`races/${chosenRace}`), options)
         .then(res => res.json())
         .then(data => {
-          dispatch(race.actions.setImageSet(data))
+          dispatch(race.actions.setImageSet(data.urls))
+          dispatch(race.actions.setAttributes(data.attributes))
           setIsLoading(false)
         })
         .catch(error => console.log(error))
     }
   }, [history, dispatch, accessToken, chosenRace])
 
+
   const onDecrementAttribute = () => {
-    let newCharacter = character
-    newCharacter[attribute] = (character[attribute] - 1)
-    if (newCharacter[attribute] === -1) {
-      newCharacter[attribute] = imageSet[attribute].length - 1
-    }
-    setCharacter(newCharacter)
+    onAttributeChange(-1)
   }
 
   const onIncrementAttribute = () => {
-    let newCharacter = character
-    newCharacter[attribute] = (character[attribute] + 1) % imageSet[attribute].length
-    setCharacter(newCharacter)
+    onAttributeChange(1)
   }
 
   const onAttributeChange = (change) => {
     let newCharacter = character
-    if (character[attribute] < imageSet[attribute].length - 1) {
-      newCharacter[attribute] = (character[attribute] + change) % imageSet[attribute].length
+    newCharacter[attribute] = (character[attribute] + change) % imageSet[attribute].length
+    if (newCharacter[attribute] === -1) {
+      newCharacter[attribute] = imageSet[attribute].length - 1
     }
-    setCharacter(newCharacter)
+    setCharacter({ ...character, attribute: newCharacter[attribute] })
   }
 
-
+  const onChooseRace = (e) => {
+    setIsLoading(true)
+    dispatch(race.actions.setChosenRace(e.target.value))
+  }
 
   return (
     <div className="creator-container">
 
-      <input type="radio" id="human" name="race" value="human" onChange={(e) => dispatch(race.actions.setChosenRace(e.target.value))} />
-      <label htmlFor="human">Human</label>
-      <input type="radio" id="tiefling" name="race" value="tiefling" onChange={(e) => dispatch(race.actions.setChosenRace(e.target.value))} />
-      <label htmlFor="tiefling">Tiefling</label>
+      <button className="race-button" value="human" onClick={onChooseRace} >Human</button>
+      <button className="race-button" value="tiefling" onClick={onChooseRace} >Tiefling</button>
 
       <select onChange={(e) => setAttribute(e.target.value)}>
-        <option value="hair">Hair</option>
-        <option value="eyebrows">Eyebrows</option>
-        <option value="eyes">Eyes</option>
-        <option value="ears">Ears</option>
-        <option value="nose">Nose</option>
-        <option value="mouth">Mouth</option>
-        <option value="head">Head</option>
-        <option value="clothes">Clothes</option>
-        <option value="rightHorn">Right horn</option>
-        <option value="leftHorn">Left horn</option>
-        <option value="facialHair">Facial hair</option>
+        {attributes.map(attribute => (
+          <option value={attribute} key={attribute} >{attribute}</option>
+        ))}
+
       </select>
       <button onClick={onDecrementAttribute}>{"<"}-</button>
       <button onClick={onIncrementAttribute}>-{">"}</button>
+
       <SaveImageButton character={character} />
+
       <CharacterRandomizer setCharacter={setCharacter} />
+
       {isLoading && <Loader />}
-      {imageSet &&
+
+      {!isLoading &&
         <div className="creator-image-container">
-          <img className="creator-image" src={imageSet.head[character.head]} alt="head" />
-          <img className="creator-image" src={imageSet.leftHorn[character.leftHorn]} alt="left horn" />
-          <img className="creator-image" src={imageSet.hair[character.hair]} alt="hair" />
-          <img className="creator-image" src={imageSet.ears[character.ears]} alt="ears" />
-          <img className="creator-image" src={imageSet.eyebrows[character.eyebrows]} alt="eyebrows" />
-          <img className="creator-image" src={imageSet.rightHorn[character.rightHorn]} alt="right horn" />
-          <img className="creator-image" src={imageSet.eyes[character.eyes]} alt="eyes" />
-          <img className="creator-image" src={imageSet.nose[character.nose]} alt="nose" />
-          <img className="creator-image" src={imageSet.mouth[character.mouth]} alt="mouth" />
-          {imageSet.clothes.length > 0 && <img className="creator-image" src={imageSet.clothes[character.clothes]} alt="clothes" />}
-          <img className="creator-image" src={imageSet.facialHair[character.facialHair]} alt="facial hair" />
+          {attributes.map(attribute => (
+            < img className="creator-image" src={imageSet[attribute][character[attribute]]} alt={attribute} key={attribute} />
+          ))}
         </div>
       }
+
     </div>
   )
 }

@@ -3,24 +3,18 @@ import { useSelector } from "react-redux"
 
 const CharacterRandomizer = ({ setCharacter }) => {
   const imageSet = useSelector(store => store.race.imageSet)
+  const attributes = useSelector(store => store.race.attributes)
 
   const generateRandomNumber = (attribute) => {
     return Math.floor(Math.random() * imageSet[attribute].length);
   }
   const onRandomize = () => {
-    let randomCharacter = {
-      hair: generateRandomNumber("hair"),
-      eyebrows: generateRandomNumber("eyebrows"),
-      eyes: generateRandomNumber("eyes"),
-      ears: generateRandomNumber("ears"),
-      nose: generateRandomNumber("nose"),
-      mouth: generateRandomNumber("mouth"),
-      head: generateRandomNumber("head"),
-      clothes: generateRandomNumber("clothes"),
-      facialHair: generateRandomNumber("facialHair"),
-      leftHorn: generateRandomNumber("leftHorn"),
-      rightHorn: generateRandomNumber("rightHorn")
+    let randomCharacter = {}
+
+    for (const attribute of attributes) {
+      randomCharacter[attribute] = generateRandomNumber(attribute)
     }
+
     setCharacter(randomCharacter)
   }
 
