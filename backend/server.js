@@ -53,6 +53,10 @@ const Character = mongoose.model('Character', {
     type: String,
     // required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -128,12 +132,14 @@ app.post('/sessions', async (req, res) => {
 })
 
 
-app.get("/human", authenticateUser)
-app.get('/human', async (req, res) => {
+app.get("/race/:race", authenticateUser)
+app.get('/race/:race', async (req, res) => {
   // TODO: make into race endpoint using params
+  const { race } = req.params
+
   try {
     const human = await cloudinary.search
-      .expression("tags=human")
+      .expression(`tags=${race}`)
       .execute()
 
     const urlsMouth = []
@@ -144,6 +150,9 @@ app.get('/human', async (req, res) => {
     const urlsEyebrows = []
     const urlsEyes = []
     const urlsHair = []
+    const urlsFacialHair = []
+    const urlsLeftHorn = []
+    const urlsRightHorn = []
 
     for (let resource of human.resources) {
       if (resource.filename.includes("hair")) {
@@ -152,7 +161,7 @@ app.get('/human', async (req, res) => {
         urlsEyebrows.push(resource.secure_url)
       } else if (resource.filename.includes("eyes")) {
         urlsEyes.push(resource.secure_url)
-      } else if (resource.filename.includes("ears")) {
+      } else if (resource.filename.includes("ear")) {
         urlsEars.push(resource.secure_url)
       } else if (resource.filename.includes("nose")) {
         urlsNose.push(resource.secure_url)
@@ -162,6 +171,12 @@ app.get('/human', async (req, res) => {
         urlsHead.push(resource.secure_url)
       } else if (resource.filename.includes("clothes")) {
         urlsClothes.push(resource.secure_url)
+      } else if (resource.filename.includes("facial")) {
+        urlsFacialHair.push(resource.secure_url)
+      } else if (resource.filename.includes("left_horn")) {
+        urlsLeftHorn.push(resource.secure_url)
+      } else if (resource.filename.includes("right_horn")) {
+        urlsRightHorn.push(resource.secure_url)
       }
     }
 
@@ -174,6 +189,9 @@ app.get('/human', async (req, res) => {
       eyebrows: urlsEyebrows,
       eyes: urlsEyes,
       hair: urlsHair,
+      facialHair: urlsFacialHair,
+      leftHorn: urlsLeftHorn,
+      rightHorn: urlsRightHorn
     })
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
