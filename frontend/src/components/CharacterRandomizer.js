@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux"
 
 const CharacterRandomizer = ({ setCharacter }) => {
-  const imageSet = useSelector(store => store.raceImageSet.imageSet)
+  const imageSet = useSelector(store => store.race.imageSet)
 
   const generateRandomNumber = (attribute) => {
     return Math.floor(Math.random() * imageSet[attribute].length);
@@ -16,7 +16,10 @@ const CharacterRandomizer = ({ setCharacter }) => {
       nose: generateRandomNumber("nose"),
       mouth: generateRandomNumber("mouth"),
       head: generateRandomNumber("head"),
-      clothes: generateRandomNumber("clothes")
+      clothes: generateRandomNumber("clothes"),
+      facialHair: generateRandomNumber("facialHair"),
+      leftHorn: generateRandomNumber("leftHorn"),
+      rightHorn: generateRandomNumber("rightHorn")
     }
     setCharacter(randomCharacter)
   }

@@ -11,12 +11,13 @@ import UserGallery from './components/UserGallery'
 import Header from "./components/Header"
 
 import user from './reducers/user'
-import raceImageSet from './reducers/raceImageSet'
+import race from './reducers/race'
 import characters from './reducers/characters'
+import Race from 'components/Race'
 
 const reducer = combineReducers({
   user: user.reducer,
-  raceImageSet: raceImageSet.reducer,
+  race: race.reducer,
   characters: characters.reducer
 })
 const store = configureStore({ reducer })
@@ -30,6 +31,7 @@ export const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/Login" component={Login} />
           <Route path="/Creator" component={Creator} />
+          <Route path="/Race" component={Race} />
           <Route path="/Gallery" component={Gallery} />
           <Route path="/UserGallery" component={UserGallery} />
         </Switch>
