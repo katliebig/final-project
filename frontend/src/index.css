@@ -120,6 +120,10 @@ header a:hover .link::before {
   height: 300px;
 }
 
+.character-image-container {
+  display: inline-block;
+}
+
 .character-image {
   height: 300px;
   width: 300px;
