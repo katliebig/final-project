@@ -52,6 +52,19 @@ const Creator = () => {
         .then(data => {
           dispatch(race.actions.setImageSet(data.urls))
           dispatch(race.actions.setAttributes(data.attributes))
+          setCharacter({
+            hair: 0,
+            eyebrows: 0,
+            eyes: 0,
+            ears: 0,
+            nose: 0,
+            mouth: 0,
+            head: 0,
+            clothes: 0,
+            facialHair: 0,
+            leftHorn: 0,
+            rightHorn: 0
+          })
           setIsLoading(false)
         })
         .catch(error => console.log(error))
