@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
 
@@ -16,6 +16,22 @@ const UserGallery = () => {
 
   const dispatch = useDispatch()
   const history = useHistory()
+
+  const onCharacterDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this character?")) {
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: accessToken
+        }
+      }
+      fetch(API_URL(`characters/users/${id}`), options)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+        })
+    }
+  }
 
   useEffect(() => {
     if (!accessToken) {
@@ -37,16 +53,18 @@ const UserGallery = () => {
         })
         .catch(error => console.log(error))
     }
-  }, [dispatch, history, id, accessToken])
+  }, [dispatch, history, id, accessToken, onCharacterDelete])
 
   return (
     <div>
       {isLoading && <Loader />}
       {charactersArray.map(character => (
-        <CharacterImage
-          key={character._id}
-          src={character.image}
-        />
+        <div key={character._id}>
+          <button onClick={() => onCharacterDelete(character._id)} >Click to delete</button>
+          <CharacterImage
+            src={character.image}
+          />
+        </div>
       ))}
     </div>
   )

@@ -113,7 +113,7 @@ app.post('/users', async (req, res) => {
 
     res.json({
       success: true,
-      userID: newUser._id,
+      userID: user._id,
       username: newUser.username,
       accessToken: newUser.accessToken
     })
@@ -216,6 +216,22 @@ app.get("/characters/users/:id", async (req, res) => {
     res.status(400).json({ message: "Something went wrong", error })
   }
 })
+
+app.delete("/characters/users/:id", authenticateUser)
+app.delete('/characters/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCharacter = await Character.deleteOne({ _id: id });
+    if (deletedCharacter) {
+      res.json(deletedCharacter);
+    } else {
+      res.status(404).json({ message: 'Not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid request', error });
+  }
+});
 
 app.listen(port, () => {
   // eslint-disable-next-line
