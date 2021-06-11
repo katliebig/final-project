@@ -36,11 +36,13 @@ const User = mongoose.model('User', {
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    minLength: 4,
+    maxLength: 20
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   accessToken: {
     type: String,
@@ -113,7 +115,7 @@ app.post('/users', async (req, res) => {
 
     res.json({
       success: true,
-      userID: newUser._id,
+      id: newUser._id,
       username: newUser.username,
       accessToken: newUser.accessToken
     })
@@ -186,7 +188,7 @@ app.get('/races/:race', async (req, res) => {
 })
 
 app.get("/characters", async (req, res) => {
-  const characters = await Character.find()
+  const characters = await Character.find().populate("user", "username")
   res.json(characters)
 })
 
@@ -197,9 +199,8 @@ app.post("/characters", async (req, res) => {
 
   try {
     const user = await User.findById(_id)
-    const newCharacter = await new Character({ image, user }).save()
-    // TODO: don't send this back, as it includes user data
-    res.json(newCharacter)
+    await new Character({ image, user }).save()
+    res.json({ message: "Character saved successfully" })
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
   }
@@ -211,11 +212,31 @@ app.get("/characters/users/:id", async (req, res) => {
 
   try {
     const characters = await Character.find({ user: id })
-    res.json(characters)
+    if (characters) {
+      res.json(characters)
+    } else {
+      res.status(404).json({ message: 'Not found' })
+    }
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
   }
 })
+
+app.delete("/characters/users/:id", authenticateUser)
+app.delete('/characters/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCharacter = await Character.deleteOne({ _id: id });
+    if (deletedCharacter) {
+      res.json({ message: "Character deleted" });
+    } else {
+      res.status(404).json({ message: 'Not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid request', error });
+  }
+});
 
 app.listen(port, () => {
   // eslint-disable-next-line

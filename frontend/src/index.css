@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Neucha&family=Righteous&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Neucha&family=Righteous&family=Roboto&family=Oswald&display=swap');
 
 /* font-family: 'Hammersmith One', sans-serif;
 font-family: 'Neucha', cursive;
@@ -106,6 +106,41 @@ header a:hover .link::before {
   text-decoration: underline;
 }
 
+h1 {
+  font-family: "Oswald";
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  border: 2px solid #000;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 3px 3px 5px #767676;
+}
+
+.card-container:hover {
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.card-image {
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}
+
+.card-title {
+  margin: 10px 0px 10px 0px;
+  font-family: "Oswald";
+}
+
+.card-text {
+  margin: 0;
+  font-family: "Oswald";
+}
+
 .creator-container {
   display: flex;
 }
@@ -118,6 +153,10 @@ header a:hover .link::before {
   position: absolute;
   width: 300px;
   height: 300px;
+}
+
+.character-image-container {
+  display: inline-block;
 }
 
 .character-image {

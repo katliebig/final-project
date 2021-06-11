@@ -27,10 +27,12 @@ const Gallery = () => {
     <div>
       {isLoading && <Loader />}
       {charactersArray.map(character => (
-        <CharacterImage
-          key={character._id}
-          src={character.image}
-        />
+        <div key={character._id} className="character-image-container">
+          <CharacterImage
+            src={character.image}
+          />
+          <p>Created by {character.user.username}</p>
+        </div>
       ))}
     </div>
   )

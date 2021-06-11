@@ -11,9 +11,7 @@ import CharacterRandomizer from "./CharacterRandomizer"
 import SaveImageButton from './SaveImageButton'
 
 const Creator = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [attribute, setAttribute] = useState("")
-  const [character, setCharacter] = useState({
+  const characterAttributes = {
     hair: 0,
     eyebrows: 0,
     eyes: 0,
@@ -24,8 +22,13 @@ const Creator = () => {
     clothes: 0,
     facialHair: 0,
     leftHorn: 0,
-    rightHorn: 0
-  })
+    rightHorn: 0,
+    background: 0
+  }
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [attribute, setAttribute] = useState("")
+  const [character, setCharacter] = useState(characterAttributes)
 
   const chosenRace = useSelector(store => store.race.chosenRace)
   const attributes = useSelector(store => store.race.attributes)
@@ -50,8 +53,10 @@ const Creator = () => {
       fetch(API_URL(`races/${chosenRace}`), options)
         .then(res => res.json())
         .then(data => {
+          console.log(data)
           dispatch(race.actions.setImageSet(data.urls))
           dispatch(race.actions.setAttributes(data.attributes))
+          setCharacter(characterAttributes)
           setIsLoading(false)
         })
         .catch(error => console.log(error))
@@ -69,10 +74,7 @@ const Creator = () => {
 
   const onAttributeChange = (change) => {
     let newCharacter = character
-    newCharacter[attribute] = (character[attribute] + change) % imageSet[attribute].length
-    if (newCharacter[attribute] === -1) {
-      newCharacter[attribute] = imageSet[attribute].length - 1
-    }
+    newCharacter[attribute] = (character[attribute] + change + imageSet[attribute].length) % imageSet[attribute].length
     setCharacter({ ...character, attribute: newCharacter[attribute] })
   }
 

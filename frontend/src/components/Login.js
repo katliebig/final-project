@@ -12,6 +12,7 @@ const Login = () => {
   const [mode, setMode] = useState(null)
 
   const accessToken = useSelector(store => store.user.accessToken)
+  const errors = useSelector(store => store.user.errors)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -34,8 +35,8 @@ const Login = () => {
     fetch(API_URL(mode), options)
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         if (data.success) {
-          console.log(data)
           batch(() => {
             dispatch(user.actions.setId(data.id))
             dispatch(user.actions.setUsername(data.username))
@@ -55,20 +56,37 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit" onClick={() => setMode('sessions')}>Sign in</button>
-      <button type="submit" onClick={() => setMode('users')}>Sign up</button>
-    </form>
+    <>
+      <form onSubmit={onFormSubmit}>
+        <label>
+          Username
+        <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <label>
+          Password (min. 8 characters)
+        <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button
+          type="submit"
+          onClick={() => setMode('sessions')}
+        >Sign in</button>
+        <button
+          type="submit"
+          onClick={() => setMode('users')}
+          disabled={password.length <= 8 ? true : false}
+        >Sign up</button>
+      </form>
+      {(errors && errors.error.code === 11000) && <p>Username already taken</p>}
+      {(errors && errors.error.name === "ValidationError") && <p>Username must be between 4 and 20 characters long.</p>}
+    </>
   )
 }
 
