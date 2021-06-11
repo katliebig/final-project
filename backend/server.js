@@ -186,7 +186,7 @@ app.get('/races/:race', async (req, res) => {
 })
 
 app.get("/characters", async (req, res) => {
-  const characters = await Character.find()
+  const characters = await Character.find().populate("user", "username")
   res.json(characters)
 })
 
