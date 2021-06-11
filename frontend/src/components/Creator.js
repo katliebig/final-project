@@ -82,10 +82,7 @@ const Creator = () => {
 
   const onAttributeChange = (change) => {
     let newCharacter = character
-    newCharacter[attribute] = (character[attribute] + change) % imageSet[attribute].length
-    if (newCharacter[attribute] === -1) {
-      newCharacter[attribute] = imageSet[attribute].length - 1
-    }
+    newCharacter[attribute] = (character[attribute] + change + imageSet[attribute].length) % imageSet[attribute].length
     setCharacter({ ...character, attribute: newCharacter[attribute] })
   }
 
