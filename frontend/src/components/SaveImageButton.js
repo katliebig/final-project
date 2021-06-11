@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from "react-redux"
 import mergeImages from 'merge-images'
 
 import { API_URL } from '../reusables/urls'
 
 const SaveImageButton = ({ character }) => {
+  const [response, setResponse] = useState(null)
+
   const attributes = useSelector(store => store.race.attributes)
   const imageSet = useSelector(store => store.race.imageSet)
   const accessToken = useSelector(store => store.user.accessToken)
@@ -26,12 +28,15 @@ const SaveImageButton = ({ character }) => {
           body: JSON.stringify({ image: b64 })
         })
           .then(res => res.json())
-          .then(data => console.log(data))
+          .then(data => setResponse(data))
       })
   }
 
   return (
-    <button onClick={onCharacterSave}>Save to gallery</button>
+    <>
+      <button onClick={onCharacterSave}>Save to gallery</button>
+      {response && <p>{response.message}</p>}
+    </>
   )
 }
 
