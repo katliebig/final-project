@@ -54,39 +54,56 @@ const Login = () => {
       })
       .catch()
   }
+  let errorMessage
+
+  if (errors) {
+    if (errors.error) {
+      if (errors.error.code === 11000) {
+        errorMessage = "Username already taken"
+      } else if (errors.error.name === "ValidationError") {
+        errorMessage = "Username must be between 4 and 20 characters long"
+      }
+    } else {
+      errorMessage = errors.message
+    }
+  }
 
   return (
-    <>
-      <form onSubmit={onFormSubmit}>
-        <label>
-          Username
-        <input
+    <section className="login">
+      <div className="login-container" >
+        <form onSubmit={onFormSubmit} className="login-form">
+          <label htmlFor="username">
+            Username
+          </label>
+          <input
             type="text"
             value={username}
+            id="username"
             onChange={(e) => setUsername(e.target.value)}
           />
-        </label>
-        <label>
-          Password (min. 8 characters)
-        <input
+          <label htmlFor="password">
+            Password (min. 8 characters)
+          </label>
+          <input
             type="password"
             value={password}
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <button
-          type="submit"
-          onClick={() => setMode('sessions')}
-        >Sign in</button>
-        <button
-          type="submit"
-          onClick={() => setMode('users')}
-          disabled={password.length <= 8 ? true : false}
-        >Sign up</button>
-      </form>
-      {(errors && errors.error.code === 11000) && <p>Username already taken</p>}
-      {(errors && errors.error.name === "ValidationError") && <p>Username must be between 4 and 20 characters long.</p>}
-    </>
+          <p className="login-error-message">{errorMessage}</p>
+          <button
+            type="submit"
+            onClick={() => setMode('sessions')}
+          >Sign in</button>
+          <button
+            type="submit"
+            onClick={() => setMode('users')}
+            disabled={password.length < 8 ? true : false}
+          >Sign up</button>
+        </form>
+        <img src="./assets/dice.jpg" alt="placeholder" />
+      </div>
+    </section>
   )
 }
 
