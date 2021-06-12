@@ -17,21 +17,23 @@ const Race = () => {
   }
 
   return (
-    <>
+    <section className="races-main">
       <h1>Races</h1>
-      <Card
-        onRaceChosen={onRaceChosen}
-        imgUrl="../assets/human.png"
-        title="Human"
-        text="Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers"
-      />
-      <Card
-        onRaceChosen={onRaceChosen}
-        imgUrl="../assets/tiefling.png"
-        title="Tiefling"
-        text="To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling."
-      />
-    </>
+      <div className="race-cards-container">
+        <Card
+          onRaceChosen={onRaceChosen}
+          imgUrl="../assets/human.png"
+          title="Human"
+          text="Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers"
+        />
+        <Card
+          onRaceChosen={onRaceChosen}
+          imgUrl="../assets/tiefling.png"
+          title="Tiefling"
+          text="To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling."
+        />
+      </div>
+    </section>
   )
 }
 

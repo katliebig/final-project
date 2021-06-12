@@ -21,59 +21,68 @@ const Header = () => {
 
   return (
     <header>
-      <img className="header-logo" src="./assets/Dice-and-doom-logo.png" alt="Dice and doom logo" />
-
-      <div className="header-links-container">
-        {accessToken &&
-          <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
+      {/* <img className="header-logo" src="./assets/Dice-and-doom-logo.png" alt="Dice and doom logo" /> */}
+      <div className="background-color-header">
+        <h1 className="header-title">CHARACTER CREATOR</h1>
+        <div className="header-links-container">
+          <Link to="/">
             <div className="header-icon-border">
-              <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
+              <img src="./assets/home.svg" className="header-icon" alt="home icon" />
             </div>
-            <span className="link">Log out</span>
-          </Link>}
+            <span className={`link ${location.pathname === "/" ? "current-route" : ""}`}>Home</span>
+          </Link>
 
-        {!accessToken &&
-          <Link to="/Login">
-            <div className="header-icon-border"><img src="./assets/login.svg" className="header-icon" alt="home icon" /></div>
-            <span className="link">Log in</span>
-          </Link>}
+          {accessToken &&
+            <Link to="/Race">
+              <div className="header-icon-border">
+                <img src="./assets/home.svg" className="header-icon" alt="home icon" />
+              </div>
+              <span className={`link ${location.pathname === "/Race" ? "current-route" : ""}`}>Races</span>
+            </Link>
+          }
 
-        <Link to="/">
-          <div className="header-icon-border">
-            <img src="./assets/home.svg" className="header-icon" alt="home icon" />
-          </div>
-          <span className={`link ${location.pathname === "/" ? "current-route" : ""}`}>Home</span>
-        </Link>
+          {accessToken &&
+            <Link to="/Creator">
+              <div className="header-icon-border">
+                <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
+              </div>
+              <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+            </Link>
+          }
 
-        <Link to="/Race">
-          <div className="header-icon-border">
-            <img src="./assets/home.svg" className="header-icon" alt="home icon" />
-          </div>
-          <span className={`link ${location.pathname === "/Race" ? "current-route" : ""}`}>Race</span>
-        </Link>
-
-        {accessToken &&
-          <Link to="/Creator">
+          <Link to="/Gallery">
             <div className="header-icon-border">
-              <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
+              <img src="./assets/gallery.svg" className="header-icon" alt="home icon" />
             </div>
-            <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
-          </Link>}
+            <span className={`link ${location.pathname === "/Gallery" ? "current-route" : ""}`}>Gallery</span>
+          </Link>
 
-        <Link to="/Gallery">
+          {accessToken &&
+            <Link to="/UserGallery">
+              <div className="header-icon-border">
+                <img src="./assets/user.svg" className="header-icon" alt="home icon" />
+              </div>
+              <span className={`link ${location.pathname === "/UserGallery" ? "current-route" : ""}`}>User Gallery</span>
+            </Link>
+          }
+
+          {!accessToken &&
+            <Link to="/Login">
+              <div className="header-icon-border"><img src="./assets/login.svg" className="header-icon" alt="home icon" /></div>
+              <span className="link">Log in</span>
+            </Link>
+          }
+
+      {accessToken &&
+        <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
           <div className="header-icon-border">
-            <img src="./assets/gallery.svg" className="header-icon" alt="home icon" />
+            <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
           </div>
-          <span className={`link ${location.pathname === "/Gallery" ? "current-route" : ""}`}>Gallery</span>
+          <span className="link">Log out</span>
         </Link>
-
-        {accessToken &&
-          <Link to="/UserGallery">
-            <div className="header-icon-border">
-              <img src="./assets/user.svg" className="header-icon" alt="home icon" />
-            </div>
-            <span className={`link ${location.pathname === "/UserGallery" ? "current-route" : ""}`}>User Gallery</span>
-          </Link>}
+      }
+        </div>
+        <img className="waves" src="./assets/layered-waves-haikei.png"/>
       </div>
     </header >
   )
