@@ -138,7 +138,7 @@ app.post('/sessions', async (req, res) => {
         accessToken: user.accessToken
       })
     } else {
-      res.status(404).json({ success: false, message: 'User not found' })
+      res.status(404).json({ success: false, message: 'Username and/or password do not match.' })
     }
   } catch (error) {
     res.status(404).json({ success: false, message: 'Invalid request', error: error })
