@@ -47,7 +47,7 @@ const Header = () => {
 
         <Link to="/Race">
           <div className="header-icon-border">
-            <img src="./assets/home.svg" className="header-icon" alt="home icon" />
+            <img src="./assets/race.svg" className="header-icon" alt="race icon" />
           </div>
           <span className={`link ${location.pathname === "/Race" ? "current-route" : ""}`}>Race</span>
         </Link>

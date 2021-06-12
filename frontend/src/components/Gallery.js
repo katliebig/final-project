@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
-import CharacterImage from './CharacterImage'
+import GalleryCard from './GalleryCard'
 import Loader from './Loader'
 
 const Gallery = () => {
@@ -19,20 +19,16 @@ const Gallery = () => {
       .then(data => {
         dispatch(characters.actions.setCharacters(data))
         setIsLoading(false)
+        console.log(data)
       })
       .catch(error => console.log(error))
   }, [dispatch])
 
   return (
-    <div>
+    <div className="gallery">
       {isLoading && <Loader />}
       {charactersArray.map(character => (
-        <div key={character._id} className="character-image-container">
-          <CharacterImage
-            src={character.image}
-          />
-          <p>Created by {character.user.username}</p>
-        </div>
+        <GalleryCard character={character} key={character._id} />
       ))}
     </div>
   )
