@@ -56,11 +56,11 @@ const Login = () => {
   }
 
   return (
-    <>
+    <section>
       <form onSubmit={onFormSubmit}>
         <label>
           Username
-        <input
+          <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -68,7 +68,7 @@ const Login = () => {
         </label>
         <label>
           Password (min. 8 characters)
-        <input
+          <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +86,7 @@ const Login = () => {
       </form>
       {(errors && errors.error.code === 11000) && <p>Username already taken</p>}
       {(errors && errors.error.name === "ValidationError") && <p>Username must be between 4 and 20 characters long.</p>}
-    </>
+    </section>
   )
 }
 

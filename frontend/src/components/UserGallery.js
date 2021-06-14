@@ -56,7 +56,7 @@ const UserGallery = () => {
   }, [dispatch, history, id, accessToken, onCharacterDelete])
 
   return (
-    <div>
+    <section>
       {isLoading && <Loader />}
       {charactersArray.map(character => (
         <div key={character._id}>
@@ -66,7 +66,7 @@ const UserGallery = () => {
           />
         </div>
       ))}
-    </div>
+    </section>
   )
 }
 

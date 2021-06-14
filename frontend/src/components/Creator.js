@@ -84,7 +84,7 @@ const Creator = () => {
   }
 
   return (
-    <div className="creator-container">
+    <section className="creator-container">
 
       <button className="race-button" value="human" onClick={onChooseRace} >Human</button>
       <button className="race-button" value="tiefling" onClick={onChooseRace} >Tiefling</button>
@@ -112,7 +112,7 @@ const Creator = () => {
         </div>
       }
 
-    </div>
+    </section>
   )
 }
 

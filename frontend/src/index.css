@@ -23,7 +23,8 @@ body {
 }
 
 header {
-  background-image: url("https://lh4.googleusercontent.com/LeGrb_A0-hbI2rX0QcSGpqj1U6taD-nx7Xf5EOnVRWWzIm9oVKVoTQddI5d4h3PmRl1lqA=w16383");
+  /* background-image: url("https://lh4.googleusercontent.com/LeGrb_A0-hbI2rX0QcSGpqj1U6taD-nx7Xf5EOnVRWWzIm9oVKVoTQddI5d4h3PmRl1lqA=w16383"); */
+  background-image: url("./reusables/dice-and-doom-big-image.jpg");
   background-size: cover;
   background-position: center center;
   transform: translate3d(0px, 0px, 0px);
@@ -131,11 +132,15 @@ header a:hover .link::before {
   text-decoration: underline;
 }
 
+header + section {
+  margin-top: 300px;
+}
+
 h1 {
   font-family: "Oswald";
 }
 
-.card-container {
+.card-container, .home-card-container {
   display: flex;
   flex-direction: column;
   width: 280px;
@@ -203,9 +208,4 @@ select {
     flex-direction: row;
     justify-content: space-between;
   }
-
-  .home-main, .races-main {
-    margin: 300px 30px 0px 30px;
-  }
-
 }

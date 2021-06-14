@@ -3,10 +3,10 @@ import React from 'react';
 const HomeCard = ({ title, text, imgUrl }) => {
   return (
     <div
-      className="card-container"
-      // onClick={() => onRaceChosen(title.toLowerCase())}
-      // tabIndex="0"
-      // role="button"
+      className="home-card-container"
+    // onClick={() => onRaceChosen(title.toLowerCase())}
+    // tabIndex="0"
+    // role="button"
     >
       <img className="card-image" src={imgUrl} alt={title} />
       <h2 className="card-title">

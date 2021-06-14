@@ -24,7 +24,7 @@ const Gallery = () => {
   }, [dispatch])
 
   return (
-    <div>
+    <section>
       {isLoading && <Loader />}
       {charactersArray.map(character => (
         <div key={character._id} className="character-image-container">
@@ -34,7 +34,7 @@ const Gallery = () => {
           <p>Created by {character.user.username}</p>
         </div>
       ))}
-    </div>
+    </section>
   )
 }
 
