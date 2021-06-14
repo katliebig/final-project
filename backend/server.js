@@ -97,10 +97,10 @@ const port = process.env.PORT || 8080
 const app = express()
 
 var corsOptions = {
-  origin: false,
+  origin: "http://localhost:3000",
 }
 
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 app.use(express.json({ limit: '50mb' }))
 
 app.get('/', (req, res) => {
@@ -191,7 +191,7 @@ app.get('/races/:race', async (req, res) => {
   }
 })
 
-app.get("/characters", cors(corsOptions), async (req, res) => {
+app.get("/characters", async (req, res) => {
   const characters = await Character.find().populate("user", "username")
   res.json(characters)
 })
