@@ -8,13 +8,15 @@ const Card = ({ title, text, imgUrl, onRaceChosen }) => {
       tabIndex="0"
       role="button"
     >
-      <img className="card-image" src={imgUrl} alt={title} />
-      <h2 className="card-title">
-        {title}
-      </h2>
-      <p className="card-text">
-        {text}
-      </p>
+      <div className="card-background">
+        <h2 className="card-title">
+          {title}
+        </h2>
+        <img className="card-image" src={imgUrl} alt={title} />
+        <p className="card-text">
+          {text}
+        </p>
+      </div>
     </div>
   )
 }

@@ -19,6 +19,7 @@ const Race = () => {
   return (
     <section className="races-main">
       <h1>Races</h1>
+      <p className="main-text">Here you can choose what race you want to create. Just click on the card you like!</p>
       <div className="race-cards-container">
         <Card
           onRaceChosen={onRaceChosen}
@@ -31,6 +32,16 @@ const Race = () => {
           imgUrl="../assets/tiefling.png"
           title="Tiefling"
           text="To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling."
+        />
+        <Card 
+          imgUrl="../assets/dwarf.png"
+          title="Dwarf"
+          text="Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal."
+        />
+        <Card 
+          imgUrl="../assets/elf.png"
+          title="Elf"
+          text="Elves are a magical people of otherworldly grace, living in the world but not entirely part of it."
         />
       </div>
     </section>
