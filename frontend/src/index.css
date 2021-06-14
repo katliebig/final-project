@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Neucha&family=Righteous&family=Roboto&family=Oswald&display=swap');
 
-/* font-family: 'Hammersmith One', sans-serif;
-font-family: 'Neucha', cursive;
-font-family: 'Righteous', cursive;
-font-family: 'Roboto', sans-serif;
-color: #FFBC37; // golden
-background-color: #FF0000; // red (button) 
-svg: #8A0101;
-*/
-
 * {
   box-sizing: border-box;
 }
@@ -27,7 +18,6 @@ p {
 }
 
 header {
-  /* background-image: url("https://lh4.googleusercontent.com/LeGrb_A0-hbI2rX0QcSGpqj1U6taD-nx7Xf5EOnVRWWzIm9oVKVoTQddI5d4h3PmRl1lqA=w16383"); */
   background-image: url("./reusables/dice-and-doom-big-image.jpg");
   background-size: cover;
   background-position: center center;
@@ -47,11 +37,6 @@ header {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* .header-logo {
-  max-width: 180px;
-  width: 20%;
-} */
-
 .header-title {
   margin: 0;
   width: 100%;
@@ -69,10 +54,10 @@ header {
   width: 100%;
   height: 100%;
   justify-content: space-evenly;
-  font-family: 'Neucha', cursive;
-  font-size: 20px;
+  font-family: "Oswald";
+  font-size: 24px;
   text-transform: uppercase;
-  color: #FFBC37;
+  color: #fff;
   align-items: flex-end;
   padding: 30px;
 }
@@ -92,12 +77,12 @@ header a {
   align-items: center;
   padding: 8px;
   margin-right: 8px;
-  border: 2px solid #FFBC37;
+  border: 2px solid #fff;
   border-radius: 50%;
 }
 
 header a:hover .header-icon-border {  
-  background-color: #3a393981;
+  background-color: #1b1b1bbe;
 }
 
 .link {
@@ -110,8 +95,8 @@ header a:hover .header-icon-border {
 .link::after {
     position: absolute;
     width: 100%;
-    height: 1px;
-    background: #FFBC37;
+    height: 2px;
+    background: #fff;
     top: 100%;
     left: 0;
     pointer-events: none;
@@ -179,9 +164,6 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* background: url(./reusables/pattern.svg), linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%); */
-  background: linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%);
-  padding: 50px 100px;
 }
 
 .creator-container {
@@ -201,38 +183,37 @@ h1 {
 .gallery-card {
   font-size: 24px;
   font-family: "Oswald";
-  width: 300px;
+  width: 350px;
   padding: 40px;
   margin: 40px;
   border: 2px solid #922020;
-  border: 1px solid #000;
-  border-radius: 10px;
+  border: 5px solid #000;
+  border-radius: 20px;
   box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
-  background: #cecece;
-  /* filter: sepia(10%); */
+  background: #dfd9d9;
 }
 
 .character-image {
   width: 100%;
-  padding-top: 16px;
+  padding: 16px 0;
   background-color: #fff;
-  box-shadow: inset 1px 1px 10px #272221;
-  filter: brightness(90%);
+  box-shadow: inset 1px 1px 12px #272221;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .character-image-created-by {  
-  font-size: 24px;
+  font-size: 16px;
   margin: 8px;
 }
 
 .character-image-user {  
-  font-size: 32px;
-  font-family: 'Neucha', cursive;
+  font-size: 24px;
   text-transform: uppercase;
 }
 
 .character-image-created-at {  
-  font-size: 20px;
+  font-size: 16px;
   text-align: end;
   margin: 8px;
 }
@@ -272,8 +253,6 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%);
-  /* background: url(./reusables/pattern.svg), linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%); */
   padding: 50px 100px;
 }
 
@@ -284,12 +263,15 @@ h1 {
   justify-content: center;
   background: #dfd9d9;
   padding: 100px;
+  border: 5px solid #000;
+  border-radius: 20px;
   box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
 }
 
 .login img {
   width: 50%;
   border: 1px solid #922020;
+  border-radius: 20px;
   box-shadow: 0 0 5px #922020;
   filter: saturate(50%);
 }
@@ -333,6 +315,7 @@ h1 {
   font: inherit;
   text-transform: uppercase;
   box-shadow: 5px 5px 10px #000000a4;
+  border-radius: 20px;
 }
 
 .login-form button:hover {
