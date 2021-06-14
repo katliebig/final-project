@@ -22,6 +22,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  margin: 0;
+}
+
 header {
   /* background-image: url("https://lh4.googleusercontent.com/LeGrb_A0-hbI2rX0QcSGpqj1U6taD-nx7Xf5EOnVRWWzIm9oVKVoTQddI5d4h3PmRl1lqA=w16383"); */
   background-image: url("./reusables/dice-and-doom-big-image.jpg");
@@ -171,6 +175,15 @@ h1 {
   font-family: "Oswald";
 }
 
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* background: url(./reusables/pattern.svg), linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%); */
+  background: linear-gradient(90deg, rgba(75,69,69,1) 0%, rgba(110,96,96,1) 10%, rgba(110,96,96,1) 86%, rgba(75,69,69,1) 100%);
+  padding: 50px 100px;
+}
+
 .creator-container {
   display: flex;
 }
@@ -185,13 +198,74 @@ h1 {
   height: 300px;
 }
 
-.character-image-container {
-  display: inline-block;
+.gallery-card {
+  font-size: 24px;
+  font-family: "Oswald";
+  width: 300px;
+  padding: 40px;
+  margin: 40px;
+  border: 2px solid #922020;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+  background: #cecece;
+  /* filter: sepia(10%); */
 }
 
 .character-image {
-  height: 300px;
-  width: 300px;
+  width: 100%;
+  padding-top: 16px;
+  background-color: #fff;
+  box-shadow: inset 1px 1px 10px #272221;
+  filter: brightness(90%);
+}
+
+.character-image-created-by {  
+  font-size: 24px;
+  margin: 8px;
+}
+
+.character-image-user {  
+  font-size: 32px;
+  font-family: 'Neucha', cursive;
+  text-transform: uppercase;
+}
+
+.character-image-created-at {  
+  font-size: 20px;
+  text-align: end;
+  margin: 8px;
+}
+
+.user-gallery-card {
+  position: relative;
+}
+
+.user-gallery-card-icons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin: 50px 50px 0 0;
+}
+
+.user-gallery-card-icon {
+  width: 24px;
+  filter: opacity(80%);
+}
+
+.user-gallery-card:hover .user-gallery-card-icons {
+  z-index: 1;
+}
+
+.user-gallery-card-icon:hover {
+  transform: scale(1.2);
+  transition: all 0.2s ease;
 }
 
 .login {

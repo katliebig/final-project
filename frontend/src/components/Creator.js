@@ -83,35 +83,36 @@ const Creator = () => {
   }
 
   return (
-    <section className="creator-container">
-
-      <button className="race-button" value="human" onClick={onChooseRace} >Human</button>
-      <button className="race-button" value="tiefling" onClick={onChooseRace} >Tiefling</button>
-
-      <select onChange={(e) => setAttribute(e.target.value)}>
-        {attributes.map(attribute => (
-          <option value={attribute} key={attribute} >{attribute}</option>
-        ))}
-
-      </select>
-      <button onClick={onDecrementAttribute}>{"<"}-</button>
-      <button onClick={onIncrementAttribute}>-{">"}</button>
-
-      <SaveImageButton character={character} />
-
-      <CharacterRandomizer setCharacter={setCharacter} />
-
+    <>
       {isLoading && <Loader />}
+      {
+        !isLoading &&
+        <section className="creator-container">
 
-      {!isLoading &&
-        <div className="creator-image-container">
-          {attributes.map(attribute => (
-            < img className="creator-image" src={imageSet[attribute][character[attribute]]} alt={attribute} key={attribute} />
-          ))}
-        </div>
+          <button className="race-button" value="human" onClick={onChooseRace} >Human</button>
+          <button className="race-button" value="tiefling" onClick={onChooseRace} >Tiefling</button>
+
+          <select onChange={(e) => setAttribute(e.target.value)}>
+            {attributes.map(attribute => (
+              <option value={attribute} key={attribute} >{attribute}</option>
+            ))}
+
+          </select>
+          <button onClick={onDecrementAttribute}>{"<"}-</button>
+          <button onClick={onIncrementAttribute}>-{">"}</button>
+
+          <SaveImageButton character={character} />
+
+          <CharacterRandomizer setCharacter={setCharacter} />
+
+          <div className="creator-image-container">
+            {attributes.map(attribute => (
+              < img className="creator-image" src={imageSet[attribute][character[attribute]]} alt={attribute} key={attribute} />
+            ))}
+          </div>
+        </section>
       }
-
-    </section>
+    </>
   )
 }
 

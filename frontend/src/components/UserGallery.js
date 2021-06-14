@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom"
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
-import CharacterImage from './CharacterImage'
+import UserGalleryCard from './UserGalleryCard'
 import Loader from './Loader'
 
 const UserGallery = () => {
@@ -16,22 +16,6 @@ const UserGallery = () => {
 
   const dispatch = useDispatch()
   const history = useHistory()
-
-  const onCharacterDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this character?")) {
-      const options = {
-        method: "DELETE",
-        headers: {
-          Authorization: accessToken
-        }
-      }
-      fetch(API_URL(`characters/users/${id}`), options)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-        })
-    }
-  }
 
   useEffect(() => {
     if (!accessToken) {
@@ -53,17 +37,15 @@ const UserGallery = () => {
         })
         .catch(error => console.log(error))
     }
-  }, [dispatch, history, id, accessToken, onCharacterDelete])
+  }, [dispatch, history, id, accessToken])
 
   return (
-    <section>
+    <section className="gallery">
       {isLoading && <Loader />}
-      {charactersArray.map(character => (
+      {!isLoading && charactersArray.map(character => (
         <div key={character._id}>
-          <button onClick={() => onCharacterDelete(character._id)} >Click to delete</button>
-          <CharacterImage
-            src={character.image}
-          />
+
+          <UserGalleryCard character={character} />
         </div>
       ))}
     </section>
