@@ -98,7 +98,7 @@ const app = express()
 
 var corsOptions = {
   origin: 'http://localhost:3000',
-  "Access-Control-Allow-Origin": 'http://localhost:3000'
+  optionsSuccessStatus: 200
 }
 
 app.use(cors(corsOptions))
