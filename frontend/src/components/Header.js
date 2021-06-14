@@ -73,16 +73,16 @@ const Header = () => {
             </Link>
           }
 
-      {accessToken &&
-        <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
-          <div className="header-icon-border">
-            <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
-          </div>
-          <span className="link">Log out</span>
-        </Link>
-      }
+          {accessToken &&
+            <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
+              <div className="header-icon-border">
+                <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
+              </div>
+              <span className="link">Log out</span>
+            </Link>
+          }
         </div>
-        <img className="waves" src="./assets/layered-waves-haikei.png"/>
+        <img className="waves" src="./assets/layered-waves-haikei.png" />
       </div>
     </header >
   )

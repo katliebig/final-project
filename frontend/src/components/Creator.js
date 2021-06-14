@@ -53,7 +53,6 @@ const Creator = () => {
       fetch(API_URL(`races/${chosenRace}`), options)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           dispatch(race.actions.setImageSet(data.urls))
           dispatch(race.actions.setAttributes(data.attributes))
           setCharacter(characterAttributes)
