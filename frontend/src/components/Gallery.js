@@ -19,7 +19,6 @@ const Gallery = () => {
       .then(data => {
         dispatch(characters.actions.setCharacters(data))
         setIsLoading(false)
-        console.log(data)
       })
       .catch(error => console.log(error))
   }, [dispatch])
@@ -27,7 +26,7 @@ const Gallery = () => {
   return (
     <div className="gallery">
       {isLoading && <Loader />}
-      {charactersArray.map(character => (
+      {!isLoading && charactersArray.map(character => (
         <GalleryCard character={character} key={character._id} />
       ))}
     </div>

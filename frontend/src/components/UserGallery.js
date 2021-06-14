@@ -42,7 +42,7 @@ const UserGallery = () => {
   return (
     <div className="gallery">
       {isLoading && <Loader />}
-      {charactersArray.map(character => (
+      {!isLoading && charactersArray.map(character => (
         <div key={character._id}>
 
           <UserGalleryCard character={character} />
