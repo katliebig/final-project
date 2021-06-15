@@ -82,7 +82,6 @@ const Header = () => {
             </Link>
           }
         </div>
-        <img className="waves" src="./assets/layered-waves-haikei.png" />
       </div>
     </header >
   )

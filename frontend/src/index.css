@@ -18,58 +18,28 @@ p {
 }
 
 header {
-  background-image: url("./reusables/dice-and-doom-big-image.jpg");
-  background-size: cover;
-  background-position: center center;
-  transform: translate3d(0px, 0px, 0px);
-  height: 300px;
-  position: absolute;
-  display: table-cell;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-}
+  display: none;
+} 
 
-.background-color-header {
+.burger-menu-links-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.header-title {
-  margin: 0;
-  width: 100%;
-  height: 80%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 60px;
-}
-
-.header-links-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   font-family: "Oswald";
   font-size: 24px;
   text-transform: uppercase;
   color: #fff;
-  align-items: flex-end;
   padding: 30px;
 }
 
-header a {
-  text-decoration: none;
-  color: inherit;
+.link-container {
   display: flex;
-  align-items: center;
+  flex-direction: row;
 }
 
-.header-icon-border {
+.burger-menu-icon-border {
   width: 50px;
   height: 50px;
   display: flex;
@@ -81,29 +51,25 @@ header a {
   border-radius: 50%;
 }
 
-header a:hover .header-icon-border {  
-  background-color: #1b1b1bbe;
-}
-
 .link {
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
 }
 
 .link::before,
 .link::after {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: #fff;
-    top: 100%;
-    left: 0;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
 }
 
 .link::before {
-    content: '';
+  content: '';
 }
 
 .link::before {
@@ -112,17 +78,16 @@ header a:hover .header-icon-border {
   transition: transform 0.3s;
 }
 
-header a:hover .link::before {
-  transform-origin: 0% 50%;
-  transform: scale3d(1, 1, 1);
-}
-
 .current-route {
   text-decoration: underline;
-}
+} 
 
-header + section {
-  margin-top: 300px;
+.home-main, .races-main {
+  display: flex;
+  flex-direction: column;
+  padding: 45px 0px 30px 0px;
+  text-align: center;
+  align-items: center;
 }
 
 h1 {
@@ -136,6 +101,7 @@ h1 {
   border: 15px solid #000;
   border-radius: 20px;
   padding: 5px;
+  margin-top: 15px;
   box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
   background-color: rgb(255, 255, 255);
 }
@@ -361,6 +327,119 @@ h1 {
 }
 
 @media (min-width: 670px) {
+
+  .burger-menu-line {
+    display: none;
+  }
+
+  header {
+    background-image: url("./reusables/dice-and-doom-big-image.jpg");
+    background-size: cover;
+    background-position: center center;
+    transform: translate3d(0px, 0px, 0px);
+    height: 300px;
+    position: absolute;
+    display: table-cell;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .background-color-header {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .header-title {
+    margin: 0;
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 60px;
+  }
+  
+  .header-links-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    font-family: "Oswald";
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #fff;
+    align-items: flex-end;
+    padding: 30px;
+  }
+  
+  header a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-icon-border {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    margin-right: 8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+  }
+  
+  header a:hover .header-icon-border {  
+    background-color: #1b1b1bbe;
+  }
+  
+  .link {
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .link::before,
+  .link::after {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    top: 100%;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .link::before {
+    content: '';
+  }
+  
+  .link::before {
+    transform-origin: 100% 50%;
+    transform: scale3d(0, 1, 1);
+    transition: transform 0.3s;
+  }
+  
+  header a:hover .link::before {
+    transform-origin: 0% 50%;
+    transform: scale3d(1, 1, 1);
+  }
+  
+  .current-route {
+    text-decoration: underline;
+  }
+  
+  header + section {
+    margin-top: 300px;
+  }
+
   .home-cards-container, .race-cards-container {
     display: flex;
     flex-direction: row;
