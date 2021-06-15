@@ -136,8 +136,8 @@ h1 {
   border: 15px solid #000;
   border-radius: 20px;
   padding: 5px;
-  box-shadow: 3px 3px 5px #767676;
-  background-color: rgb(197, 126, 113);
+  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+  background-color: rgb(255, 255, 255);
 }
 
 .card-container:hover {
