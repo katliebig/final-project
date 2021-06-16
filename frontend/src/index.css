@@ -103,13 +103,13 @@ h1 {
   border-radius: 20px;
   padding: 5px;
   margin-top: 15px;
-  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+  box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
   background-color: rgb(255, 255, 255);
 }
 
 .card-container:hover {
   box-shadow: none;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .card-background {

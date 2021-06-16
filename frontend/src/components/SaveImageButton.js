@@ -9,6 +9,7 @@ const SaveImageButton = ({ character }) => {
   const attributes = useSelector(store => store.race.attributes)
   const imageSet = useSelector(store => store.race.imageSet)
   const accessToken = useSelector(store => store.user.accessToken)
+  const chosenRace = useSelector(store => store.race.chosenRace)
 
   const onCharacterSave = () => {
     const images = attributes.map(attribute => (
@@ -23,7 +24,7 @@ const SaveImageButton = ({ character }) => {
             "Authorization": accessToken,
             "Content-Type": 'application/json'
           },
-          body: JSON.stringify({ image: b64 })
+          body: JSON.stringify({ image: b64, race: chosenRace })
         })
           .then(res => res.json())
           .then(data => alert(data.message))
