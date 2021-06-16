@@ -242,8 +242,23 @@ app.get("/characters/users/:id", async (req, res) => {
   }
 })
 
-app.delete("/characters/users/:id", authenticateUser)
-app.delete('/characters/users/:id', async (req, res) => {
+app.get("/characters/:id", authenticateUser)
+app.get("/characters/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const character = await Character.findById(id)
+    if (character) {
+      res.json(character)
+    } else {
+      res.status(404).json({ message: 'Character not found' })
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid request', error })
+  }
+})
+
+app.delete("/characters/:id", authenticateUser)
+app.delete('/characters/:id', async (req, res) => {
   const { id } = req.params
 
   try {
@@ -258,7 +273,8 @@ app.delete('/characters/users/:id', async (req, res) => {
   }
 });
 
-app.patch("/characters/users/:id", async (req, res) => {
+app.patch("/characters/:id", authenticateUser)
+app.patch("/characters/:id", async (req, res) => {
   const { id } = req.params
   const { name, profession, background } = req.body
 
