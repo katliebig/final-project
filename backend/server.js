@@ -309,9 +309,16 @@ app.patch("/characters/:id", async (req, res) => {
   try {
     const updatedCharacter = await Character.findByIdAndUpdate(id, {
       $set: {
-        name: name,
-        profession: profession,
-        background: background
+        name,
+        profession,
+        background,
+        other,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma
       }
     }, { new: true })
     res.json({ success: true, updatedCharacter })
