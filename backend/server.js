@@ -260,13 +260,12 @@ app.delete('/characters/users/:id', async (req, res) => {
 
 app.patch("/characters/users/:id", async (req, res) => {
   const { id } = req.params
-  const { name } = req.body
+  const { name, profession, background } = req.body
 
   try {
     const updatedCharacter = await Character.findByIdAndUpdate(id, {
       $set: {
         name: name,
-        race: race,
         profession: profession,
         background: background
       }
