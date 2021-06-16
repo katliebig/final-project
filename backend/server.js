@@ -78,6 +78,10 @@ const Character = mongoose.model('Character', {
   background: {
     type: String,
     default: ""
+  },
+  other: {
+    type: String,
+    default: ""
   }
 })
 
