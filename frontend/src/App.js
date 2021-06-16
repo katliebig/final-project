@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, { useState, useRef } from 'react'
 import { Provider } from 'react-redux'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
@@ -16,30 +16,33 @@ import Menu from './components/Menu'
 import user from './reducers/user'
 import race from './reducers/race'
 import characters from './reducers/characters'
+import currentCharacter from './reducers/currentCharacter'
 
 import { useOnClickOutside } from 'reusables/hooks'
+import CharacterSheet from 'components/CharacterSheet'
 
 const reducer = combineReducers({
   user: user.reducer,
   race: race.reducer,
-  characters: characters.reducer
+  characters: characters.reducer,
+  currentCharacter: currentCharacter.reducer
 })
 const store = configureStore({ reducer })
 
 export const App = () => {
   const [open, setOpen] = useState(false)
-  const node = useRef(); 
+  const node = useRef();
   useOnClickOutside(node, () => setOpen(false));
 
   return (
     <BrowserRouter>
       <Provider store={store}>
         <div ref={node}>
-          <Burger 
+          <Burger
             open={open}
             setOpen={setOpen}
           />
-          <Menu 
+          <Menu
             open={open}
             setOpen={setOpen}
           />
@@ -51,7 +54,8 @@ export const App = () => {
           <Route path="/Creator" component={Creator} />
           <Route path="/Race" component={Race} />
           <Route path="/Gallery" component={Gallery} />
-          <Route path="/UserGallery" component={UserGallery} />
+          <Route path="/UserGallery" component={UserGallery} exact />
+          <Route path="/UserGallery/CharacterSheet" component={CharacterSheet} exact />
         </Switch>
       </Provider>
     </BrowserRouter>

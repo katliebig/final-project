@@ -1,10 +1,16 @@
-import React from "react"
-import { useSelector } from 'react-redux'
+import React, { useState } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from "react-router-dom"
 
 import { API_URL } from '../reusables/urls'
 
+import user from '../reducers/user'
+
 const UserGalleryCard = ({ character }) => {
   const accessToken = useSelector(store => store.user.accessToken)
+
+  const history = useHistory()
+  const dispatch = useDispatch()
 
   const onCharacterDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this character?")) {
@@ -14,12 +20,17 @@ const UserGalleryCard = ({ character }) => {
           Authorization: accessToken
         }
       }
-      fetch(API_URL(`characters/users/${id}`), options)
+      fetch(API_URL(`characters/${id}`), options)
         .then(res => res.json())
         .then(data => {
           console.log(data)
         })
     }
+  }
+
+  const onCharacterEdit = (id) => {
+    dispatch(user.actions.setCurrentCharacter(id))
+    history.push("/UserGallery/CharacterSheet")
   }
 
   return (
@@ -30,6 +41,12 @@ const UserGalleryCard = ({ character }) => {
           alt="bin icon"
           className="user-gallery-card-icon"
           onClick={() => onCharacterDelete(character._id)}
+        />
+        <img
+          src="./assets/edit.svg"
+          alt="edit icon"
+          className="user-gallery-card-icon"
+          onClick={() => onCharacterEdit(character._id)}
         />
       </div>
       <img
