@@ -304,7 +304,7 @@ app.delete('/characters/:id', async (req, res) => {
 app.patch("/characters/:id", authenticateUser)
 app.patch("/characters/:id", async (req, res) => {
   const { id } = req.params
-  const { name, profession, background } = req.body
+  const { name, profession, background, other, strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body
 
   try {
     const updatedCharacter = await Character.findByIdAndUpdate(id, {
