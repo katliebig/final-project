@@ -62,6 +62,22 @@ const Character = mongoose.model('Character', {
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  name: {
+    type: String,
+    default: ""
+  },
+  race: {
+    type: String,
+    default: ""
+  },
+  profession: {
+    type: String,
+    default: ""
+  },
+  background: {
+    type: String,
+    default: ""
   }
 })
 
@@ -228,19 +244,38 @@ app.get("/characters/users/:id", async (req, res) => {
 
 app.delete("/characters/users/:id", authenticateUser)
 app.delete('/characters/users/:id', async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
 
   try {
-    const deletedCharacter = await Character.deleteOne({ _id: id });
+    const deletedCharacter = await Character.deleteOne({ _id: id })
     if (deletedCharacter) {
-      res.json({ message: "Character deleted" });
+      res.json({ message: "Character deleted" })
     } else {
       res.status(404).json({ message: 'Not found' })
     }
   } catch (error) {
-    res.status(400).json({ message: 'Invalid request', error });
+    res.status(400).json({ message: 'Invalid request', error })
   }
 });
+
+app.patch("/characters/users/:id", async (req, res) => {
+  const { id } = req.params
+  const { name } = req.body
+
+  try {
+    const updatedCharacter = await Character.findByIdAndUpdate(id, {
+      $set: {
+        name: name,
+        race: race,
+        profession: profession,
+        background: background
+      }
+    }, { new: true })
+    res.json({ success: true, updatedCharacter })
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid request', error })
+  }
+})
 
 app.listen(port, () => {
   // eslint-disable-next-line
