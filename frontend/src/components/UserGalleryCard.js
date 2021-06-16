@@ -34,7 +34,7 @@ const UserGalleryCard = ({ character }) => {
   }
 
   return (
-    <div className="gallery-card user-gallery-card">
+    <div className="card gallery-card user-gallery-card">
       <div className="user-gallery-card-icons">
         <img
           src="./assets/bin.svg"

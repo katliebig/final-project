@@ -26,9 +26,12 @@ const Gallery = () => {
   return (
     <section className="gallery">
       {isLoading && <Loader />}
-      {!isLoading && charactersArray.map(character => (
-        <GalleryCard character={character} key={character._id} />
-      ))}
+      {!isLoading &&
+        <div className="cards-container">
+          {charactersArray.map(character => (
+            <GalleryCard character={character} key={character._id} />
+          ))}
+        </div>}
     </section>
   )
 }

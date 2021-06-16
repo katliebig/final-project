@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ title, text, imgUrl, onRaceChosen }) => {
   return (
     <div
-      className="card-container"
+      className="card"
       onClick={() => onRaceChosen(title.toLowerCase())}
       tabIndex="0"
       role="button"

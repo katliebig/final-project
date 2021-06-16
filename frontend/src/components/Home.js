@@ -4,10 +4,10 @@ import HomeCard from './HomeCard'
 
 const Home = () => {
   return (
-    <section className="home-main">
-      <h1>Welcome to the character creator!</h1>
+    <section className="home">
+      <h2>Welcome to the character creator!</h2>
       <p className="main-text">Register and log in to get access to these cool features!</p>
-        <div className="home-cards-container">
+      <div className="cards-container">
         <HomeCard
           imgUrl="../assets/races-screenshot.png"
           title="Races"

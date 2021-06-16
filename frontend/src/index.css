@@ -17,9 +17,17 @@ p {
   margin: 0;
 }
 
+/***** HEADER *****/
+
 header {
   display: none;
-} 
+}
+
+h1,
+h2 {
+  font-family: "Oswald";
+  margin: 16px 0;
+}
 
 .burger-menu-links-container {
   display: flex;
@@ -82,34 +90,47 @@ header {
   text-decoration: underline;
 } 
 
-.home-main, .races-main {
-  box-sizing: border-box;
+/***** HOME & RACE *****/
+
+.home, .race {
   display: flex;
   flex-direction: column;
-  padding: 45px 0px 30px 0px;
+  padding: 60px 20px 30px;
   text-align: center;
   align-items: center;
 }
 
-h1 {
+.main-text {
+  margin: 0;
+  font-size: 18px;
   font-family: "Oswald";
 }
 
-.card-container, .home-card-container {
+.cards-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 280px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-width: 280px;
+  max-width: 320px;
+  margin-top: 24px;
+  padding: 5px;
   border: 15px solid #000;
   border-radius: 20px;
-  padding: 5px;
-  margin-top: 15px;
   box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
   background-color: rgb(255, 255, 255);
 }
 
-.card-container:hover {
+.race .card:hover {
   box-shadow: none;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 .card-background {
@@ -130,7 +151,7 @@ h1 {
 .card-title {
   margin: 0;
   font-family: "Oswald";
-  font-size: 18px;
+  font-size: 24px;
   border: 2px solid #000;
   border-radius: 10px;
   padding: 0px 0px 5px 15px;
@@ -139,17 +160,14 @@ h1 {
 .card-text {
   margin: 0;
   font-family: "Oswald";
-  font-size: 14px;
+  font-size: 18px;
   padding: 5px;
   border: 1.5px solid #000;
   border-radius: 0px 0px 5px 5px;
+  text-align: left;
 }
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+/***** CREATOR *****/
 
 .creator {
   display: flex;
@@ -168,7 +186,7 @@ h1 {
   border: 15px solid #000;
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+  box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
 }
 
 .creator-race-select {
@@ -272,19 +290,35 @@ h1 {
   transform: none;
 }
 
-.gallery-card {
-  font-size: 24px;
-  font-family: "Oswald";
-  width: 350px;
-  padding: 15px;
-  margin: 40px;
-  border-radius: 20px;
-  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+/***** GALLERY *****/
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 60px 20px 30px;
+}
+
+.gallery .card {
   background: #000;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 14px;
+  border: 1px solid #000;
+}
+
+/* .card {
+  
+  padding: 5px;
+  border: 15px solid #000;
+  border-radius: 20px;
+  box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
+  background-color: rgb(255, 255, 255);
+} */
+
+.gallery-card {
+  padding: 15px;
+  background: #000;
+  color: #fff;
 }
 
 .character-image {
@@ -293,10 +327,11 @@ h1 {
   background-color: #fff;
   box-shadow: inset 0 -30px 20px black, 
               inset 0 -10px 10px black, 
-              inset 0 5px 10px black;
+              inset 0 5px 10px black,
+              0 10px 10px black;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  filter: brightness(90%);
+  filter: brightness(95%);
 }
 
 .user-gallery-card .character-image {  
@@ -320,6 +355,8 @@ h1 {
   margin: 8px 0 16px;
 }
 
+/***** USER GALLERY *****/
+
 .user-gallery-card {
   position: relative;
 }
@@ -332,14 +369,16 @@ h1 {
   right: 0;
   z-index: 0;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
   margin: 40px 40px 0 0;
 }
 
 .user-gallery-card-icon {
   width: 36px;
   padding: 4px;
+  margin-bottom: 8px;
   filter: opacity(80%);
 }
 
@@ -351,6 +390,8 @@ h1 {
   transform: scale(1.2);
   transition: all 0.2s ease;
 }
+
+/***** LOGIN *****/
 
 .login {
   display: flex;
@@ -367,7 +408,7 @@ h1 {
   padding: 50px;
   border: 12px solid #000;
   border-radius: 20px;
-  box-shadow: 12px 12px 16px #000000a4, 16px 16px 0 #922020;
+  box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
 }
 
 .login img {
@@ -431,9 +472,41 @@ h1 {
   height: 80px;
 }
 
+/***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
+  .home,
+  .race,
+  .creator,
+  .gallery {
+    padding: 30px;
+  }
 
+  .cards-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: initial;
+  }
+  
+  h2 {
+    font-size: 32px;
+  }
+
+  .main-text {
+    font-size: 24px;
+  }
+
+  .races-title {
+    margin: 0;
+  }
+
+  .card {
+    margin: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
   .burger-menu-line {
     display: none;
   }
@@ -546,26 +619,12 @@ h1 {
     margin-top: 300px;
   }
 
-  .home-cards-container, .race-cards-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 25px;
-    width: 100%;
+  h2 {
+    font-size: 48px;
   }
 
-  .home-main, .races-main {
-    padding: 5px 30px 30px 30px;
-    justify-content: space-between;
-  }
-
-  .main-text {
-    margin: 0;
-    font-size: 18px;
-    font-family: "Oswald";
-  }
-
-  .races-title {
-    margin: 0;
+  .card {
+    max-width: 350px;
+    margin: 24px;
   }
 }

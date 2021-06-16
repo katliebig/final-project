@@ -3,7 +3,7 @@ import React from 'react';
 const HomeCard = ({ title, text, imgUrl }) => {
   return (
     <div
-      className="home-card-container"
+      className="card"
     // onClick={() => onRaceChosen(title.toLowerCase())}
     // tabIndex="0"
     // role="button"

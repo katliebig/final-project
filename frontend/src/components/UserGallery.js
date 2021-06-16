@@ -42,9 +42,12 @@ const UserGallery = () => {
   return (
     <section className="gallery">
       {isLoading && <Loader />}
-      {!isLoading && charactersArray.map(character => (
-        <UserGalleryCard key={character._id} character={character} />
-      ))}
+      {!isLoading &&
+        <div className="cards-container">
+          {charactersArray.map(character => (
+            <UserGalleryCard key={character._id} character={character} />
+          ))}
+        </div>}
     </section>
   )
 }
