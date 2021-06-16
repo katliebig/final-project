@@ -19,7 +19,10 @@ const CharacterRandomizer = ({ setCharacter }) => {
   }
 
   return (
-    <button onClick={onRandomize}>Randomize character</button>
+    <button onClick={onRandomize} className="creator-button">
+      <img src="./assets/d20.svg" alt="d20 icon" className="card-icon" />
+      Randomize
+    </button>
   )
 }
 

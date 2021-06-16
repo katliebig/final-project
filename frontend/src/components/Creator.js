@@ -9,6 +9,7 @@ import { API_URL } from '../reusables/urls'
 import Loader from './Loader'
 import CharacterRandomizer from "./CharacterRandomizer"
 import SaveImageButton from './SaveImageButton'
+import CreatorNavButton from './CreatorNavButton'
 
 const Creator = () => {
   const characterAttributes = {
@@ -56,6 +57,7 @@ const Creator = () => {
           dispatch(race.actions.setImageSet(data.urls))
           dispatch(race.actions.setAttributes(data.attributes))
           setCharacter(characterAttributes)
+          setAttribute("")
           setIsLoading(false)
         })
         .catch(error => console.log(error))
@@ -77,42 +79,74 @@ const Creator = () => {
     setCharacter({ ...character, attribute: newCharacter[attribute] })
   }
 
-  const onChooseRace = (e) => {
+  const onRaceSelect = (e) => {
     setIsLoading(true)
     dispatch(race.actions.setChosenRace(e.target.value))
   }
 
   return (
-    <>
+    <section className="creator">
       {isLoading && <Loader />}
-      {
-        !isLoading &&
-        <section className="creator-container">
+      {!isLoading &&
+        <>
+          <CreatorNavButton
+            onAttributeChange={onDecrementAttribute}
+            attribute={attribute}
+            direction="left"
+          />
 
-          <button className="race-button" value="human" onClick={onChooseRace} >Human</button>
-          <button className="race-button" value="tiefling" onClick={onChooseRace} >Tiefling</button>
+          <div className="creator-card">
 
-          <select onChange={(e) => setAttribute(e.target.value)}>
-            {attributes.map(attribute => (
-              <option value={attribute} key={attribute} >{attribute}</option>
-            ))}
+            <select
+              onChange={(e) => onRaceSelect(e)}
+              className="creator-race-select"
+              defaultValue={chosenRace}
+            >
+              <option value="human">Human</option>
+              <option value="tiefling">Tiefling</option>
+            </select>
 
-          </select>
-          <button onClick={onDecrementAttribute}>{"<"}-</button>
-          <button onClick={onIncrementAttribute}>-{">"}</button>
+            <div className="creator-card-image-container">
+              {attributes.map(attribute => (
+                <img
+                  className="creator-image"
+                  src={imageSet[attribute][character[attribute]]}
+                  alt={attribute}
+                  key={attribute}
+                />
+              ))}
+            </div>
 
-          <SaveImageButton character={character} />
+            <div className="creator-card-bottom-container">
+              <select
+                onChange={(e) => setAttribute(e.target.value)} className="creator-attribute-select"
+                defaultValue="default" >
+                <option disabled hidden value="default">Select an attribute</option>
+                {attributes.map(attribute => (
+                  <option
+                    value={attribute}
+                    key={attribute}
+                  >
+                    {attribute}
+                  </option>
+                ))}
+              </select>
 
-          <CharacterRandomizer setCharacter={setCharacter} />
+              <div className="creator-card-button-container">
+                <SaveImageButton character={character} />
+                <CharacterRandomizer setCharacter={setCharacter} />
+              </div>
 
-          <div className="creator-image-container">
-            {attributes.map(attribute => (
-              < img className="creator-image" src={imageSet[attribute][character[attribute]]} alt={attribute} key={attribute} />
-            ))}
+            </div>
           </div>
-        </section>
-      }
-    </>
+
+          <CreatorNavButton
+            onAttributeChange={onIncrementAttribute}
+            attribute={attribute}
+            direction="right"
+          />
+        </>}
+    </section >
   )
 }
 
