@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom"
 
 import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
+import TextInput from "./TextInput"
+import RangeInput from "./RangeInput"
 
 import currentCharacter from "reducers/currentCharacter"
 
@@ -81,14 +83,11 @@ const CharacterSheet = () => {
         <>
           <img src={character.image} alt="character" />
 
-          <label htmlFor="name">Name</label>
-          <input type="text" value={character.name} id="name" onChange={(e) => onInputChange(e.target.value, e.target.id)} />
+          <TextInput onInputChange={onInputChange} label="name" value={character.name} />
 
-          <label htmlFor="profession">Profession</label>
-          <input type="text" value={character.profession} id="profession" onChange={(e) => onInputChange(e.target.value, e.target.id)} />
+          <TextInput onInputChange={onInputChange} label="profession" value={character.profession} />
 
-          <label htmlFor="background">Background</label>
-          <input type="text" value={character.background} id="background" onChange={(e) => onInputChange(e.target.value, e.target.id)} />
+          <TextInput onInputChange={onInputChange} label="background" value={character.background} />
 
           <label htmlFor="other">Other</label>
           <textarea
@@ -101,36 +100,36 @@ const CharacterSheet = () => {
             {character.other}
           </textarea>
 
-          <label htmlFor="strength">Strength</label>
-          <input
-            type="range"
-            id="strength"
+          <RangeInput
+            onInputChange={onInputChange}
+            label="strength"
             value={character.strength}
-            min={0}
-            max={20}
-            onChange={(e) => onInputChange(e.target.value, e.target.id)}
           />
-
-          <label htmlFor="dexterity">Dexterity</label>
-          <input type="range" id="dexterity" value={character.dexterity} min="0" max="20"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)} />
-
-          <label htmlFor="constitution">Constitution</label>
-          <input type="range" id="constitution" value={character.constitution} min="0" max="20"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)} />
-
-          <label htmlFor="intelligence">Intelligence</label>
-          <input type="range" id="intelligence" value={character.intelligence} min="0" max="20"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)} />
-
-          <label htmlFor="wisdom">Wisdom</label>
-          <input type="range" id="wisdom" value={character.wisdom} min="0" max="20"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)} />
-
-          <label htmlFor="charisma">Charisma</label>
-          <input type="range" id="charisma" value={character.charisma} min="0" max="20"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)} />
-
+          <RangeInput
+            onInputChange={onInputChange}
+            label="dexterity"
+            value={character.dexterity}
+          />
+          <RangeInput
+            onInputChange={onInputChange}
+            label="constitution"
+            value={character.constitution}
+          />
+          <RangeInput
+            onInputChange={onInputChange}
+            label="intelligence"
+            value={character.intelligence}
+          />
+          <RangeInput
+            onInputChange={onInputChange}
+            label="wisdom"
+            value={character.wisdom}
+          />
+          <RangeInput
+            onInputChange={onInputChange}
+            label="charisma"
+            value={character.charisma}
+          />
 
           <button onClick={onCharacterSheetSave} >Save character sheet</button>
         </>}
