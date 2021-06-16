@@ -215,11 +215,11 @@ app.get("/characters", async (req, res) => {
 app.post("/characters", authenticateUser)
 app.post("/characters", async (req, res) => {
   const { _id } = req.user
-  const { image } = req.body
+  const { image, race } = req.body
 
   try {
     const user = await User.findById(_id)
-    await new Character({ image, user }).save()
+    await new Character({ image, user, race }).save()
     res.json({ message: "Character saved successfully" })
   } catch (error) {
     res.status(400).json({ message: "Something went wrong", error })
