@@ -429,6 +429,36 @@ nav {
   text-align: left;
 }
 
+/***** LOADER *****/
+
+.dice-loader {
+  width: 200px;
+  height: 200px;
+  margin-top: 100px;
+}
+
+.breathe { 
+  transform-origin: center;
+  animation: breathe 1.6s infinite;
+}
+.first { animation-delay: .2s; }
+.second { animation-delay: .4s; }
+.third { animation-delay: .6s; }
+.fourth { animation-delay: .8s; }
+
+@keyframes breathe {
+  0%, 50% { 
+    transform: scale(1.0);
+    opacity: 1
+  }
+  20% {
+    opacity: 0.5
+  }
+  33% { 
+    transform: scale(.2);
+  }
+}
+
 /***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
