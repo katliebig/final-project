@@ -137,7 +137,10 @@ const CharacterSheet = () => {
             </textarea>
           </div>
 
-          <button className="save-sheet-button" onClick={onCharacterSheetSave} >Save character sheet</button>
+          <button className="save-sheet-button" onClick={onCharacterSheetSave} >
+            <img src="../assets/save.svg" alt="save icon" className="card-icon" />
+              Save character sheet
+          </button>
         </div>}
     </section>
   )
