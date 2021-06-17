@@ -85,7 +85,7 @@ const Creator = () => {
   }
 
   return (
-    <section className="creator">
+    <section className="main creator">
       {isLoading && <Loader />}
       {!isLoading &&
         <>

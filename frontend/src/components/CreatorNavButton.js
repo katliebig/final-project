@@ -5,7 +5,7 @@ const CreatorNavButton = ({ onAttributeChange, attribute, direction }) => {
 
     <button
       onClick={onAttributeChange}
-      className="creator-button arrow-button"
+      className="arrow-button"
       disabled={attribute === "" ? true : false}
     >
       <img
