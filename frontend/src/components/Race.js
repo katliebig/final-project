@@ -17,7 +17,7 @@ const Race = () => {
   }
 
   return (
-    <section className="race">
+    <section className="main">
       <h2>Races</h2>
       <p className="main-text">Here you can choose what race you want to create. Just click on the card you like!</p>
       <div className="cards-container">

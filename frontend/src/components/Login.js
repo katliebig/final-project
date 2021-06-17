@@ -69,7 +69,7 @@ const Login = () => {
   }
 
   return (
-    <section className="login">
+    <section className="main">
       <div className="login-container" >
         <form onSubmit={onFormSubmit} className="login-form">
           <label htmlFor="username">

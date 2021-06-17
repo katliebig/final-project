@@ -6,7 +6,7 @@ dayjs.extend(relativeTime)
 
 const GalleryCard = ({ character }) => {
   return (
-    <div className="card">
+    <div className="card gallery-card">
       <img
         src={character.image}
         alt="character"

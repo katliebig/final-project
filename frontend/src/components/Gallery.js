@@ -24,7 +24,7 @@ const Gallery = () => {
   }, [dispatch])
 
   return (
-    <section className="gallery">
+    <section className="main">
       {isLoading && <Loader />}
       {!isLoading &&
         <div className="cards-container">

@@ -59,43 +59,16 @@ h2 {
   border-radius: 50%;
 }
 
-.link {
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-}
-
-.link::before,
-.link::after {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: #fff;
-  top: 100%;
-  left: 0;
-  pointer-events: none;
-}
-
-.link::before {
-  content: '';
-}
-
-.link::before {
-  transform-origin: 100% 50%;
-  transform: scale3d(0, 1, 1);
-  transition: transform 0.3s;
-}
-
 .current-route {
   text-decoration: underline;
 } 
 
 /***** HOME & RACE *****/
 
-.home, .race {
+.main {
   display: flex;
   flex-direction: column;
-  padding: 60px 20px 30px;
+  padding: 80px 20px 30px;
   text-align: center;
   align-items: center;
 }
@@ -128,7 +101,7 @@ h2 {
   background-color: rgb(255, 255, 255);
 }
 
-.race .card:hover {
+.race-card:hover {
   box-shadow: none;
   opacity: 0.85;
 }
@@ -292,33 +265,11 @@ h2 {
 
 /***** GALLERY *****/
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 60px 20px 30px;
-}
-
-.gallery .card {
-  background: #000;
-  color: #fff;
-  padding: 14px;
-  border: 1px solid #000;
-}
-
-/* .card {
-  
-  padding: 5px;
-  border: 15px solid #000;
-  border-radius: 20px;
-  box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
-  background-color: rgb(255, 255, 255);
-} */
-
 .gallery-card {
-  padding: 15px;
   background: #000;
   color: #fff;
+  text-align: center; 
+  font-family: "Oswald";
 }
 
 .character-image {
@@ -327,30 +278,23 @@ h2 {
   background-color: #fff;
   box-shadow: inset 0 -30px 20px black, 
               inset 0 -10px 10px black, 
-              inset 0 5px 10px black,
-              0 10px 10px black;
+              inset 0 5px 10px black;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   filter: brightness(95%);
 }
 
-.user-gallery-card .character-image {  
-  border-radius: 10px;
-  box-shadow: inset 0 0 10px black;
-}
-
 .character-image-created-by {  
-  font-size: 32px;
+  font-size: 24px;
   margin: 8px;
 }
 
 .character-image-user {  
   font-family: "Lobster";
-  font-size: 40px;
+  font-size: 32px;
 }
 
-.character-image-created-at {  
-  font-family: "Oswald";
+.character-image-created-at {
   font-size: 20px;
   margin: 8px 0 16px;
 }
@@ -359,6 +303,11 @@ h2 {
 
 .user-gallery-card {
   position: relative;
+}
+
+.user-gallery-card .character-image {  
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px black;
 }
 
 .user-gallery-card-icons {
@@ -372,7 +321,7 @@ h2 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  margin: 40px 40px 0 0;
+  margin: 20px 20px 0 0;
 }
 
 .user-gallery-card-icon {
@@ -401,17 +350,17 @@ h2 {
 }
 
 .login-container {
-  width: 70%;
-  min-width: 1000px;
+  width: 100%;
   display: flex;
   justify-content: center;
-  padding: 50px;
+  padding: 16px;
   border: 12px solid #000;
   border-radius: 20px;
   box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
 }
 
-.login img {
+.login-container img {
+  display: none;
   width: 50%;
   border: 1px solid #922020;
   border-radius: 20px;
@@ -420,12 +369,11 @@ h2 {
 }
 
 .login-form {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 80px;
   font-family: "Oswald";
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .login-form input {
@@ -446,6 +394,7 @@ h2 {
 
 .login-form label {
   margin: 0 0 8px 8px;
+  text-align: left;
 }
 
 .login-form button {
@@ -461,25 +410,19 @@ h2 {
   border-radius: 20px;
 }
 
-.login-form button:hover {
-  background: #9b2222;
-  transform: scale(1.02);
-  transition: all 0.2s linear; 
-}
-
 .login-error-message {
   margin: 0;
   height: 80px;
+  text-align: left;
 }
 
 /***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
-  .home,
-  .race,
+  .main,
   .creator,
   .gallery {
-    padding: 30px;
+    padding: 40px 30px;
   }
 
   .cards-container {
@@ -503,6 +446,15 @@ h2 {
 
   .card {
     margin: 16px;
+  }
+
+  .login-container {
+    width: 80%;
+    padding: 50px;
+  }
+
+  .login-form {
+    font-size: 24px;
   }
 }
 
@@ -626,5 +578,34 @@ h2 {
   .card {
     max-width: 350px;
     margin: 24px;
+  }
+
+  .login-form button:hover {
+    background: #9b2222;
+    transform: scale(1.02);
+    transition: all 0.2s linear; 
+  }
+
+  .login-container {
+    width: 80%;
+    min-width: 900px;
+    max-width: 1200px;
+  }
+  
+  .login-container img {
+    display: block;
+    margin-left: 40px;
+    width: 60%;
+  }
+  
+  .login-form {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .main,
+  .creator {
+    padding: 30px 150px;
   }
 }

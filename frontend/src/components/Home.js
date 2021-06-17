@@ -4,7 +4,7 @@ import HomeCard from './HomeCard'
 
 const Home = () => {
   return (
-    <section className="home">
+    <section className="main">
       <h2>Welcome to the character creator!</h2>
       <p className="main-text">Register and log in to get access to these cool features!</p>
       <div className="cards-container">
