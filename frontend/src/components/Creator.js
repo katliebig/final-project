@@ -110,7 +110,6 @@ const Creator = () => {
 
             <select
               onChange={(e) => onRaceSelect(e)}
-              className="creator-race-select"
               defaultValue={chosenRace}
             >
               <option value="human">Human</option>
@@ -130,7 +129,7 @@ const Creator = () => {
 
             <div className="creator-card-bottom-container">
               <select
-                onChange={(e) => setAttribute(e.target.value)} className="creator-attribute-select"
+                onChange={(e) => setAttribute(e.target.value)}
                 defaultValue="default" >
                 <option disabled hidden value="default">Select an attribute</option>
                 {attributes.map(attribute => (
@@ -138,7 +137,7 @@ const Creator = () => {
                     value={attribute}
                     key={attribute}
                   >
-                    {attribute}
+                    {attribute.replace(/([A-Z])/g, " $1")}
                   </option>
                 ))}
               </select>
