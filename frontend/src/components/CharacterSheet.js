@@ -21,7 +21,7 @@ const CharacterSheet = () => {
 
   useEffect(() => {
     if (!characterId) {
-      history.push("/");
+      history.push("/UserGallery");
     }
 
     if (characterId) {
@@ -77,62 +77,71 @@ const CharacterSheet = () => {
   }
 
   return (
-    <section>
+    <section className="sheet-container">
       {isLoading && <Loader />}
       {!isLoading &&
-        <>
-          <img src={character.image} alt="character" />
+        <div className="sheet-content">
+          <div className="sheet-top-row">
+            <img className="sheet-image" src={character.image} alt="character" />
+            <div className="sheet-text-inputs">
+              <TextInput onInputChange={onInputChange} label="Name" value={character.name} />
 
-          <TextInput onInputChange={onInputChange} label="name" value={character.name} />
+              <TextInput onInputChange={onInputChange} label="Class" value={character.profession} />
 
-          <TextInput onInputChange={onInputChange} label="profession" value={character.profession} />
+              <TextInput onInputChange={onInputChange} label="Background" value={character.background} />
+            </div>
+          </div>
 
-          <TextInput onInputChange={onInputChange} label="background" value={character.background} />
+          <div className="sheet-range-container">
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Strength"
+              value={character.strength}
+            />
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Dexterity"
+              value={character.dexterity}
+            />
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Constitution"
+              value={character.constitution}
+            />
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Intelligence"
+              value={character.intelligence}
+            />
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Wisdom"
+              value={character.wisdom}
+            />
+            <RangeInput
+              onInputChange={onInputChange}
+              label="Charisma"
+              value={character.charisma}
+            />
+          </div>
+          <div className="sheet-text-area-container">
+            <label htmlFor="other">Other</label>
+            <textarea
+              rows="4"
+              cols="35"
+              value={character.other}
+              id="other"
+              onChange={(e) => onInputChange(e.target.value, e.target.id)}
+            >
+              {character.other}
+            </textarea>
+          </div>
 
-          <label htmlFor="other">Other</label>
-          <textarea
-            rows="4"
-            cols="50"
-            value={character.other}
-            id="other"
-            onChange={(e) => onInputChange(e.target.value, e.target.id)}
-          >
-            {character.other}
-          </textarea>
-
-          <RangeInput
-            onInputChange={onInputChange}
-            label="strength"
-            value={character.strength}
-          />
-          <RangeInput
-            onInputChange={onInputChange}
-            label="dexterity"
-            value={character.dexterity}
-          />
-          <RangeInput
-            onInputChange={onInputChange}
-            label="constitution"
-            value={character.constitution}
-          />
-          <RangeInput
-            onInputChange={onInputChange}
-            label="intelligence"
-            value={character.intelligence}
-          />
-          <RangeInput
-            onInputChange={onInputChange}
-            label="wisdom"
-            value={character.wisdom}
-          />
-          <RangeInput
-            onInputChange={onInputChange}
-            label="charisma"
-            value={character.charisma}
-          />
-
-          <button onClick={onCharacterSheetSave} >Save character sheet</button>
-        </>}
+          <button className="save-sheet-button" onClick={onCharacterSheetSave} >
+            <img src="../assets/save.svg" alt="save icon" className="card-icon" />
+              Save character sheet
+          </button>
+        </div>}
     </section>
   )
 }
