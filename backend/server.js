@@ -236,7 +236,9 @@ app.get('/races/:race', async (req, res) => {
 })
 
 app.get("/characters", async (req, res) => {
-  const characters = await Character.find().populate("user", "username")
+  const characters = await Character.find()
+    .sort({ createdAt: "desc" })
+    .populate("user", "username")
   res.json(characters)
 })
 
@@ -259,7 +261,7 @@ app.get("/characters/users/:id", async (req, res) => {
   const { id } = req.params
 
   try {
-    const characters = await Character.find({ user: id })
+    const characters = await Character.find({ user: id }).sort({ createdAt: "desc" })
     if (characters) {
       res.json(characters)
     } else {
