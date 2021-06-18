@@ -83,30 +83,41 @@ const Character = mongoose.model('Character', {
     type: String,
     default: ""
   },
-  strength: {
-    type: Number,
-    default: 10
+  stats: {
+    type: Object,
+    default: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10
+    }
   },
-  dexterity: {
-    type: Number,
-    default: 10
-  },
-  constitution: {
-    type: Number,
-    default: 10
-  },
-  intelligence: {
-    type: Number,
-    default: 10
-  },
-  wisdom: {
-    type: Number,
-    default: 10
-  },
-  charisma: {
-    type: Number,
-    default: 10
-  }
+  // strength: {
+  //   type: Number,
+  //   default: 10
+  // },
+  // dexterity: {
+  //   type: Number,
+  //   default: 10
+  // },
+  // constitution: {
+  //   type: Number,
+  //   default: 10
+  // },
+  // intelligence: {
+  //   type: Number,
+  //   default: 10
+  // },
+  // wisdom: {
+  //   type: Number,
+  //   default: 10
+  // },
+  // charisma: {
+  //   type: Number,
+  //   default: 10
+  // }
 })
 
 const Race = mongoose.model("Race", {
@@ -304,21 +315,22 @@ app.delete('/characters/:id', async (req, res) => {
 app.patch("/characters/:id", authenticateUser)
 app.patch("/characters/:id", async (req, res) => {
   const { id } = req.params
-  const { name, profession, background, other, strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body
+  // const { name, profession, background, other, strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body
+  const { character } = req.body
 
   try {
     const updatedCharacter = await Character.findByIdAndUpdate(id, {
       $set: {
-        name,
-        profession,
-        background,
-        other,
-        strength,
-        dexterity,
-        constitution,
-        intelligence,
-        wisdom,
-        charisma
+        name: character.name,
+        profession: character.profession,
+        background: character.background,
+        other: character.other,
+        strength: character.stats.strength,
+        dexterity: character.stats.dexterity,
+        constitution: character.stats.constitution,
+        intelligence: character.stats.intelligence,
+        wisdom: character.stats.wisdom,
+        charisma: character.stats.charisma
       }
     }, { new: true })
     res.json({ success: true, updatedCharacter })

@@ -49,18 +49,7 @@ const CharacterSheet = () => {
         Authorization: accessToken,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        name: character.name,
-        profession: character.profession,
-        background: character.background,
-        other: character.other,
-        strength: character.strength,
-        dexterity: character.dexterity,
-        constitution: character.constitution,
-        intelligence: character.intelligence,
-        wisdom: character.wisdom,
-        charisma: character.charisma
-      })
+      body: JSON.stringify({ character })
     }
     fetch(API_URL(`characters/${characterId}`), options)
       .then(res => res.json())
@@ -73,6 +62,12 @@ const CharacterSheet = () => {
   const onInputChange = (value, id) => {
     let updatedCharacter = { ...character }
     updatedCharacter[id] = value
+    dispatch(
+      currentCharacter.actions.setCharacter(updatedCharacter))
+  }
+  const onStatInputChange = (value, id) => {
+    let updatedCharacter = { ...character, stats: { ...character.stats } }
+    updatedCharacter.stats[id] = value
     dispatch(currentCharacter.actions.setCharacter(updatedCharacter))
   }
 
@@ -100,7 +95,18 @@ const CharacterSheet = () => {
             {character.other}
           </textarea>
 
-          <RangeInput
+          {
+            Object.entries(character.stats).map(stat => (
+              <RangeInput
+                key={stat[0]}
+                onInputChange={onStatInputChange}
+                label={stat[0]}
+                value={stat[1]}
+              />
+            ))
+          }
+
+          {/* <RangeInput
             onInputChange={onInputChange}
             label="strength"
             value={character.strength}
@@ -129,7 +135,7 @@ const CharacterSheet = () => {
             onInputChange={onInputChange}
             label="charisma"
             value={character.charisma}
-          />
+          /> */}
 
           <button onClick={onCharacterSheetSave} >Save character sheet</button>
         </>}
