@@ -19,6 +19,8 @@ const CharacterSheet = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const inputs = []
+
   useEffect(() => {
     if (!characterId) {
       history.push("/UserGallery");
@@ -54,12 +56,7 @@ const CharacterSheet = () => {
         profession: character.profession,
         background: character.background,
         other: character.other,
-        strength: character.strength,
-        dexterity: character.dexterity,
-        constitution: character.constitution,
-        intelligence: character.intelligence,
-        wisdom: character.wisdom,
-        charisma: character.charisma
+        stats: character.stats
       })
     }
     fetch(API_URL(`characters/${characterId}`), options)
@@ -74,6 +71,23 @@ const CharacterSheet = () => {
     let updatedCharacter = { ...character }
     updatedCharacter[id] = value
     dispatch(currentCharacter.actions.setCharacter(updatedCharacter))
+  }
+
+  const onStatInputChange = (value, id) => {
+    let updatedCharacter = { ...character, stats: { ...character.stats } }
+    updatedCharacter.stats[id] = +value
+    dispatch(currentCharacter.actions.setCharacter(updatedCharacter))
+  }
+
+  if (character) {
+    for (const [key, value] of Object.entries(character.stats)) {
+      inputs.push(<RangeInput
+        key={key}
+        label={key}
+        value={value}
+        onInputChange={onStatInputChange}
+      />)
+    }
   }
 
   return (
@@ -93,36 +107,7 @@ const CharacterSheet = () => {
           </div>
 
           <div className="sheet-range-container">
-            <RangeInput
-              onInputChange={onInputChange}
-              label="strength"
-              value={character.strength}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="dexterity"
-              value={character.dexterity}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="constitution"
-              value={character.constitution}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="intelligence"
-              value={character.intelligence}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="wisdom"
-              value={character.wisdom}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="charisma"
-              value={character.charisma}
-            />
+            {inputs}
           </div>
           <div className="sheet-text-area-container">
             <label htmlFor="other">Other</label>

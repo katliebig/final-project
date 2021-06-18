@@ -6,7 +6,7 @@ import { API_URL } from '../reusables/urls'
 
 import user from '../reducers/user'
 
-const UserGalleryCard = ({ character }) => {
+const UserGalleryCard = ({ character, setShowModal }) => {
   const accessToken = useSelector(store => store.user.accessToken)
 
   const history = useHistory()
@@ -30,7 +30,8 @@ const UserGalleryCard = ({ character }) => {
 
   const onCharacterEdit = (id) => {
     dispatch(user.actions.setCurrentCharacter(id))
-    history.push("/UserGallery/CharacterSheet")
+    setShowModal(true)
+    // history.push("/UserGallery/CharacterSheet")
   }
 
   return (
