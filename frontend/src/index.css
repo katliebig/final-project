@@ -358,9 +358,8 @@ nav {
   transition: all 0.2s ease;
 }
 
-<<<<<<< HEAD
-/***** LOGIN *****/
-=======
+/***** CHARACTER SHEET *****/
+
 .sheet-container {
   display: flex;
   justify-content: center;
@@ -392,6 +391,10 @@ nav {
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   transform: rotate(1deg);
   background-color: #fff;
+}
+
+.sheet-container label {
+  text-transform: capitalize;
 }
 
 .sheet-text-inputs {
@@ -504,7 +507,8 @@ textarea {
   font-family: Oswald;
   font-size: 16px;
 }
->>>>>>> origin/styling-character-sheet
+
+/***** LOGIN *****/
 
 .login {
   display: flex;

@@ -21,7 +21,6 @@ const Header = () => {
 
   return (
     <header>
-      {/* <img className="header-logo" src="./assets/Dice-and-doom-logo.png" alt="Dice and doom logo" /> */}
       <div className="background-color-header">
         <h1 className="header-title">CHARACTER CREATOR</h1>
         <div className="header-links-container">
@@ -44,7 +43,7 @@ const Header = () => {
           {accessToken &&
             <Link to="/Creator">
               <div className="header-icon-border">
-                <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
+                <img src="./assets/creator.svg" className="header-icon" alt="creator icon" />
               </div>
               <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
             </Link>
@@ -52,7 +51,7 @@ const Header = () => {
 
           <Link to="/Gallery">
             <div className="header-icon-border">
-              <img src="./assets/gallery.svg" className="header-icon" alt="home icon" />
+              <img src="./assets/gallery.svg" className="header-icon" alt="gallery icon" />
             </div>
             <span className={`link ${location.pathname === "/Gallery" ? "current-route" : ""}`}>Gallery</span>
           </Link>
@@ -60,7 +59,7 @@ const Header = () => {
           {accessToken &&
             <Link to="/UserGallery">
               <div className="header-icon-border">
-                <img src="./assets/user.svg" className="header-icon" alt="home icon" />
+                <img src="./assets/user.svg" className="header-icon" alt="user gallery icon" />
               </div>
               <span className={`link ${location.pathname === "/UserGallery" ? "current-route" : ""}`}>User Gallery</span>
             </Link>
@@ -68,7 +67,7 @@ const Header = () => {
 
           {!accessToken &&
             <Link to="/Login">
-              <div className="header-icon-border"><img src="./assets/login.svg" className="header-icon" alt="home icon" /></div>
+              <div className="header-icon-border"><img src="./assets/login.svg" className="header-icon" alt="login icon" /></div>
               <span className="link">Log in</span>
             </Link>
           }
@@ -76,7 +75,7 @@ const Header = () => {
           {accessToken &&
             <Link to="/" onClick={onLogoutButtonClick} className="logout-button">
               <div className="header-icon-border">
-                <img src="./assets/logout.svg" className="header-icon" alt="home icon" />
+                <img src="./assets/logout.svg" className="header-icon" alt="logout icon" />
               </div>
               <span className="link">Log out</span>
             </Link>

@@ -84,43 +84,43 @@ const CharacterSheet = () => {
           <div className="sheet-top-row">
             <img className="sheet-image" src={character.image} alt="character" />
             <div className="sheet-text-inputs">
-              <TextInput onInputChange={onInputChange} label="Name" value={character.name} />
+              <TextInput onInputChange={onInputChange} label="name" value={character.name} />
 
-              <TextInput onInputChange={onInputChange} label="Class" value={character.profession} />
+              <TextInput onInputChange={onInputChange} label="profession" value={character.profession} />
 
-              <TextInput onInputChange={onInputChange} label="Background" value={character.background} />
+              <TextInput onInputChange={onInputChange} label="background" value={character.background} />
             </div>
           </div>
 
           <div className="sheet-range-container">
             <RangeInput
               onInputChange={onInputChange}
-              label="Strength"
+              label="strength"
               value={character.strength}
             />
             <RangeInput
               onInputChange={onInputChange}
-              label="Dexterity"
+              label="dexterity"
               value={character.dexterity}
             />
             <RangeInput
               onInputChange={onInputChange}
-              label="Constitution"
+              label="constitution"
               value={character.constitution}
             />
             <RangeInput
               onInputChange={onInputChange}
-              label="Intelligence"
+              label="intelligence"
               value={character.intelligence}
             />
             <RangeInput
               onInputChange={onInputChange}
-              label="Wisdom"
+              label="wisdom"
               value={character.wisdom}
             />
             <RangeInput
               onInputChange={onInputChange}
-              label="Charisma"
+              label="charisma"
               value={character.charisma}
             />
           </div>
@@ -139,7 +139,7 @@ const CharacterSheet = () => {
 
           <button className="save-sheet-button" onClick={onCharacterSheetSave} >
             <img src="../assets/save.svg" alt="save icon" className="card-icon" />
-              Save character sheet
+            Save character sheet
           </button>
         </div>}
     </section>
