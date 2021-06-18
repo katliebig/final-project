@@ -24,6 +24,8 @@ const Creator = () => {
     head: 0,
     clothes: 0,
     facialHair: 0,
+    frontHair: 0,
+    backHair: 0,
     leftHorn: 0,
     rightHorn: 0,
     background: 0
@@ -64,6 +66,8 @@ const Creator = () => {
             head: 0,
             clothes: 0,
             facialHair: 0,
+            frontHair: 0,
+            backHair: 0,
             leftHorn: 0,
             rightHorn: 0,
             background: 0
@@ -114,6 +118,7 @@ const Creator = () => {
             >
               <option value="human">Human</option>
               <option value="tiefling">Tiefling</option>
+              <option value="elf">Elf</option>
             </select>
 
             <div className="creator-card-image-container">

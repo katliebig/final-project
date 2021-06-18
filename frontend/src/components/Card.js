@@ -2,11 +2,12 @@ import React from 'react';
 
 const Card = ({ title, text, imgUrl, onRaceChosen }) => {
   return (
-    <div
+    <button
       className="card race-card"
       onClick={() => onRaceChosen(title.toLowerCase())}
       tabIndex="0"
       role="button"
+      disabled={title === "Dwarf" ? true : false}
     >
       <div className="card-background">
         <h2 className="card-title">
@@ -17,7 +18,7 @@ const Card = ({ title, text, imgUrl, onRaceChosen }) => {
           {text}
         </p>
       </div>
-    </div>
+    </button>
   )
 }
 

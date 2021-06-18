@@ -39,6 +39,7 @@ const Race = () => {
           text="Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal."
         />
         <Card
+          onRaceChosen={onRaceChosen}
           imgUrl="../assets/elf.png"
           title="Elf"
           text="Elves are a magical people of otherworldly grace, living in the world but not entirely part of it."
