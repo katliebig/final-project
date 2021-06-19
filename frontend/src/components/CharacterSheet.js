@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom"
 
 import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
@@ -16,16 +15,11 @@ const CharacterSheet = () => {
   const accessToken = useSelector(store => store.user.accessToken)
   const character = useSelector(store => store.currentCharacter.character)
 
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const inputs = []
 
   useEffect(() => {
-    if (!characterId) {
-      history.push("/UserGallery");
-    }
-
     if (characterId) {
       const options = {
         method: "GET",
@@ -42,7 +36,7 @@ const CharacterSheet = () => {
         })
         .catch(error => console.log(error))
     }
-  }, [history, dispatch, accessToken, characterId])
+  }, [dispatch, accessToken, characterId])
 
   const onCharacterSheetSave = () => {
     const options = {
@@ -91,7 +85,7 @@ const CharacterSheet = () => {
   }
 
   return (
-    <section className="sheet-container">
+    <>
       {isLoading && <Loader />}
       {!isLoading &&
         <div className="sheet-content">
@@ -109,6 +103,7 @@ const CharacterSheet = () => {
           <div className="sheet-range-container">
             {inputs}
           </div>
+
           <div className="sheet-text-area-container">
             <label htmlFor="other">Other</label>
             <textarea
@@ -127,7 +122,7 @@ const CharacterSheet = () => {
             Save character sheet
           </button>
         </div>}
-    </section>
+    </>
   )
 }
 

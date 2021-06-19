@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
 import UserGalleryCard from './UserGalleryCard'
-import Modal from "./Modal"
+import CharacterSheet from './CharacterSheet';
 import Loader from './Loader'
 
 const UserGallery = () => {
-  const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [open, setOpen] = useState(false);
+
   const charactersArray = useSelector(store => store.characters.charactersByUser)
   const id = useSelector(store => store.user.id)
   const accessToken = useSelector(store => store.user.accessToken)
@@ -46,13 +49,15 @@ const UserGallery = () => {
       {isLoading && <Loader />}
       {!isLoading &&
         <>
-          <Modal showModal={showModal} setShowModal={setShowModal} />
+          <Modal open={open} onClose={() => setOpen(false)} center>
+            <CharacterSheet />
+          </Modal>
           <div className="cards-container">
             {charactersArray.map(character => (
               <UserGalleryCard
                 key={character._id}
                 character={character}
-                setShowModal={setShowModal}
+                setOpen={setOpen}
               />
             ))}
           </div>

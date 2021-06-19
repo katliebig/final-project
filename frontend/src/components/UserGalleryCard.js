@@ -1,15 +1,13 @@
 import React from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from "react-router-dom"
 
 import { API_URL } from '../reusables/urls'
 
 import user from '../reducers/user'
 
-const UserGalleryCard = ({ character, setShowModal }) => {
+const UserGalleryCard = ({ character, setOpen }) => {
   const accessToken = useSelector(store => store.user.accessToken)
 
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const onCharacterDelete = (id) => {
@@ -30,8 +28,7 @@ const UserGalleryCard = ({ character, setShowModal }) => {
 
   const onCharacterEdit = (id) => {
     dispatch(user.actions.setCurrentCharacter(id))
-    setShowModal(true)
-    // history.push("/UserGallery/CharacterSheet")
+    setOpen(true)
   }
 
   return (
