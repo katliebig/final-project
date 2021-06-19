@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from "react-redux"
 import mergeImages from 'merge-images'
+
+import PopUp from './PopUp'
 
 import { API_URL } from '../reusables/urls'
 
 const SaveImageButton = ({ character }) => {
+  const [showPopUp, setShowPopUp] = useState(false)
 
   const attributes = useSelector(store => store.race.attributes)
   const imageSet = useSelector(store => store.race.imageSet)
@@ -27,12 +30,15 @@ const SaveImageButton = ({ character }) => {
           body: JSON.stringify({ image: b64, race: chosenRace })
         })
           .then(res => res.json())
-          .then(data => alert(data.message))
+          .then(data => {
+            setShowPopUp(true)
+          })
       })
   }
 
   return (
     <>
+        {showPopUp && <PopUp text="Imaged saved to gallery"/>}
       <button onClick={onCharacterSave} className="creator-button">
         <img src="./assets/save.svg" alt="save icon" className="card-icon" />
         Save
