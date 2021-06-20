@@ -370,6 +370,7 @@ nav {
 
 .sheet-content {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px 30px;
@@ -378,15 +379,15 @@ nav {
   background: rgb(197, 209, 203);
 }
 
-.sheet-top-row {
+.sheet-second-row {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
 }
 
 .sheet-image {
   width: 100%;
-  max-width: 300px;
+  /* max-width: 300px; */
   border: solid #000;
   border-width: 2px;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -394,8 +395,9 @@ nav {
   background-color: #fff;
 }
 
-.sheet-contet label {
+.sheet-content label {
   text-transform: capitalize;
+  font-family: "Oswald";
 }
 
 .sheet-text-inputs {
@@ -421,12 +423,13 @@ nav {
 .text-input-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   text-align: center;
   border: 2px solid #000;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   transform: rotate(1deg);
   background-color: #fff;
-  margin-top: 5px;
+  margin: 8px 0;
 }
 
 .sheet-range-container {
@@ -436,6 +439,10 @@ nav {
   margin: 15px 0;
   font-family: "Oswald";
   width: 100%;
+}
+
+.sheet-range-container-desktop {
+  display: none;
 }
 
 .range-input {
@@ -477,6 +484,7 @@ nav {
 .sheet-text-area-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
   margin: 15px 0;
   font-family: "Oswald";
@@ -487,6 +495,7 @@ nav {
 }
 
 textarea {
+  width: 90%;
   border: none;
   font-family: 'Just Another Hand';
   color: #525257;
@@ -628,6 +637,12 @@ textarea:focus {
   }
 }
 
+@media (min-width: 400px) {
+  .sheet-content {
+    padding: 50px;
+  }
+}
+
 /***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
@@ -710,6 +725,10 @@ textarea:focus {
 
   .react-responsive-modal-modal {
     width: auto;
+  }
+  .sheet-content {
+    max-width: 600px;
+    padding: 60px 100px
   }
 }
 
@@ -863,26 +882,27 @@ textarea:focus {
   }
   
   .sheet-content {
-    width: 669px;
+    max-width: 800px;
+    padding: 60px;
     background-color: rgb(197, 209, 203);
     outline: 2px solid rgb(255, 255, 255);
     outline-offset: -10px;
     border: none;
   }
-  
-  .sheet-top-row {
-    display: flex;
+    
+  .sheet-second-row {
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
   }
 
   .sheet-image {
-    width: 250px;
+    width: 45%;
   }
 
+
   .sheet-text-inputs {
-    width: 40%;
+    width: 45%;
   }
 
   .sheet-range-container {
@@ -890,6 +910,14 @@ textarea:focus {
     justify-content: space-between;
     width: 90%;
     flex-wrap: wrap;
+  }
+
+  .sheet-range-container-mobile {
+    display:none!important;
+  }
+
+  .sheet-range-container-desktop {
+    display: flex;
   }
 
   .range-slider {

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
@@ -84,23 +87,37 @@ const CharacterSheet = () => {
     }
   }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipe: false,
+  }
+
   return (
     <>
       {isLoading && <Loader />}
       {!isLoading &&
         <div className="sheet-content">
-          <div className="sheet-top-row">
+          <TextInput onInputChange={onInputChange} label="name" value={character.name} disabled={false} />
+          <div className="sheet-second-row">
             <img className="sheet-image" src={character.image} alt="character" />
             <div className="sheet-text-inputs">
-              <TextInput onInputChange={onInputChange} label="name" value={character.name} />
 
-              <TextInput onInputChange={onInputChange} label="profession" value={character.profession} />
+              <TextInput onInputChange={onInputChange} label="race" value={character.race} disabled={true} />
 
-              <TextInput onInputChange={onInputChange} label="background" value={character.background} />
+              <TextInput onInputChange={onInputChange} label="profession" value={character.profession} disabled={false} />
+
+              <TextInput onInputChange={onInputChange} label="background" value={character.background} disabled={false} />
             </div>
           </div>
 
-          <div className="sheet-range-container">
+          <Slider {...settings} className="sheet-range-container sheet-range-container-mobile">
+            {inputs}
+          </Slider>
+          <div className="sheet-range-container sheet-range-container-desktop">
             {inputs}
           </div>
 
