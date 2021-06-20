@@ -5,6 +5,7 @@ import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
 import GalleryCard from './GalleryCard'
+import GalleryFilter from './GalleryFilter';
 import Loader from './Loader'
 
 const Gallery = () => {
@@ -26,12 +27,16 @@ const Gallery = () => {
   return (
     <section className="main">
       {isLoading && <Loader />}
-      {!isLoading &&
-        <div className="cards-container">
-          {charactersArray.map(character => (
-            <GalleryCard character={character} key={character._id} />
-          ))}
-        </div>}
+      {!isLoading && (
+        <>
+          <GalleryFilter />
+          <div className="cards-container">
+            {charactersArray.map(character => (
+              <GalleryCard character={character} key={character._id} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )
 }

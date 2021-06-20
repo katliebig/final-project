@@ -278,6 +278,18 @@ nav {
 
 /***** GALLERY *****/
 
+.filter-select {
+  border: none;
+  border-bottom: 2px solid #9b2222;
+  border-top: 2px solid #9b2222;
+  align-self: flex-end;
+  font-family: "Oswald";
+  font-size: 24px;
+  width: 200px;
+  padding: 8px;
+  margin: 16px 0;
+}
+
 .gallery-card {
   background: #000;
   color: #fff;
