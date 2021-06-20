@@ -10,26 +10,27 @@ import Loader from './Loader'
 
 const Gallery = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [filter, setFilter] = useState("")
   const charactersArray = useSelector(store => store.characters.characters)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch(API_URL("characters"))
+    fetch(API_URL(`characters?race=${filter}`))
       .then(res => res.json())
       .then(data => {
         dispatch(characters.actions.setCharacters(data))
         setIsLoading(false)
       })
       .catch(error => console.log(error))
-  }, [dispatch])
+  }, [dispatch, filter])
 
   return (
     <section className="main">
       {isLoading && <Loader />}
       {!isLoading && (
         <>
-          <GalleryFilter />
+          <GalleryFilter setFilter={setFilter} />
           <div className="cards-container">
             {charactersArray.map(character => (
               <GalleryCard character={character} key={character._id} />

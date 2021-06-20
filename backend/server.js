@@ -239,7 +239,6 @@ app.get("/characters", async (req, res) => {
   const { race } = req.query
   let characters
   if (race !== "") {
-    console.log(race)
     characters = await Character.find({ race: race }).populate("user", "username").sort({ createdAt: "desc" })
   } else {
     characters = await Character.find().populate("user", "username").sort({ createdAt: "desc" })
