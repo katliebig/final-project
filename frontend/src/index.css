@@ -315,6 +315,10 @@ nav {
   z-index: 1;
 }
 
+.creator-icon {
+  width: 50px;
+}
+
 .arrow-button:nth-of-type(1) {
   left: 0;
 }
@@ -823,6 +827,13 @@ textarea:focus {
 
   .arrow-button {
     background: #fff;
+    position: static;
+    width: 60px;
+    height: 60px;
+  }
+
+  .creator-icon {
+    width: 60px;
   }
 
   .creator-button:hover,
@@ -830,12 +841,6 @@ textarea:focus {
     background: #922020;
     transform: scale(1.02);
     transition: all 0.2s linear; 
-  }
-
-  .arrow-button {
-    position: static;
-    width: 60px;
-    height: 60px;
   }
 
   .arrow-button:disabled:hover {
@@ -1019,16 +1024,9 @@ textarea:focus {
 }
 
 @media (min-width: 850px) {
-
   .header-links-container {
     font-size: 24px;
   }
-
-  .header-icon-border {
-    width: 50px;
-    height: 50px;
-  }
-
 }
 
 @media (min-width: 1920px) {
