@@ -22,7 +22,6 @@ const UserGalleryCard = ({ character, setTriggerOnDelete, setOpen }) => {
       fetch(API_URL(`characters/${id}`), options)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           setTriggerOnDelete((prevState) => prevState + 1)
         })
     }

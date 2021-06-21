@@ -33,8 +33,7 @@ const CharacterSheet = () => {
       fetch(API_URL(`characters/${characterId}`), options)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
-          dispatch(currentCharacter.actions.setCharacter(data))
+          dispatch(currentCharacter.actions.setCharacter(data.character))
           setIsLoading(false)
         })
         .catch(error => console.log(error))

@@ -19,7 +19,7 @@ const Gallery = () => {
     fetch(API_URL(`characters?race=${filter}`))
       .then(res => res.json())
       .then(data => {
-        dispatch(characters.actions.setCharacters(data))
+        dispatch(characters.actions.setCharacters(data.characters))
         setIsLoading(false)
       })
       .catch(error => console.log(error))

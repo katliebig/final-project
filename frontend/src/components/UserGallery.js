@@ -39,7 +39,7 @@ const UserGallery = () => {
       fetch(API_URL(`characters/users/${id}`), options)
         .then(res => res.json())
         .then(data => {
-          dispatch(characters.actions.setCharactersByUser(data))
+          dispatch(characters.actions.setCharactersByUser(data.characters))
           setIsLoading(false)
         })
         .catch(error => console.log(error))
