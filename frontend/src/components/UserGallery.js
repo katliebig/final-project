@@ -13,7 +13,6 @@ import Loader from './Loader'
 
 const UserGallery = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const [triggerOnDelete, setTriggerOnDelete] = useState(0)
   const [open, setOpen] = useState(false);
 
   const charactersArray = useSelector(store => store.characters.charactersByUser)
@@ -39,12 +38,15 @@ const UserGallery = () => {
       fetch(API_URL(`characters/users/${id}`), options)
         .then(res => res.json())
         .then(data => {
-          dispatch(characters.actions.setCharactersByUser(data.characters))
-          setIsLoading(false)
+          if (data.success) {
+            dispatch(characters.actions.setCharactersByUser(data.characters))
+            setIsLoading(false)
+          } else {
+            alert(data.message)
+          }
         })
-        .catch(error => console.log(error))
     }
-  }, [dispatch, history, id, accessToken, triggerOnDelete])
+  }, [dispatch, history, id, accessToken, isLoading])
 
   return (
     <section className="main">
@@ -60,7 +62,7 @@ const UserGallery = () => {
                 key={character._id}
                 character={character}
                 setOpen={setOpen}
-                setTriggerOnDelete={setTriggerOnDelete}
+                setIsLoading={setIsLoading}
               />
             ))}
           </div>

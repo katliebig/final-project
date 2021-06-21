@@ -8,11 +8,13 @@ import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
 import TextInput from "./TextInput"
 import RangeInput from "./RangeInput"
+import PopUp from './PopUp'
 
 import currentCharacter from "reducers/currentCharacter"
 
 const CharacterSheet = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [showPopUp, setShowPopUp] = useState(false)
 
   const characterId = useSelector(store => store.user.currentCharacter)
   const accessToken = useSelector(store => store.user.accessToken)
@@ -33,10 +35,13 @@ const CharacterSheet = () => {
       fetch(API_URL(`characters/${characterId}`), options)
         .then(res => res.json())
         .then(data => {
-          dispatch(currentCharacter.actions.setCharacter(data.character))
-          setIsLoading(false)
+          if (data.success) {
+            dispatch(currentCharacter.actions.setCharacter(data.character))
+            setIsLoading(false)
+          } else {
+            alert(data.message)
+          }
         })
-        .catch(error => console.log(error))
     }
   }, [dispatch, accessToken, characterId])
 
@@ -58,9 +63,13 @@ const CharacterSheet = () => {
     fetch(API_URL(`characters/${characterId}`), options)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        if (data.success) {
+          setShowPopUp(true)
+          setTimeout(() => setShowPopUp(false), 3000)
+        } else {
+          alert(data.message)
+        }
       })
-      .catch(error => console.log(error))
   }
 
   const onInputChange = (value, id) => {
@@ -133,10 +142,13 @@ const CharacterSheet = () => {
             </textarea>
           </div>
 
-          <button className="save-sheet-button" onClick={onCharacterSheetSave} >
-            <img src="../assets/save.svg" alt="save icon" className="card-icon" />
-            Save character sheet
-          </button>
+          <div className="save-button-container">
+            {showPopUp && <PopUp text="Character sheet saved" />}
+            <button className="save-sheet-button" onClick={onCharacterSheetSave} >
+              <img src="../assets/save.svg" alt="save icon" className="card-icon" />
+              Save character sheet
+            </button>
+          </div>
         </div>}
     </>
   )

@@ -17,7 +17,6 @@ const GalleryCard = ({ character }) => {
         <span className="character-image-user"> {character.user.username}</span>
       </p>
       <p className="character-image-created-at">{dayjs().to(character.createdAt)}</p>
-      {/* <p className="character-image-race">Race: {character.race}</p> */}
     </div>
   )
 }

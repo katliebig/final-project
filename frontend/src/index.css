@@ -329,8 +329,6 @@ nav {
   position: absolute;
   z-index: 1;
   bottom: 100%;
-  left: 50%;
-  margin-left: 30px;
 }
 
 .popup .popuptext::after {
@@ -624,8 +622,17 @@ textarea:focus {
     background: #922020;
     transform: scale(1.02);
     transition: all 0.2s linear; 
-  }
+}
 
+.save-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.save-button-container .popup .popuptext {
+  left: 15px;
+}
 
 /***** LOGIN *****/
 

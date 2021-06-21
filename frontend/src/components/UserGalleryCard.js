@@ -6,7 +6,7 @@ import { API_URL } from '../reusables/urls'
 
 import user from '../reducers/user'
 
-const UserGalleryCard = ({ character, setTriggerOnDelete, setOpen }) => {
+const UserGalleryCard = ({ character, setOpen, setIsLoading }) => {
   const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
@@ -22,7 +22,11 @@ const UserGalleryCard = ({ character, setTriggerOnDelete, setOpen }) => {
       fetch(API_URL(`characters/${id}`), options)
         .then(res => res.json())
         .then(data => {
-          setTriggerOnDelete((prevState) => prevState + 1)
+          if (data.success) {
+            setIsLoading(true)
+          } else {
+            alert(data.message)
+          }
         })
     }
   }

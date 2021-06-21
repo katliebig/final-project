@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector, batch } from "react-redux"
 import { useHistory } from "react-router-dom"
 
 import race from "../reducers/race"
@@ -54,28 +54,33 @@ const Creator = () => {
       fetch(API_URL(`races/${chosenRace}`), options)
         .then(res => res.json())
         .then(data => {
-          dispatch(race.actions.setImageSet(data.urls))
-          dispatch(race.actions.setAttributes(data.attributes))
-          setCharacter({
-            hair: 0,
-            eyebrows: 0,
-            eyes: 0,
-            ears: 0,
-            nose: 0,
-            mouth: 0,
-            head: 0,
-            clothes: 0,
-            facialHair: 0,
-            frontHair: 0,
-            backHair: 0,
-            leftHorn: 0,
-            rightHorn: 0,
-            background: 0
-          })
-          setAttribute("")
-          setIsLoading(false)
+          if (data.success) {
+            batch(() => {
+              dispatch(race.actions.setImageSet(data.urls))
+              dispatch(race.actions.setAttributes(data.attributes))
+            })
+            setCharacter({
+              hair: 0,
+              eyebrows: 0,
+              eyes: 0,
+              ears: 0,
+              nose: 0,
+              mouth: 0,
+              head: 0,
+              clothes: 0,
+              facialHair: 0,
+              frontHair: 0,
+              backHair: 0,
+              leftHorn: 0,
+              rightHorn: 0,
+              background: 0
+            })
+            setAttribute("")
+            setIsLoading(false)
+          } else {
+            alert(data.message)
+          }
         })
-        .catch(error => console.log(error))
     }
   }, [history, dispatch, accessToken, chosenRace])
 

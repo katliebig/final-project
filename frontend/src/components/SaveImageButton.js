@@ -31,14 +31,19 @@ const SaveImageButton = ({ character }) => {
         })
           .then(res => res.json())
           .then(data => {
-            setShowPopUp(true)
+            if (data.success) {
+              setShowPopUp(true)
+              setTimeout(() => setShowPopUp(false), 3000)
+            } else {
+              alert(data.message)
+            }
           })
       })
   }
 
   return (
     <>
-        {showPopUp && <PopUp text="Imaged saved to gallery"/>}
+      {showPopUp && <PopUp text="Imaged saved to gallery" />}
       <button onClick={onCharacterSave} className="creator-button">
         <img src="./assets/save.svg" alt="save icon" className="card-icon" />
         Save
