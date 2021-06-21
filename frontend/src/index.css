@@ -114,7 +114,6 @@ nav {
   height: 30px;
 }
 
-
 .header-icon-border {
   width: 40px;
   height: 40px;
@@ -207,6 +206,18 @@ nav {
   border: 1.5px solid #000;
   border-radius: 0px 0px 5px 5px;
   text-align: left;
+}
+
+.upcoming-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.upcoming-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 }
 
 /***** CREATOR *****/
@@ -803,6 +814,10 @@ textarea:focus {
     margin: 0;
   }
 
+  .upcoming-title {
+    font-size: 25px;
+  }
+
   .card {
     margin: 16px;
   }
@@ -959,6 +974,10 @@ textarea:focus {
     margin: 24px;
   }
 
+  .upcoming-title {
+    font-size: 30px;
+  }
+
   .login-form button:hover {
     background: #9b2222;
     transform: scale(1.02);
@@ -1003,7 +1022,6 @@ textarea:focus {
   .sheet-image {
     width: 45%;
   }
-
 
   .sheet-text-inputs {
     width: 45%;
