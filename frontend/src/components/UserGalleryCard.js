@@ -1,17 +1,15 @@
 import React from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from "react-router-dom"
 
 
 import { API_URL } from '../reusables/urls'
 
 import user from '../reducers/user'
 
-const UserGalleryCard = ({ character, setTriggerOnDelete }) => {
+const UserGalleryCard = ({ character, setTriggerOnDelete, setOpen }) => {
   const accessToken = useSelector(store => store.user.accessToken)
-  const history = useHistory()
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch()
 
   const onCharacterDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this character?")) {
@@ -32,7 +30,7 @@ const UserGalleryCard = ({ character, setTriggerOnDelete }) => {
 
   const onCharacterEdit = (id) => {
     dispatch(user.actions.setCurrentCharacter(id))
-    history.push("/UserGallery/CharacterSheet")
+    setOpen(true)
   }
 
   return (

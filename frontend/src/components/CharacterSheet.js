@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
@@ -16,14 +18,11 @@ const CharacterSheet = () => {
   const accessToken = useSelector(store => store.user.accessToken)
   const character = useSelector(store => store.currentCharacter.character)
 
-  const history = useHistory()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (!characterId) {
-      history.push("/UserGallery");
-    }
+  const inputs = []
 
+  useEffect(() => {
     if (characterId) {
       const options = {
         method: "GET",
@@ -40,7 +39,7 @@ const CharacterSheet = () => {
         })
         .catch(error => console.log(error))
     }
-  }, [history, dispatch, accessToken, characterId])
+  }, [dispatch, accessToken, characterId])
 
   const onCharacterSheetSave = () => {
     const options = {
@@ -54,12 +53,7 @@ const CharacterSheet = () => {
         profession: character.profession,
         background: character.background,
         other: character.other,
-        strength: character.strength,
-        dexterity: character.dexterity,
-        constitution: character.constitution,
-        intelligence: character.intelligence,
-        wisdom: character.wisdom,
-        charisma: character.charisma
+        stats: character.stats
       })
     }
     fetch(API_URL(`characters/${characterId}`), options)
@@ -76,54 +70,57 @@ const CharacterSheet = () => {
     dispatch(currentCharacter.actions.setCharacter(updatedCharacter))
   }
 
+  const onStatInputChange = (value, id) => {
+    let updatedCharacter = { ...character, stats: { ...character.stats } }
+    updatedCharacter.stats[id] = +value
+    dispatch(currentCharacter.actions.setCharacter(updatedCharacter))
+  }
+
+  if (character) {
+    for (const [key, value] of Object.entries(character.stats)) {
+      inputs.push(<RangeInput
+        key={key}
+        label={key}
+        value={value}
+        onInputChange={onStatInputChange}
+      />)
+    }
+  }
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipe: false,
+  }
+
   return (
-    <section className="sheet-container">
+    <>
       {isLoading && <Loader />}
       {!isLoading &&
         <div className="sheet-content">
-          <div className="sheet-top-row">
+          <TextInput onInputChange={onInputChange} label="name" value={character.name} disabled={false} />
+          <div className="sheet-second-row">
             <img className="sheet-image" src={character.image} alt="character" />
             <div className="sheet-text-inputs">
-              <TextInput onInputChange={onInputChange} label="name" value={character.name} />
 
-              <TextInput onInputChange={onInputChange} label="profession" value={character.profession} />
+              <TextInput onInputChange={onInputChange} label="race" value={character.race} disabled={true} />
 
-              <TextInput onInputChange={onInputChange} label="background" value={character.background} />
+              <TextInput onInputChange={onInputChange} label="profession" value={character.profession} disabled={false} />
+
+              <TextInput onInputChange={onInputChange} label="background" value={character.background} disabled={false} />
             </div>
           </div>
 
-          <div className="sheet-range-container">
-            <RangeInput
-              onInputChange={onInputChange}
-              label="strength"
-              value={character.strength}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="dexterity"
-              value={character.dexterity}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="constitution"
-              value={character.constitution}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="intelligence"
-              value={character.intelligence}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="wisdom"
-              value={character.wisdom}
-            />
-            <RangeInput
-              onInputChange={onInputChange}
-              label="charisma"
-              value={character.charisma}
-            />
+          <Slider {...settings} className="sheet-range-container sheet-range-container-mobile">
+            {inputs}
+          </Slider>
+          <div className="sheet-range-container sheet-range-container-desktop">
+            {inputs}
           </div>
+
           <div className="sheet-text-area-container">
             <label htmlFor="other">Other</label>
             <textarea
@@ -142,7 +139,7 @@ const CharacterSheet = () => {
             Save character sheet
           </button>
         </div>}
-    </section>
+    </>
   )
 }
 

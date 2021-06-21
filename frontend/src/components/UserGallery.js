@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
 import UserGalleryCard from './UserGalleryCard'
+import CharacterSheet from './CharacterSheet';
 import Loader from './Loader'
 
 const UserGallery = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [triggerOnDelete, setTriggerOnDelete] = useState(0)
+  const [open, setOpen] = useState(false);
+
   const charactersArray = useSelector(store => store.characters.charactersByUser)
   const id = useSelector(store => store.user.id)
   const accessToken = useSelector(store => store.user.accessToken)
@@ -45,15 +50,21 @@ const UserGallery = () => {
     <section className="main">
       {isLoading && <Loader />}
       {!isLoading &&
-        <div className="cards-container">
-          {charactersArray.map(character => (
-            <UserGalleryCard
-              key={character._id}
-              character={character}
-              setTriggerOnDelete={setTriggerOnDelete}
-            />
-          ))}
-        </div>}
+        <>
+          <Modal open={open} onClose={() => setOpen(false)} center>
+            <CharacterSheet />
+          </Modal>
+          <div className="cards-container">
+            {charactersArray.map(character => (
+              <UserGalleryCard
+                key={character._id}
+                character={character}
+                setOpen={setOpen}
+                setTriggerOnDelete={setTriggerOnDelete}
+              />
+            ))}
+          </div>
+        </>}
     </section>
   )
 }

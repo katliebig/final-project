@@ -83,29 +83,16 @@ const Character = mongoose.model('Character', {
     type: String,
     default: ""
   },
-  strength: {
-    type: Number,
-    default: 10
-  },
-  dexterity: {
-    type: Number,
-    default: 10
-  },
-  constitution: {
-    type: Number,
-    default: 10
-  },
-  intelligence: {
-    type: Number,
-    default: 10
-  },
-  wisdom: {
-    type: Number,
-    default: 10
-  },
-  charisma: {
-    type: Number,
-    default: 10
+  stats: {
+    type: Object,
+    default: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10
+    }
   }
 })
 
@@ -310,7 +297,7 @@ app.delete('/characters/:id', async (req, res) => {
 app.patch("/characters/:id", authenticateUser)
 app.patch("/characters/:id", async (req, res) => {
   const { id } = req.params
-  const { name, profession, background, other, strength, dexterity, constitution, intelligence, wisdom, charisma } = req.body
+  const { name, profession, background, other, stats } = req.body
 
   try {
     const updatedCharacter = await Character.findByIdAndUpdate(id, {
@@ -319,12 +306,7 @@ app.patch("/characters/:id", async (req, res) => {
         profession,
         background,
         other,
-        strength,
-        dexterity,
-        constitution,
-        intelligence,
-        wisdom,
-        charisma
+        stats
       }
     }, { new: true })
     res.json({ success: true, updatedCharacter })
