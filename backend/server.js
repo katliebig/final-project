@@ -138,6 +138,8 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
+
+// creates a new user
 app.post('/users', async (req, res) => {
   const { username, password } = req.body
 
@@ -159,6 +161,7 @@ app.post('/users', async (req, res) => {
   }
 })
 
+// allows the user to log in
 app.post('/sessions', async (req, res) => {
   const { username, password } = req.body
 
@@ -180,16 +183,21 @@ app.post('/sessions', async (req, res) => {
   }
 })
 
-app.post("/races", async (req, res) => {
-  const { race, attributes } = req.body
-  try {
-    const newRace = await new Race({ race, attributes }).save()
-    res.json(newRace)
-  } catch (error) {
-    res.status(400).json({ message: "Something went wrong", error })
-  }
-})
+// create a new race with attributes
+// should be commented out
+// app.post("/races", async (req, res) => {
+//   const { race, attributes } = req.body
+//   try {
+//     const newRace = await new Race({ race, attributes }).save()
+//     res.json(newRace)
+//   } catch (error) {
+//     res.status(400).json({ message: "Something went wrong", error })
+//   }
+// })
 
+
+// gets race by param, loops over attributes to find matching images 
+// from cloudinary, sends urls
 app.get("/races/:race", authenticateUser)
 app.get('/races/:race', async (req, res) => {
   const { race } = req.params
@@ -215,13 +223,15 @@ app.get('/races/:race', async (req, res) => {
       }
     }
 
-    res.json({ urls, attributes: chosenRace.attributes })
+    res.json({ success: true, urls, attributes: chosenRace.attributes })
 
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong", error })
+    res.status(400).json({ success: false, message: "Something went wrong", error })
   }
 })
 
+
+// get all characters by race (if queried), sort by newest
 app.get("/characters", async (req, res) => {
   const { race } = req.query
   let characters
@@ -230,9 +240,11 @@ app.get("/characters", async (req, res) => {
   } else {
     characters = await Character.find().populate("user", "username").sort({ createdAt: "desc" })
   }
-  res.json(characters)
+  res.json({ success: true, characters })
 })
 
+
+// creates a new character
 app.post("/characters", authenticateUser)
 app.post("/characters", async (req, res) => {
   const { _id } = req.user
@@ -241,12 +253,13 @@ app.post("/characters", async (req, res) => {
   try {
     const user = await User.findById(_id)
     await new Character({ image, user, race }).save()
-    res.json({ message: "Character saved successfully" })
+    res.json({ success: true, message: "Character saved successfully" })
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong", error })
+    res.status(400).json({ success: false, message: "Something went wrong", error })
   }
 })
 
+// get all characters created by one user, sort by newest
 app.get("/characters/users/:id", authenticateUser)
 app.get("/characters/users/:id", async (req, res) => {
   const { id } = req.params
@@ -254,30 +267,32 @@ app.get("/characters/users/:id", async (req, res) => {
   try {
     const characters = await Character.find({ user: id }).sort({ createdAt: "desc" })
     if (characters) {
-      res.json(characters)
+      res.json({ success: true, characters })
     } else {
-      res.status(404).json({ message: 'Not found' })
+      res.status(404).json({ success: false, message: 'Not found' })
     }
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong", error })
+    res.status(400).json({ success: false, message: "Something went wrong", error })
   }
 })
 
+// get one character by id, for character sheet
 app.get("/characters/:id", authenticateUser)
 app.get("/characters/:id", async (req, res) => {
   const { id } = req.params
   try {
     const character = await Character.findById(id)
     if (character) {
-      res.json(character)
+      res.json({ success: true, character })
     } else {
-      res.status(404).json({ message: 'Character not found' })
+      res.status(404).json({ success: false, message: 'Character not found' })
     }
   } catch (error) {
-    res.status(400).json({ message: 'Invalid request', error })
+    res.status(400).json({ success: false, message: 'Invalid request', error })
   }
 })
 
+// finds and deletes one character by id
 app.delete("/characters/:id", authenticateUser)
 app.delete('/characters/:id', async (req, res) => {
   const { id } = req.params
@@ -285,15 +300,17 @@ app.delete('/characters/:id', async (req, res) => {
   try {
     const deletedCharacter = await Character.deleteOne({ _id: id })
     if (deletedCharacter) {
-      res.json({ message: "Character deleted" })
+      res.json({ success: true, message: "Character deleted" })
     } else {
-      res.status(404).json({ message: 'Not found' })
+      res.status(404).json({ success: false, message: 'Not found' })
     }
   } catch (error) {
-    res.status(400).json({ message: 'Invalid request', error })
+    res.status(400).json({ success: false, message: 'Invalid request', error })
   }
 });
 
+
+// updates one character by id, for character sheet
 app.patch("/characters/:id", authenticateUser)
 app.patch("/characters/:id", async (req, res) => {
   const { id } = req.params
@@ -311,7 +328,7 @@ app.patch("/characters/:id", async (req, res) => {
     }, { new: true })
     res.json({ success: true, updatedCharacter })
   } catch (error) {
-    res.status(400).json({ message: 'Invalid request', error })
+    res.status(400).json({ success: false, message: 'Invalid request', error })
   }
 })
 
