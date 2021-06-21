@@ -109,6 +109,24 @@ nav {
   border-radius: 50%;
 }
 
+.header-icon {
+  width: 30px;
+  height: 30px;
+}
+
+
+.header-icon-border {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin-right: 8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
 .current-route {
   text-decoration: underline;
 } 
@@ -543,7 +561,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
 }
 
 .range-slider {
@@ -871,22 +889,6 @@ textarea:focus {
     color: inherit;
     display: flex;
     align-items: center;
-  }
-
-  .header-icon {
-    width: 30px;
-  }
-  
-  .header-icon-border {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    margin-right: 8px;
-    border: 2px solid #fff;
-    border-radius: 50%;
   }
   
   header a:hover .header-icon-border {  

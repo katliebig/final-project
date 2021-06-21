@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import { Carousel } from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 import { API_URL } from '../reusables/urls'
 import Loader from "./Loader"
@@ -95,15 +94,6 @@ const CharacterSheet = () => {
     }
   }
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    swipe: false,
-  }
-
   return (
     <>
       {isLoading && <Loader />}
@@ -122,9 +112,9 @@ const CharacterSheet = () => {
             </div>
           </div>
 
-          <Slider {...settings} className="sheet-range-container sheet-range-container-mobile">
+          <Carousel className="sheet-range-container sheet-range-container-mobile" showStatus={false} swipeable={false}>
             {inputs}
-          </Slider>
+          </Carousel>
           <div className="sheet-range-container sheet-range-container-desktop">
             {inputs}
           </div>
