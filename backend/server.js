@@ -128,7 +128,7 @@ const port = process.env.PORT || 8080
 const app = express()
 
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", , "https://character-creator.netlify.app"]
 }
 
 app.use(cors(corsOptions))
@@ -252,7 +252,7 @@ app.get("/characters/users/:id", async (req, res) => {
   const { id } = req.params
 
   try {
-    const characters = await Character.find({ user: id })
+    const characters = await Character.find({ user: id }).sort({ createdAt: "desc" })
     if (characters) {
       res.json(characters)
     } else {

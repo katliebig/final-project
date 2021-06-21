@@ -5,8 +5,6 @@ const Card = ({ title, text, imgUrl, onRaceChosen }) => {
     <button
       className="card race-card"
       onClick={() => onRaceChosen(title.toLowerCase())}
-      tabIndex="0"
-      role="button"
       disabled={title === "Dwarf" ? true : false}
     >
       <div className="card-background">
