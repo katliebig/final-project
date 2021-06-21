@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
-import GalleryCard from './GalleryCard'
-import GalleryFilter from './GalleryFilter';
-import Loader from './Loader'
+import GalleryCard from '../components/GalleryCard'
+import GalleryFilter from '../components/GalleryFilter';
+import Loader from '../components/Loader'
 
 const Gallery = () => {
   const [isLoading, setIsLoading] = useState(true)

@@ -7,9 +7,9 @@ import { Modal } from 'react-responsive-modal';
 import characters from '../reducers/characters'
 import { API_URL } from '../reusables/urls'
 
-import UserGalleryCard from './UserGalleryCard'
-import CharacterSheet from './CharacterSheet';
-import Loader from './Loader'
+import UserGalleryCard from '../components/UserGalleryCard'
+import CharacterSheet from '../components/CharacterSheet';
+import Loader from '../components/Loader'
 
 const UserGallery = () => {
   const [isLoading, setIsLoading] = useState(true)

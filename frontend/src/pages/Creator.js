@@ -6,10 +6,10 @@ import race from "../reducers/race"
 
 import { API_URL } from '../reusables/urls'
 
-import Loader from './Loader'
-import CharacterRandomizer from "./CharacterRandomizer"
-import SaveImageButton from './SaveImageButton'
-import CreatorNavButton from './CreatorNavButton'
+import Loader from '../components/Loader'
+import CharacterRandomizer from "../components/CharacterRandomizer"
+import SaveImageButton from '../components/SaveImageButton'
+import CreatorNavButton from '../components/CreatorNavButton'
 
 const Creator = () => {
   const [isLoading, setIsLoading] = useState(true)

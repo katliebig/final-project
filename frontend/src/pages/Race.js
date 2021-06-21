@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 
 import race from "../reducers/race"
 
-import Card from "./Card"
+import Card from "../components/Card"
 
 const Race = () => {
   const dispatch = useDispatch()

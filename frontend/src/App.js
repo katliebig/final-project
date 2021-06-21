@@ -3,14 +3,14 @@ import { Provider } from 'react-redux'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Home from './components/Home'
-import Login from './components/Login'
-import Race from 'components/Race'
-import Creator from './components/Creator'
-import Gallery from './components/Gallery'
-import UserGallery from './components/UserGallery'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Race from 'pages/Race'
+import Creator from './pages/Creator'
+import Gallery from './pages/Gallery'
+import UserGallery from './pages/UserGallery'
 import Header from "./components/Header"
-import Burger from './components/Burger';
+import Burger from './components/Burger'
 import Menu from './components/Menu'
 
 import user from './reducers/user'
@@ -19,7 +19,6 @@ import characters from './reducers/characters'
 import currentCharacter from './reducers/currentCharacter'
 
 import { useOnClickOutside } from 'reusables/hooks'
-import CharacterSheet from 'components/CharacterSheet'
 
 const reducer = combineReducers({
   user: user.reducer,
@@ -32,7 +31,7 @@ const store = configureStore({ reducer })
 export const App = () => {
   const [open, setOpen] = useState(false)
   const node = useRef();
-  useOnClickOutside(node, () => setOpen(false));
+  useOnClickOutside(node, () => setOpen(false))
 
   return (
     <BrowserRouter>
@@ -55,7 +54,6 @@ export const App = () => {
           <Route path="/Race" component={Race} />
           <Route path="/Gallery" component={Gallery} />
           <Route path="/UserGallery" component={UserGallery} exact />
-          <Route path="/UserGallery/CharacterSheet" component={CharacterSheet} exact />
         </Switch>
       </Provider>
     </BrowserRouter>

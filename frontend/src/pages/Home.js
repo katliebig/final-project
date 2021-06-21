@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HomeCard from './HomeCard'
+import HomeCard from '../components/HomeCard'
 
 const Home = () => {
   return (
