@@ -872,6 +872,10 @@ textarea:focus {
     display: flex;
     align-items: center;
   }
+
+  .header-icon {
+    width: 100%;
+  }
   
   .header-icon-border {
     width: 40px;
