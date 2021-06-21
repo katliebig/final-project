@@ -10,12 +10,14 @@ import Loader from './Loader'
 
 const UserGallery = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [triggerOnDelete, setTriggerOnDelete] = useState(0)
   const charactersArray = useSelector(store => store.characters.charactersByUser)
   const id = useSelector(store => store.user.id)
   const accessToken = useSelector(store => store.user.accessToken)
 
   const dispatch = useDispatch()
   const history = useHistory()
+
 
   useEffect(() => {
     if (!accessToken) {
@@ -37,7 +39,7 @@ const UserGallery = () => {
         })
         .catch(error => console.log(error))
     }
-  }, [dispatch, history, id, accessToken])
+  }, [dispatch, history, id, accessToken, triggerOnDelete])
 
   return (
     <section className="main">
@@ -45,7 +47,11 @@ const UserGallery = () => {
       {!isLoading &&
         <div className="cards-container">
           {charactersArray.map(character => (
-            <UserGalleryCard key={character._id} character={character} />
+            <UserGalleryCard
+              key={character._id}
+              character={character}
+              setTriggerOnDelete={setTriggerOnDelete}
+            />
           ))}
         </div>}
     </section>
