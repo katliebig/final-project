@@ -112,7 +112,7 @@ const CharacterSheet = () => {
             </div>
           </div>
 
-          <Carousel className="sheet-range-container sheet-range-container-mobile" showStatus={false} swipeable={false}>
+          <Carousel className="sheet-range-container sheet-range-container-mobile" showStatus={false} showThumbs={false} swipeable={false}>
             {inputs}
           </Carousel>
           <div className="sheet-range-container sheet-range-container-desktop">

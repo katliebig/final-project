@@ -9,7 +9,7 @@ const Home = () => {
     <section className="main">
       <h2>Welcome to the character creator!</h2>
       <p className="main-text">Register and log in to get access to these cool features!</p>
-      <Carousel className="cards-container home-cards-container" showStatus={false}>
+      <Carousel className="cards-container home-cards-container" showStatus={false} showThumbs={false}>
         <HomeCard
           imgUrl="../assets/races-screenshot.png"
           title="Races"
