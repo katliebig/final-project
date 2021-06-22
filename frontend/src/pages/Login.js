@@ -62,7 +62,7 @@ const Login = () => {
       if (errors.error.code === 11000) {
         errorMessage = "Username already taken"
       } else if (errors.error.name === "ValidationError") {
-        errorMessage = "Username must be between 4 and 20 characters long"
+        errorMessage = "Username must be between 4 and 16 characters long"
       }
     } else {
       errorMessage = errors.message

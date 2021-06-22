@@ -38,7 +38,7 @@ const User = mongoose.model('User', {
     required: true,
     unique: true,
     minLength: 4,
-    maxLength: 20
+    maxLength: 16
   },
   password: {
     type: String,
