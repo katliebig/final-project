@@ -2,16 +2,16 @@ import React from 'react';
 
 const HomeCard = ({ title, text, imgUrl }) => {
   return (
-    <div className="card">
-      <div className="card-background">
-        <h2 className="card-title">
+    <div className="home-card">
+      <div>
+        <h2 className="home-card-title">
           {title}
         </h2>
-        <img className="card-image" src={imgUrl} alt={title} />
-        <p className="card-text">
+        <p className="home-card-text">
           {text}
         </p>
       </div>
+      <img className="card-image" id="home-card-image" src={imgUrl} alt={title} />
     </div>
   )
 }
