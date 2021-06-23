@@ -706,20 +706,17 @@ textarea:focus {
 .login-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 16px;
   border: 12px solid #000;
   border-radius: 20px;
   box-shadow: 6px 6px 10px #000000a4, 10px 10px 3px #922020;
 }
 
-.login-container img {
+.login-image-container {
   display: none;
   width: 50%;
-  border: 1px solid #922020;
-  border-radius: 20px;
-  box-shadow: 0 0 5px #922020;
-  filter: saturate(50%);
+  max-width: 400px;
 }
 
 .login-form {
@@ -1069,10 +1066,11 @@ footer img {
     max-width: 1200px;
   }
   
-  .login-container img {
-    display: block;
+  .login-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 40px;
-    width: 60%;
   }
   
   .login-form {

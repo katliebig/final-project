@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, batch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { Carousel } from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 import user from '../reducers/user'
 
@@ -60,7 +62,7 @@ const Login = () => {
       if (errors.error.code === 11000) {
         errorMessage = "Username already taken"
       } else if (errors.error.name === "ValidationError") {
-        errorMessage = "Username must be between 4 and 20 characters long"
+        errorMessage = "Username must be between 4 and 16 characters long"
       }
     } else {
       errorMessage = errors.message
@@ -100,7 +102,24 @@ const Login = () => {
             disabled={password.length < 8 ? true : false}
           >Sign up</button>
         </form>
-        <img src="./assets/dice.jpg" alt="placeholder" />
+        <Carousel
+          className="login-image-container"
+          showStatus={false}
+          showThumbs={false}
+          showIndicators={false}
+          showArrows={false}
+          swipeable={false}
+          autoPlay={true}
+          infiniteLoop={true}
+          interval={4000}
+        >
+          <img id="login-image" src="./assets/elf.png" alt="elf" />
+          <img id="login-image" src="./assets/tiefling.png" alt="tiefling" />
+          <img id="login-image" src="./assets/human.png" alt="human" />
+          <img id="login-image" src="./assets/dwarf.png" alt="dwarf" />
+          <img id="login-image" src="./assets/human1.png" alt="human" />
+          <img id="login-image" src="./assets/tiefling1.png" alt="tiefling" />
+        </Carousel>
       </div>
     </section>
   )
