@@ -185,15 +185,15 @@ app.post('/sessions', async (req, res) => {
 
 // create a new race with attributes
 // should be commented out
-// app.post("/races", async (req, res) => {
-//   const { race, attributes } = req.body
-//   try {
-//     const newRace = await new Race({ race, attributes }).save()
-//     res.json(newRace)
-//   } catch (error) {
-//     res.status(400).json({ message: "Something went wrong", error })
-//   }
-// })
+app.post("/races", async (req, res) => {
+  const { race, attributes } = req.body
+  try {
+    const newRace = await new Race({ race, attributes }).save()
+    res.json(newRace)
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong", error })
+  }
+})
 
 
 // gets race by param, loops over attributes to find matching images 
