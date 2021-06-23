@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { useSelector } from "react-redux"
 
 const CharacterRandomizer = ({ setCharacter }) => {
@@ -6,8 +6,9 @@ const CharacterRandomizer = ({ setCharacter }) => {
   const attributes = useSelector(store => store.race.attributes)
 
   const generateRandomNumber = (attribute) => {
-    return Math.floor(Math.random() * imageSet[attribute].length);
+    return Math.floor(Math.random() * imageSet[attribute].length)
   }
+
   const onRandomize = () => {
     let randomCharacter = {}
 

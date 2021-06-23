@@ -3,37 +3,20 @@ import { useDispatch, useSelector, batch } from "react-redux"
 import { useHistory } from "react-router-dom"
 
 import race from "../reducers/race"
-
 import { API_URL } from '../reusables/urls'
 
 import Loader from '../components/Loader'
-import CharacterRandomizer from "../components/CharacterRandomizer"
-import SaveImageButton from '../components/SaveImageButton'
+import CreatorCard from 'components/CreatorCard'
 import CreatorNavButton from '../components/CreatorNavButton'
 
 const Creator = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [attribute, setAttribute] = useState("")
-  const [character, setCharacter] = useState({
-    hair: 0,
-    eyebrows: 0,
-    eyes: 0,
-    ears: 0,
-    nose: 0,
-    mouth: 0,
-    head: 0,
-    clothes: 0,
-    facialHair: 0,
-    bangs: 0,
-    leftHorn: 0,
-    rightHorn: 0,
-    background: 0
-  })
+  const [character, setCharacter] = useState({})
 
-  const chosenRace = useSelector(store => store.race.chosenRace)
-  const attributes = useSelector(store => store.race.attributes)
-  const imageSet = useSelector(store => store.race.imageSet)
   const accessToken = useSelector(store => store.user.accessToken)
+  const chosenRace = useSelector(store => store.race.chosenRace)
+  const imageSet = useSelector(store => store.race.imageSet)
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -58,21 +41,12 @@ const Creator = () => {
               dispatch(race.actions.setImageSet(data.urls))
               dispatch(race.actions.setAttributes(data.attributes))
             })
-            setCharacter({
-              hair: 0,
-              eyebrows: 0,
-              eyes: 0,
-              ears: 0,
-              nose: 0,
-              mouth: 0,
-              head: 0,
-              clothes: 0,
-              facialHair: 0,
-              bangs: 0,
-              leftHorn: 0,
-              rightHorn: 0,
-              background: 0
-            })
+            // reset everything, randomize character
+            let newCharacter = {}
+            for (const attribute of data.attributes) {
+              newCharacter[attribute] = Math.floor(Math.random() * data.urls[attribute].length)
+            }
+            setCharacter(newCharacter)
             setAttribute("")
             setIsLoading(false)
           } else {
@@ -81,15 +55,6 @@ const Creator = () => {
         })
     }
   }, [history, dispatch, accessToken, chosenRace])
-
-
-  const onDecrementAttribute = () => {
-    onAttributeChange(-1)
-  }
-
-  const onIncrementAttribute = () => {
-    onAttributeChange(1)
-  }
 
   const onAttributeChange = (change) => {
     let newCharacter = character
@@ -108,58 +73,20 @@ const Creator = () => {
       {!isLoading &&
         <>
           <CreatorNavButton
-            onAttributeChange={onDecrementAttribute}
+            onAttributeChange={() => onAttributeChange(-1)}
             attribute={attribute}
             direction="left"
           />
 
-          <div className="creator-card">
-
-            <select
-              onChange={(e) => onRaceSelect(e)}
-              defaultValue={chosenRace}
-            >
-              <option value="human">Human</option>
-              <option value="tiefling">Tiefling</option>
-              <option value="elf">Elf</option>
-            </select>
-
-            <div className="creator-card-image-container">
-              {attributes.map(attribute => (
-                <img
-                  className="creator-image"
-                  src={imageSet[attribute][character[attribute]]}
-                  alt={attribute}
-                  key={attribute}
-                />
-              ))}
-            </div>
-
-            <div className="creator-card-bottom-container">
-              <select
-                onChange={(e) => setAttribute(e.target.value)}
-                defaultValue="default" >
-                <option disabled hidden value="default">Select an attribute</option>
-                {attributes.map(attribute => (
-                  <option
-                    value={attribute}
-                    key={attribute}
-                  >
-                    {attribute.replace(/([A-Z])/g, " $1")}
-                  </option>
-                ))}
-              </select>
-
-              <div className="creator-card-button-container">
-                <SaveImageButton character={character} />
-                <CharacterRandomizer setCharacter={setCharacter} />
-              </div>
-
-            </div>
-          </div>
+          <CreatorCard
+            onRaceSelect={onRaceSelect}
+            character={character}
+            setAttribute={setAttribute}
+            setCharacter={setCharacter}
+          />
 
           <CreatorNavButton
-            onAttributeChange={onIncrementAttribute}
+            onAttributeChange={() => onAttributeChange(1)}
             attribute={attribute}
             direction="right"
           />
