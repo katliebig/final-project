@@ -23,26 +23,29 @@ const Race = () => {
       <div className="cards-container">
         <Card
           onRaceChosen={onRaceChosen}
-          imgUrl="../assets/human.png"
+          imgUrl="../assets/human2.png"
           title="Human"
-          text="Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers"
+          text="Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers."
         />
         <Card
           onRaceChosen={onRaceChosen}
-          imgUrl="../assets/tiefling.png"
+          imgUrl="../assets/tiefling2.png"
           title="Tiefling"
           text="To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling."
         />
         <Card
-          imgUrl="../assets/dwarf.png"
-          title="Dwarf"
-          text="Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal."
-        />
-        <Card
           onRaceChosen={onRaceChosen}
-          imgUrl="../assets/elf.png"
+          imgUrl="../assets/elf1.png"
           title="Elf"
           text="Elves are a magical people of otherworldly grace, living in the world but not entirely part of it."
+        />
+      </div>
+      <div className="upcoming-container">
+        <h2 className="upcoming-title">Upcoming</h2>
+        <Card
+          imgUrl="../assets/dwarf1.png"
+          title="Dwarf"
+          text="Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal."
         />
       </div>
     </section>

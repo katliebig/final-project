@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <section className="main">
         <h2>Welcome to the character creator!</h2>
-        <p className="main-text">Register and log in to get access to these cool features!</p>
+        <p className="main-text">This is an image creator mainly aimed to create DnD characters. Register and log in to get access to these cool features!</p>
         <Carousel className="cards-container home-cards-container" showStatus={false} showThumbs={false}>
           <HomeCard
             imgUrl="../assets/races-screenshot.png"
@@ -22,11 +22,6 @@ const Home = () => {
             title="Character creator"
             text="A character creator where you can create a character image and save it to your personal gallery."
           />
-          {/* <HomeCard
-          imgUrl="../assets/character-example.png"
-          title="Gallery"
-          text="A gallery with all the characters created by all the users"
-        /> */}
           <HomeCard
             imgUrl="../assets/user-gallery.png"
             title="User gallery"
