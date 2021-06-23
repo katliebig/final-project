@@ -24,8 +24,7 @@ const Creator = () => {
     head: 0,
     clothes: 0,
     facialHair: 0,
-    frontHair: 0,
-    backHair: 0,
+    bangs: 0,
     leftHorn: 0,
     rightHorn: 0,
     background: 0
@@ -69,8 +68,7 @@ const Creator = () => {
               head: 0,
               clothes: 0,
               facialHair: 0,
-              frontHair: 0,
-              backHair: 0,
+              bangs: 0,
               leftHorn: 0,
               rightHorn: 0,
               background: 0
