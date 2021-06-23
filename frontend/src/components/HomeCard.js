@@ -4,9 +4,9 @@ const HomeCard = ({ title, text, imgUrl }) => {
   return (
     <div className="home-card">
       <div>
-        <h2 className="home-card-title">
+        <h3 className="home-card-title">
           {title}
-        </h2>
+        </h3>
         <p className="home-card-text">
           {text}
         </p>

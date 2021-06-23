@@ -70,7 +70,9 @@ header {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-family: "Oswald";
   margin: 16px 0;
 }
@@ -798,13 +800,36 @@ textarea:focus {
   }
 }
 
+/***** FOOTER *****/
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+  background: #000;
+  color: #fff;
+  padding: 32px 16px;
+}
+
+footer h4 {
+  font-size: 20px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+footer img {
+  width: 40px;
+}
+
+/***** MEDIA QUERIES *****/
+
 @media (min-width: 400px) {
   .sheet-content {
     padding: 50px;
   }
 }
-
-/***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
   .main,
@@ -1103,6 +1128,22 @@ textarea:focus {
 
   textarea {
     width: 550px;
+  }
+
+  footer h4 {
+    font-size: 24px;
+  }
+  
+  .footer-icons {
+    justify-content: space-around;
+  }
+
+  footer a:hover img {
+    transform: scale(1.1);
+  }
+
+  footer img {
+    width: 50px;
   }
 }
 
