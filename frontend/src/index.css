@@ -29,15 +29,14 @@ button:disabled {
 /***** HEADER *****/
 
 header + section {
-  margin-top: 230px;
+  margin-top: 200px;
 }
 
 header {
   background-image: url("./reusables/dice-and-doom-big-image.jpg");
   background-size: cover;
   background-position: center center;
-  transform: translate3d(0px, 0px, 0px);
-  height: 300px;
+  height: 200px;
   position: absolute;
   display: table-cell;
   top: 0;
@@ -848,8 +847,12 @@ footer img {
     padding: 40px 30px;
   }
 
+  header {
+    height: 250px;
+  }
+
   header + section {
-    margin-top: 300px;
+    margin-top: 250px;
   }
 
   .header-title {
@@ -1032,10 +1035,6 @@ footer img {
   
   .current-route {
     text-decoration: underline;
-  }
-  
-  header + section {
-    margin-top: 300px;
   }
 
   h2 {
