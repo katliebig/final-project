@@ -43,7 +43,7 @@ const SaveImageButton = ({ character }) => {
 
   return (
     <>
-      {showPopUp && <PopUp text="Imaged saved to gallery" />}
+      {showPopUp && <PopUp text="Image saved to gallery" />}
       <button onClick={onCharacterSave} className="creator-button">
         <img src="./assets/save.svg" alt="save icon" className="card-icon" />
         Save
