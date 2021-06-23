@@ -70,7 +70,9 @@ header {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-family: "Oswald";
   margin: 16px 0;
 }
@@ -114,7 +116,6 @@ nav {
   height: 30px;
 }
 
-
 .header-icon-border {
   width: 40px;
   height: 40px;
@@ -131,7 +132,7 @@ nav {
   text-decoration: underline;
 } 
 
-/***** HOME & RACE *****/
+/***** MAIN, CARDS *****/
 
 .main {
   display: flex;
@@ -207,6 +208,39 @@ nav {
   border: 1.5px solid #000;
   border-radius: 0px 0px 5px 5px;
   text-align: left;
+}
+
+/***** HOME *****/
+
+.home-cards-container {
+  max-width: 1100px;
+}
+
+.home-cards-container .carousel .control-dots .dot {
+  background: #9b2222;
+  width: 16px;
+  height: 16px;
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.home-card-title {
+  font-size: 24px;
+}
+
+.home-card-text {
+  font-family: "Oswald";
+  font-size: 18px;
+  margin: 0 8px;
+}
+
+#home-card-image {
+  width: 90%;
 }
 
 /***** CREATOR *****/
@@ -503,7 +537,6 @@ nav {
 
 .sheet-image {
   width: 100%;
-  /* max-width: 300px; */
   border: solid #000;
   border-width: 2px;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -559,6 +592,11 @@ nav {
 
 .sheet-range-container-desktop {
   display: none;
+}
+
+.sheet-range-container .carousel .control-dots .dot {
+  width: 12px;
+  height: 12px;
 }
 
 .range-input {
@@ -762,13 +800,36 @@ textarea:focus {
   }
 }
 
+/***** FOOTER *****/
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
+  background: #000;
+  color: #fff;
+  padding: 32px 16px;
+}
+
+footer h4 {
+  font-size: 20px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+footer img {
+  width: 40px;
+}
+
+/***** MEDIA QUERIES *****/
+
 @media (min-width: 400px) {
   .sheet-content {
     padding: 50px;
   }
 }
-
-/***** MEDIA QUERIES *****/
 
 @media (min-width: 670px) {
   .main,
@@ -805,6 +866,18 @@ textarea:focus {
 
   .card {
     margin: 16px;
+  }
+  
+  .home-card-title {
+    font-size: 32px;
+  }
+  
+  .home-card-text {
+    font-size: 24px;
+  }
+  
+  #home-card-image {
+    width: 80%;
   }
 
   .creator-card {
@@ -959,6 +1032,31 @@ textarea:focus {
     margin: 24px;
   }
 
+  .home-cards-container .carousel.carousel-slider .control-arrow {
+    background: #9b2222;
+    margin: 260px 0;
+  }
+
+  .home-card {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 16px 16px 16px 48px;
+  }
+  
+  .home-card-title {
+    font-size: 40px;
+    margin-bottom: 32px;
+  }
+  
+  .home-card-text {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  #home-card-image {
+    width: 60%;
+  }
+
   .login-form button:hover {
     background: #9b2222;
     transform: scale(1.02);
@@ -1030,6 +1128,22 @@ textarea:focus {
 
   textarea {
     width: 550px;
+  }
+
+  footer h4 {
+    font-size: 24px;
+  }
+  
+  .footer-icons {
+    justify-content: space-around;
+  }
+
+  footer a:hover img {
+    transform: scale(1.1);
+  }
+
+  footer img {
+    width: 50px;
   }
 }
 

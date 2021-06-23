@@ -95,10 +95,10 @@ const CharacterSheet = () => {
   }
 
   return (
-    <>
+    <div className="sheet-content">
       {isLoading && <Loader />}
       {!isLoading &&
-        <div className="sheet-content">
+        <>
           <TextInput onInputChange={onInputChange} label="name" value={character.name} disabled={false} />
           <div className="sheet-second-row">
             <img className="sheet-image" src={character.image} alt="character" />
@@ -112,7 +112,7 @@ const CharacterSheet = () => {
             </div>
           </div>
 
-          <Carousel className="sheet-range-container sheet-range-container-mobile" showStatus={false} swipeable={false}>
+          <Carousel className="sheet-range-container sheet-range-container-mobile" showStatus={false} showThumbs={false} swipeable={false}>
             {inputs}
           </Carousel>
           <div className="sheet-range-container sheet-range-container-desktop">
@@ -139,8 +139,8 @@ const CharacterSheet = () => {
               Save character sheet
             </button>
           </div>
-        </div>}
-    </>
+        </>}
+    </div>
   )
 }
 
