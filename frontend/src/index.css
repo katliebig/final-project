@@ -261,7 +261,6 @@ nav {
 .creator {
   flex-direction: row;
   justify-content: center;
-  padding-top: 110px;
 }
 
 .creator-card {
