@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 import HomeCard from '../components/HomeCard'
 import Footer from '../components/Footer'
+import Accordion from '../components/Accordion'
 
 const Home = () => {
   return (
@@ -29,6 +30,7 @@ const Home = () => {
           />
         </Carousel>
       </section>
+      <Accordion />
       <Footer />
     </>
   )

@@ -255,7 +255,41 @@ nav {
   width: 90%;
 }
 
+/***** ACCORDION *****/
 
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px 5px 30px 5px;
+}
+
+.accordion-container h4 {
+  font-size: 24px;
+}
+
+.Collapsible {
+  background-color: #830E07;
+  border-radius: 5px;
+  padding: 10px 0px 10px 0px;
+  margin: 2px;
+  width: 100%;
+}
+
+.Collapsible__trigger {
+  font-family: "Oswald";
+  color: #fff;
+  font-size: 20px;
+}
+
+.Collapsible__contentInner {
+  background-color: #4F0C07;
+  font-size: 18px;
+  font-family: "Oswald";
+  color: #fff;
+  padding: 10px;
+}
 /***** CREATOR *****/
 
 .creator {
@@ -872,6 +906,22 @@ footer img {
   .main-text {
     font-size: 24px;
   }
+  
+  .Collapsible {
+    width: 80%;
+  }
+
+  .accordion-container h4 {
+    font-size: 32px;
+  }
+
+  .Collapsible__trigger {
+    font-size: 24px;
+  }
+  
+  .Collapsible__contentInner {
+    font-size: 20px;
+  }
 
   .races-title {
     margin: 0;
@@ -1068,6 +1118,22 @@ footer img {
   
   #home-card-image {
     width: 60%;
+  }
+
+  .Collapsible {
+    width: 70%;
+  }
+
+  .accordion-container h4 {
+    font-size: 40px;
+  }
+
+  .Collapsible__trigger {
+    font-size: 28px;
+  }
+  
+  .Collapsible__contentInner {
+    font-size: 24px;
   }
   
   .upcoming-title {
