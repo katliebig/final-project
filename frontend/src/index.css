@@ -832,6 +832,25 @@ footer img {
   width: 40px;
 }
 
+/***** NOT FOUND PAGE *****/
+
+.redirect-link {
+  text-decoration: none;
+  color: #000;
+  font-family: "Oswald";
+  font-size: 24px;
+}
+
+.link.redirect-link::before,
+.link.redirect-link::after {
+  background: #000;
+}
+
+.link.redirect-link:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+
 /***** MEDIA QUERIES *****/
 
 @media (min-width: 400px) {
