@@ -40,14 +40,12 @@ const Header = () => {
             </Link>
           }
 
-          {accessToken &&
-            <Link to="/Creator">
-              <div className="header-icon-border">
-                <img src="./assets/creator.svg" className="header-icon" alt="creator icon" />
-              </div>
-              <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
-            </Link>
-          }
+          <Link to="/Creator">
+            <div className="header-icon-border">
+              <img src="./assets/creator.svg" className="header-icon" alt="creator icon" />
+            </div>
+            <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+          </Link>
 
           <Link to="/Gallery">
             <div className="header-icon-border">

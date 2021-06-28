@@ -184,7 +184,7 @@ app.post('/sessions', async (req, res) => {
 })
 
 // create a new race with attributes
-// should be commented out
+// should be commented out unless a race should be added or updated
 app.post("/races", async (req, res) => {
   const { race, attributes } = req.body
   try {
@@ -198,7 +198,6 @@ app.post("/races", async (req, res) => {
 
 // gets race by param, loops over attributes to find matching images 
 // from cloudinary, sends urls
-app.get("/races/:race", authenticateUser)
 app.get('/races/:race', async (req, res) => {
   const { race } = req.params
 

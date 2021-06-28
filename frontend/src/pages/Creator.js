@@ -22,38 +22,26 @@ const Creator = () => {
   const history = useHistory()
 
   useEffect(() => {
-    if (!accessToken) {
-      history.push("/");
-    }
-
-    if (accessToken) {
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization: accessToken
-        }
-      }
-      fetch(API_URL(`races/${chosenRace}`), options)
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            batch(() => {
-              dispatch(race.actions.setImageSet(data.urls))
-              dispatch(race.actions.setAttributes(data.attributes))
-            })
-            // reset everything, randomize character
-            let newCharacter = {}
-            for (const attribute of data.attributes) {
-              newCharacter[attribute] = Math.floor(Math.random() * data.urls[attribute].length)
-            }
-            setCharacter(newCharacter)
-            setAttribute("")
-            setIsLoading(false)
-          } else {
-            alert(data.message)
+    fetch(API_URL(`races/${chosenRace}`))
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          batch(() => {
+            dispatch(race.actions.setImageSet(data.urls))
+            dispatch(race.actions.setAttributes(data.attributes))
+          })
+          // reset everything, randomize character
+          let newCharacter = {}
+          for (const attribute of data.attributes) {
+            newCharacter[attribute] = Math.floor(Math.random() * data.urls[attribute].length)
           }
-        })
-    }
+          setCharacter(newCharacter)
+          setAttribute("")
+          setIsLoading(false)
+        } else {
+          alert(data.message)
+        }
+      })
   }, [history, dispatch, accessToken, chosenRace])
 
   const onAttributeChange = (change) => {
