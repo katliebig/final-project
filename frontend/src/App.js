@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Register from 'pages/Register'
 import Race from 'pages/Race'
 import Creator from './pages/Creator'
 import Gallery from './pages/Gallery'
@@ -50,6 +51,7 @@ export const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/Login" component={Login} />
+          <Route path="/Register" component={Register} />
           <Route path="/Creator" component={Creator} />
           <Route path="/Race" component={Race} />
           <Route path="/Gallery" component={Gallery} />

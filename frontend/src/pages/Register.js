@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import Form from 'components/Form'
 import ImageCarousel from 'components/ImageCarousel'
 
-const Login = () => {
+const Register = () => {
   const accessToken = useSelector(store => store.user.accessToken)
   const history = useHistory()
 
@@ -18,11 +18,11 @@ const Login = () => {
   return (
     <section className="main">
       <div className="login-container" >
-        <Form title="Login" mode="sessions" />
-        <ImageCarousel linkTo="Register" linkText="Not a user yet? Sign up here!" />
+        <Form title="Register" mode="users" />
+        <ImageCarousel linkTo="Login" linkText="Already have an account? Sign in here!" />
       </div>
     </section>
   )
 }
 
-export default Login
+export default Register
