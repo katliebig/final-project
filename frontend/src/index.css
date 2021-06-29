@@ -428,6 +428,47 @@ nav {
 
 /***** GALLERY *****/
 
+.pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.pagination li {
+  list-style: none;
+  margin: 0 8px;
+}
+
+.pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  /* padding: 16px; */
+}
+
+.pagination .active {
+  border-top: 2px solid #9b2222;
+  border-bottom: 2px solid #9b2222;
+}
+
+.pagination .pagination-link {
+  padding: 0;
+}
+
+.pagination-icon {
+  width: 50px;
+  filter: opacity(80%);
+}
+
+.pagination-link:hover .pagination-icon {
+  filter: opacity(100%);
+}
+
 .filter-select {
   border: none;
   border-bottom: 2px solid #9b2222;
