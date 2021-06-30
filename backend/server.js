@@ -237,13 +237,14 @@ app.get('/races/:race', async (req, res) => {
 app.get("/characters", async (req, res) => {
   const { race, page } = req.query
   let characters
+  let perPage = 12
 
   const options = {
     sort: { createdAt: -1 },
     populate: "user",
     lean: true,
-    offset: 2 * +page,
-    limit: 2
+    offset: perPage * +page,
+    limit: perPage
   }
 
   if (race !== "") {

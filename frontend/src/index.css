@@ -433,7 +433,7 @@ nav {
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin: 40px 0 16px;
   padding: 0;
   font-family: "Oswald";
   font-size: 20px;
@@ -441,7 +441,7 @@ nav {
 
 .pagination li {
   list-style: none;
-  margin: 0 8px;
+  margin: 0 6px;
   cursor: pointer;
 }
 
@@ -449,7 +449,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
+  width: 24px;
   height: 50px;
 }
 
@@ -457,21 +457,8 @@ nav {
   border: 2px solid transparent;
 }
 
-.pagination li:hover {
-  border-left-color: #9b2222;
-  border-right-color: #9b2222;
-  transition: all 0.4s linear;
-}
-
 .pagination li.break-me {
   cursor: default;
-}
-
-.pagination .break-me:hover,
-.pagination .previous:hover,
-.pagination .next:hover
-{
-  border-color: transparent;
 }
 
 .pagination .active {
@@ -482,17 +469,12 @@ nav {
 .pagination .pagination-link {
   padding: 0;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .pagination-icon {
-  width: 40px;
-}
-
-.pagination-link:hover {
-  background: #9b2222;
-  transition: all 0.4s linear; 
+  width: 30px;
 }
 
 .filter-select {
@@ -1021,6 +1003,24 @@ footer img {
     max-width: 600px;
     padding: 60px 100px
   }
+  
+  .pagination li {
+    margin: 0 8px;
+  }
+  
+  .pagination a {
+    width: 50px;
+  }
+
+  .pagination .pagination-link {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .pagination-icon {
+    width: 40px;
+  }
+  
 }
 
 
@@ -1228,6 +1228,24 @@ footer img {
 
   footer img {
     width: 50px;
+  }
+
+  .pagination li:hover {
+    border-left-color: #9b2222;
+    border-right-color: #9b2222;
+    transition: all 0.4s linear;
+  }
+    
+  .pagination .break-me:hover,
+  .pagination .previous:hover,
+  .pagination .next:hover
+  {
+    border-color: transparent;
+  }
+  
+  .pagination-link:hover {
+    background: #9b2222;
+    transition: all 0.4s linear; 
   }
 }
 
