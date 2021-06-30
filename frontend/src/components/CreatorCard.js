@@ -9,6 +9,9 @@ const CreatorCard = ({ onRaceSelect, character, setCharacter, setAttribute }) =>
   const attributes = useSelector(store => store.race.attributes)
   const imageSet = useSelector(store => store.race.imageSet)
 
+  // this filter the attributes to exclude bangs, 
+  // the new array is used to render options in the select menu
+  const attributesToSelect = attributes.filter(attribute => attribute !== "bangs")
 
   return (
     <div className="creator-card">
@@ -39,7 +42,7 @@ const CreatorCard = ({ onRaceSelect, character, setCharacter, setAttribute }) =>
           defaultValue="default"
         >
           <option disabled hidden value="default">Select an attribute</option>
-          {attributes.map(attribute => (
+          {attributesToSelect.map(attribute => (
             <option
               value={attribute}
               key={attribute}
