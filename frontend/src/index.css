@@ -432,13 +432,17 @@ nav {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   margin: 16px 0;
   padding: 0;
+  font-family: "Oswald";
+  font-size: 20px;
 }
 
 .pagination li {
   list-style: none;
   margin: 0 8px;
+  cursor: pointer;
 }
 
 .pagination a {
@@ -447,26 +451,48 @@ nav {
   align-items: center;
   width: 50px;
   height: 50px;
-  cursor: pointer;
-  /* padding: 16px; */
+}
+
+.pagination li {
+  border: 2px solid transparent;
+}
+
+.pagination li:hover {
+  border-left-color: #9b2222;
+  border-right-color: #9b2222;
+  transition: all 0.4s linear;
+}
+
+.pagination li.break-me {
+  cursor: default;
+}
+
+.pagination .break-me:hover,
+.pagination .previous:hover,
+.pagination .next:hover
+{
+  border-color: transparent;
 }
 
 .pagination .active {
-  border-top: 2px solid #9b2222;
-  border-bottom: 2px solid #9b2222;
+  border-top-color: #9b2222;
+  border-bottom-color: #9b2222;
 }
 
 .pagination .pagination-link {
   padding: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 .pagination-icon {
-  width: 50px;
-  filter: opacity(80%);
+  width: 40px;
 }
 
-.pagination-link:hover .pagination-icon {
-  filter: opacity(100%);
+.pagination-link:hover {
+  background: #9b2222;
+  transition: all 0.4s linear; 
 }
 
 .filter-select {

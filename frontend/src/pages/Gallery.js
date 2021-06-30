@@ -31,6 +31,11 @@ const Gallery = () => {
       })
   }, [dispatch, filter, page])
 
+  let forcePageObj = {}
+  if (page === 0) {
+    forcePageObj["forcePage"] = 0
+  }
+
   return (
     <section className="main">
       {meta && <ReactPaginate
@@ -39,13 +44,14 @@ const Gallery = () => {
         breakLabel={'...'}
         breakClassName={'break-me'}
         pageCount={meta.totalPages}
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         onPageChange={(currentPage) => setPage(currentPage.selected)}
         containerClassName={'pagination'}
         activeClassName={'active'}
         previousLinkClassName={"pagination-link"}
         nextLinkClassName={"pagination-link"}
+        {...forcePageObj}
       />}
       {isLoading && <Loader />}
       {!isLoading && (
