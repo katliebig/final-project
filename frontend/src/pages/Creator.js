@@ -41,12 +41,17 @@ const Creator = () => {
               dispatch(race.actions.setImageSet(data.urls))
               dispatch(race.actions.setAttributes(data.attributes))
             })
-            // reset everything, randomize character
+            // randomize character
             let newCharacter = {}
             for (const attribute of data.attributes) {
               newCharacter[attribute] = Math.floor(Math.random() * data.urls[attribute].length)
             }
-            setCharacter(newCharacter)
+            // for race elf only: sets the bangs attribute to the hair attribute
+            if (chosenRace === "elf") {
+              newCharacter.bangs = newCharacter.hair
+            }
+            // reset everything
+            setCharacter({ ...newCharacter })
             setAttribute("")
             setIsLoading(false)
           } else {
@@ -56,21 +61,14 @@ const Creator = () => {
     }
   }, [history, dispatch, accessToken, chosenRace])
 
-  // for race elf only: whenever the hair attribute is changed,
-  // this also changes the bangs attribute
-  useEffect(() => {
-    if (chosenRace === "elf") {
-      let newCharacter = { ...character }
-      newCharacter.bangs = newCharacter.hair
-      setCharacter(newCharacter)
-    }
-    // eslint-disable-next-line
-  }, [character.hair])
-
   const onAttributeChange = (change) => {
     let newCharacter = character
     newCharacter[attribute] = (character[attribute] + change + imageSet[attribute].length) % imageSet[attribute].length
-    setCharacter({ ...character, attribute: newCharacter[attribute] })
+    // for race elf only: sets the bangs attribute to the hair attribute
+    if (chosenRace === "elf" && attribute === "hair") {
+      newCharacter.bangs = newCharacter.hair
+    }
+    setCharacter({ ...newCharacter })
   }
 
   const onRaceSelect = (e) => {
