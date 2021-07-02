@@ -45,16 +45,14 @@ const Menu = ({ open, setOpen }) => {
           </Link>
         }
 
-        {accessToken &&
-          <Link to="/Creator" onClick={() => setOpen(false)}>
-            <div className="link-container">
-              <div className="burger-menu-icon-border">
-                <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
-              </div>
-              <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+        <Link to="/Creator" onClick={() => setOpen(false)}>
+          <div className="link-container">
+            <div className="burger-menu-icon-border">
+              <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
             </div>
-          </Link>
-        }
+            <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+          </div>
+        </Link>
 
         <Link to="/Gallery" onClick={() => setOpen(false)}>
           <div className="link-container">
