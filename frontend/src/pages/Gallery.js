@@ -41,9 +41,9 @@ const Gallery = () => {
               <GalleryCard character={character} key={character._id} />
             ))}
           </div>
+          <Pagination page={page} setPage={setPage} />
         </>
       )}
-      <Pagination page={page} setPage={setPage} />
     </section>
   )
 }
