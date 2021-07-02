@@ -208,6 +208,7 @@ app.get('/races/:race', async (req, res) => {
 
     const chosenRaceResults = await cloudinary.search
       .expression(`tags=${race}`)
+      .max_results(100)
       .execute()
 
     const urls = {}
@@ -223,7 +224,6 @@ app.get('/races/:race', async (req, res) => {
         }
       }
     }
-
     res.json({ success: true, urls, attributes: chosenRace.attributes })
 
   } catch (error) {
