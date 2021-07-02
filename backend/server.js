@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import mongoosePaginate from "mongoose-paginate-v2"
 import dotenv from 'dotenv'
 import cloudinaryFramework from 'cloudinary'
 import multer from 'multer'
@@ -50,11 +51,8 @@ const User = mongoose.model('User', {
   }
 })
 
-const Character = mongoose.model('Character', {
-  image: {
-    type: String,
-    // required: true,
-  },
+const CharacterSchema = new mongoose.Schema({
+  image: String,
   createdAt: {
     type: Date,
     default: Date.now
@@ -96,6 +94,10 @@ const Character = mongoose.model('Character', {
   }
 })
 
+CharacterSchema.plugin(mongoosePaginate)
+
+const Character = mongoose.model('Character', CharacterSchema)
+
 const Race = mongoose.model("Race", {
   race: {
     type: String,
@@ -128,7 +130,7 @@ const port = process.env.PORT || 8080
 const app = express()
 
 var corsOptions = {
-  origin: ["http://localhost:3000", , "https://character-creator.netlify.app"]
+  origin: ["http://localhost:3000", "https://character-creator.netlify.app"]
 }
 
 app.use(cors(corsOptions))
@@ -203,7 +205,7 @@ app.get('/races/:race', async (req, res) => {
   const { race } = req.params
 
   try {
-    const chosenRace = await Race.findOne({ race })
+    const chosenRace = await Race.findOne({ race }).lean()
 
     const chosenRaceResults = await cloudinary.search
       .expression(`tags=${race}`)
@@ -233,12 +235,22 @@ app.get('/races/:race', async (req, res) => {
 
 // get all characters by race (if queried), sort by newest
 app.get("/characters", async (req, res) => {
-  const { race } = req.query
+  const { race, page } = req.query
   let characters
+  let perPage = 12
+
+  const options = {
+    sort: { createdAt: -1 },
+    populate: "user",
+    lean: true,
+    offset: perPage * +page,
+    limit: perPage
+  }
+
   if (race !== "") {
-    characters = await Character.find({ race: race }).populate("user", "username").sort({ createdAt: "desc" })
+    characters = await Character.paginate({ race: race }, options)
   } else {
-    characters = await Character.find().populate("user", "username").sort({ createdAt: "desc" })
+    characters = await Character.paginate({}, options)
   }
   res.json({ success: true, characters })
 })
@@ -265,7 +277,7 @@ app.get("/characters/users/:id", async (req, res) => {
   const { id } = req.params
 
   try {
-    const characters = await Character.find({ user: id }).sort({ createdAt: "desc" })
+    const characters = await Character.find({ user: id }).sort({ createdAt: "desc" }).lean()
     if (characters) {
       res.json({ success: true, characters })
     } else {
@@ -281,7 +293,7 @@ app.get("/characters/:id", authenticateUser)
 app.get("/characters/:id", async (req, res) => {
   const { id } = req.params
   try {
-    const character = await Character.findById(id)
+    const character = await Character.findById(id).lean()
     if (character) {
       res.json({ success: true, character })
     } else {

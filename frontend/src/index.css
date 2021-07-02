@@ -428,6 +428,55 @@ nav {
 
 /***** GALLERY *****/
 
+.pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0 16px;
+  padding: 0;
+  font-family: "Oswald";
+  font-size: 20px;
+}
+
+.pagination li {
+  list-style: none;
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.pagination a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 50px;
+}
+
+.pagination li {
+  border: 2px solid transparent;
+}
+
+.pagination li.break-me {
+  cursor: default;
+}
+
+.pagination .active {
+  border-top-color: #9b2222;
+  border-bottom-color: #9b2222;
+}
+
+.pagination .pagination-link {
+  padding: 0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.pagination-icon {
+  width: 30px;
+}
+
 .filter-select {
   border: none;
   border-bottom: 2px solid #9b2222;
@@ -954,6 +1003,24 @@ footer img {
     max-width: 600px;
     padding: 60px 100px
   }
+  
+  .pagination li {
+    margin: 0 8px;
+  }
+  
+  .pagination a {
+    width: 50px;
+  }
+
+  .pagination .pagination-link {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .pagination-icon {
+    width: 40px;
+  }
+  
 }
 
 
@@ -1161,6 +1228,24 @@ footer img {
 
   footer img {
     width: 50px;
+  }
+
+  .pagination li:hover {
+    border-left-color: #9b2222;
+    border-right-color: #9b2222;
+    transition: all 0.4s linear;
+  }
+    
+  .pagination .break-me:hover,
+  .pagination .previous:hover,
+  .pagination .next:hover
+  {
+    border-color: transparent;
+  }
+  
+  .pagination-link:hover {
+    background: #9b2222;
+    transition: all 0.4s linear; 
   }
 }
 
