@@ -35,10 +35,8 @@ const Creator = () => {
           for (const attribute of data.attributes) {
             newCharacter[attribute] = Math.floor(Math.random() * data.urls[attribute].length)
           }
-          // for race elf only: sets the bangs attribute to the hair attribute
-          if (chosenRace === "elf") {
-            newCharacter.bangs = newCharacter.hair
-          }
+          newCharacter.bottomHair = newCharacter.hair
+          newCharacter.middleHair = newCharacter.hair
           // reset everything
           setCharacter(newCharacter)
           setAttribute("")
@@ -52,10 +50,9 @@ const Creator = () => {
   const onAttributeChange = (change) => {
     let newCharacter = character
     newCharacter[attribute] = (character[attribute] + change + imageSet[attribute].length) % imageSet[attribute].length
-    // for race elf only: sets the bangs attribute to the hair attribute
-    if (chosenRace === "elf" && attribute === "hair") {
-      newCharacter.bangs = newCharacter.hair
-    }
+
+    newCharacter.bottomHair = newCharacter.hair
+    newCharacter.middleHair = newCharacter.hair
     setCharacter({ ...newCharacter })
   }
 

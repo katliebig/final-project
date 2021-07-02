@@ -11,7 +11,7 @@ const CreatorCard = ({ onRaceSelect, character, setCharacter, setAttribute }) =>
 
   // this filter the attributes to exclude bangs, 
   // the new array is used to render options in the select menu
-  const attributesToSelect = attributes.filter(attribute => attribute !== "bangs")
+  const attributesToSelect = attributes.filter(attribute => attribute !== "middleHair" && attribute !== "bottomHair")
 
   return (
     <div className="creator-card">

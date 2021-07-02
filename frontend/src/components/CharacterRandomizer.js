@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from "react-redux"
 
 const CharacterRandomizer = ({ setCharacter }) => {
-  const chosenRace = useSelector(store => store.race.chosenRace)
   const imageSet = useSelector(store => store.race.imageSet)
   const attributes = useSelector(store => store.race.attributes)
 
@@ -18,10 +17,8 @@ const CharacterRandomizer = ({ setCharacter }) => {
       randomCharacter[attribute] = generateRandomNumber(attribute)
     }
 
-    // for race elf only: sets the bangs attribute to the hair attribute
-    if (chosenRace === "elf") {
-      randomCharacter.bangs = randomCharacter.hair
-    }
+    randomCharacter.bottomHair = randomCharacter.hair
+    randomCharacter.middleHair = randomCharacter.hair
 
     setCharacter(randomCharacter)
   }
