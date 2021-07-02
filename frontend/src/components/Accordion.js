@@ -31,8 +31,7 @@ const Accordion = () => {
       </Collapsible>
       <Collapsible trigger="Who made the images?">
         <p>
-          The images for the creator was made by Erika Andersson Porath, and the images on the cards is from seekpng.com and toppng.com.
-          This might change in the future.
+          The illustrations for the creator was made by Erika Andersson Porath, and the images on the cards are currently placeholders from seekpng.com and toppng.com.
         </p>
       </Collapsible>
       <Collapsible trigger="Will the page be updated?">
