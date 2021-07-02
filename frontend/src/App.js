@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Provider } from 'react-redux'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -9,6 +9,7 @@ import Race from 'pages/Race'
 import Creator from './pages/Creator'
 import Gallery from './pages/Gallery'
 import UserGallery from './pages/UserGallery'
+import NotFound from 'pages/NotFound'
 import Header from "./components/Header"
 import Burger from './components/Burger'
 import Menu from './components/Menu'
@@ -54,6 +55,8 @@ export const App = () => {
           <Route path="/Race" component={Race} />
           <Route path="/Gallery" component={Gallery} />
           <Route path="/UserGallery" component={UserGallery} exact />
+          <Route path="/404" component={NotFound} />
+          <Redirect to="/404" />
         </Switch>
       </Provider>
     </BrowserRouter>
