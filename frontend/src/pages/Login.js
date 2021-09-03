@@ -19,7 +19,7 @@ const Login = () => {
     <section className="main">
       <div className="login-container" >
         <Form title="Login" mode="sessions" />
-        <ImageCarousel linkTo="Register" linkText="Not a user yet? Sign up here!" />
+        <ImageCarousel linkTo="register" linkText="Not a user yet? Sign up here!" />
       </div>
     </section>
   )

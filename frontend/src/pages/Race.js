@@ -13,7 +13,7 @@ const Race = () => {
 
   const onRaceChosen = (chosenRace) => {
     dispatch(race.actions.setChosenRace(chosenRace))
-    history.push("/Creator")
+    history.push("/creator")
   }
 
   return (

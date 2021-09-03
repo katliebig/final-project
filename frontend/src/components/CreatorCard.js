@@ -9,7 +9,7 @@ const CreatorCard = ({ onRaceSelect, character, setCharacter, setAttribute }) =>
   const attributes = useSelector(store => store.race.attributes)
   const imageSet = useSelector(store => store.race.imageSet)
 
-  // this filter the attributes to exclude bangs, 
+  // this filter the attributes to exclude middleHair & bottomHair, 
   // the new array is used to render options in the select menu
   const attributesToSelect = attributes.filter(attribute => attribute !== "middleHair" && attribute !== "bottomHair")
 
@@ -17,7 +17,7 @@ const CreatorCard = ({ onRaceSelect, character, setCharacter, setAttribute }) =>
     <div className="creator-card">
 
       <select
-        onChange={(e) => onRaceSelect(e)}
+        onChange={onRaceSelect}
         defaultValue={chosenRace}
       >
         <option value="human">Human</option>

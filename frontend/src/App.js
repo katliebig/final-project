@@ -51,12 +51,12 @@ export const App = () => {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/Login" component={Login} />
-          <Route path="/Register" component={Register} />
-          <Route path="/Creator" component={Creator} />
-          <Route path="/Race" component={Race} />
-          <Route path="/Gallery" component={Gallery} />
-          <Route path="/UserGallery" component={UserGallery} exact />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/creator" component={Creator} />
+          <Route path="/race" component={Race} />
+          <Route path="/gallery" component={Gallery} />
+          <Route path="/usergallery" component={UserGallery} exact />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

@@ -35,47 +35,47 @@ const Menu = ({ open, setOpen }) => {
         </Link>
 
         {accessToken &&
-          <Link to="/Race" onClick={() => setOpen(false)}>
+          <Link to="/race" onClick={() => setOpen(false)}>
             <div className="link-container">
               <div className="burger-menu-icon-border">
                 <img src="./assets/race.svg" className="header-icon" alt="race icon" />
               </div>
-              <span className={`link ${location.pathname === "/Race" ? "current-route" : ""}`}>Races</span>
+              <span className={`link ${location.pathname === "/race" ? "current-route" : ""}`}>Races</span>
             </div>
           </Link>
         }
 
-        <Link to="/Creator" onClick={() => setOpen(false)}>
+        <Link to="/creator" onClick={() => setOpen(false)}>
           <div className="link-container">
             <div className="burger-menu-icon-border">
               <img src="./assets/creator.svg" className="header-icon" alt="home icon" />
             </div>
-            <span className={`link ${location.pathname === "/Creator" ? "current-route" : ""}`}>Creator</span>
+            <span className={`link ${location.pathname === "/creator" ? "current-route" : ""}`}>Creator</span>
           </div>
         </Link>
 
-        <Link to="/Gallery" onClick={() => setOpen(false)}>
+        <Link to="/gallery" onClick={() => setOpen(false)}>
           <div className="link-container">
             <div className="burger-menu-icon-border">
               <img src="./assets/gallery.svg" className="header-icon" alt="home icon" />
             </div>
-            <span className={`link ${location.pathname === "/Gallery" ? "current-route" : ""}`}>Gallery</span>
+            <span className={`link ${location.pathname === "/gallery" ? "current-route" : ""}`}>Gallery</span>
           </div>
         </Link>
 
         {accessToken &&
-          <Link to="/UserGallery" onClick={() => setOpen(false)}>
+          <Link to="/usergallery" onClick={() => setOpen(false)}>
             <div className="link-container">
               <div className="burger-menu-icon-border">
                 <img src="./assets/user.svg" className="header-icon" alt="home icon" />
               </div>
-              <span className={`link ${location.pathname === "/UserGallery" ? "current-route" : ""}`}>User Gallery</span>
+              <span className={`link ${location.pathname === "/usergallery" ? "current-route" : ""}`}>User Gallery</span>
             </div>
           </Link>
         }
 
         {!accessToken &&
-          <Link to="/Login" onClick={() => setOpen(false)}>
+          <Link to="/login" onClick={() => setOpen(false)}>
             <div className="link-container">
               <div className="burger-menu-icon-border"><img src="./assets/login.svg" className="header-icon" alt="home icon" /></div>
               <span className="link">Log in</span>

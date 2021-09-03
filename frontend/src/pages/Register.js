@@ -19,7 +19,7 @@ const Register = () => {
     <section className="main">
       <div className="login-container" >
         <Form title="Register" mode="users" />
-        <ImageCarousel linkTo="Login" linkText="Already have an account? Sign in here!" />
+        <ImageCarousel linkTo="login" linkText="Already have an account? Sign in here!" />
       </div>
     </section>
   )
